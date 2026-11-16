@@ -1,0 +1,174 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum JlptLevel {
+  N5
+  N4
+  N3
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE // pick the grammar form that fits the blank
+  ORDERING        // ★ sentence composition: arrange the chunks
+  TRANSLATION     // pick the correct English meaning
+}
+
+enum Role {
+  LEARNER
+  ADMIN
+}
+
+/// A section of the book: 形の練習, 第1部, 第2部
+model Part {
+  id      String   @id @default(cuid())
+  slug    String   @unique
+  order   Int
+  title   String
+  titleEn String
+  color   String   @default("lavender")
+  lessons Lesson[]
+}
+
+model Lesson {
+  id            String         @id @default(cuid())
+  slug          String         @unique
+  partId        String
+  part          Part           @relation(fields: [partId], references: [id], onDelete: Cascade)
+  number        Int
+  order         Int
+  title         String
+  titleEn       String
+  summary       String         @default("")
+  bookPage      Int?
+  published     Boolean        @default(true)
+  grammarPoints GrammarPoint[]
+  progress      LessonProgress[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([partId, order])
+}
+
+model GrammarPoint {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  lessonId    String
+  lesson      Lesson     @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  order       Int
+  pattern     String
+  meaning     String
+  formation   String     @default("")
+  explanation String     @default("")
+  notes       String[]   @default([])
+  level       JlptLevel  @default(N4)
+  examples    Example[]
+  questions   Question[]
+  bookmarks   Bookmark[]
+
+  @@index([lessonId, order])
+}
+
+/// A study sentence. `japanese` uses {漢字|かんじ} ruby markup and "/" between
+/// chunks (chunks power the sentence-ordering exercise). `highlight` is the
+/// part of the sentence that shows the grammar pattern.
+model Example {
+  id             String         @id @default(cuid())
+  grammarPointId String
+  grammarPoint   GrammarPoint   @relation(fields: [grammarPointId], references: [id], onDelete: Cascade)
+  order          Int
+  japanese       String
+  english        String
+  highlight      String         @default("")
+  words          ExampleWord[]
+
+  @@index([grammarPointId, order])
+}
+
+model Vocabulary {
+  id           String        @id @default(cuid())
+  word         String
+  reading      String
+  meaning      String
+  partOfSpeech String        @default("")
+  level        JlptLevel     @default(N4)
+  examples     ExampleWord[]
+
+  @@unique([word, reading])
+  @@index([level])
+}
+
+model ExampleWord {
+  exampleId    String
+  example      Example    @relation(fields: [exampleId], references: [id], onDelete: Cascade)
+  vocabularyId String
+  vocabulary   Vocabulary @relation(fields: [vocabularyId], references: [id], onDelete: Cascade)
+  order        Int
+
+  @@id([exampleId, vocabularyId])
+}
+
+model Question {
+  id             String       @id @default(cuid())
+  grammarPointId String
+  grammarPoint   GrammarPoint @relation(fields: [grammarPointId], references: [id], onDelete: Cascade)
+  type           QuestionType @default(MULTIPLE_CHOICE)
+  prompt         String
+  options        String[]
+  answer         String
+  explanation    String       @default("")
+  order          Int          @default(0)
+}
+
+/// One row per Supabase Auth user (id = auth.users.id)
+model Profile {
+  id            String           @id
+  email         String           @unique
+  displayName   String?
+  role          Role             @default(LEARNER)
+  xp            Int              @default(0)
+  streak        Int              @default(0)
+  lastActiveOn  DateTime?        @db.Date
+  dailyGoal     Int              @default(30)
+  progress      LessonProgress[]
+  activity      DailyActivity[]
+  bookmarks     Bookmark[]
+  createdAt     DateTime         @default(now())
+}
+
+model LessonProgress {
+  profileId   String
+  profile     Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  lessonId    String
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  bestScore   Int      @default(0)
+  attempts    Int      @default(0)
+  completedAt DateTime @default(now())
+
+  @@id([profileId, lessonId])
+}
+
+model DailyActivity {
+  profileId String
+  profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  day       DateTime @db.Date
+  xp        Int      @default(0)
+  minutes   Int      @default(0)
+
+  @@id([profileId, day])
+}
+
+model Bookmark {
+  profileId      String
+  profile        Profile      @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  grammarPointId String
+  grammarPoint   GrammarPoint @relation(fields: [grammarPointId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now())
+
+  @@id([profileId, grammarPointId])
+}

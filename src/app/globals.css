@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+/* ── Design system (from the reference app UI) ───────────────────────── */
+@theme {
+  --font-sans: "Urbanist Variable", "Hiragino Sans", "Noto Sans JP", "Yu Gothic", system-ui, sans-serif;
+  --font-jp: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", "Urbanist Variable", sans-serif;
+
+  --color-canvas: #f6f5f7;
+  --color-ink: #141414;
+  --color-muted: #77767c;
+  --color-line: #ebe9ee;
+  --color-card: #ffffff;
+  --color-night: #2b2a2e;
+  --color-night-2: #3a393e;
+  --color-nav: #2c2426;
+
+  --color-lavender: #b9bcf7;
+  --color-lavender-soft: #e3e4fd;
+  --color-lavender-ink: #4b4fb5;
+  --color-peach: #fde9db;
+  --color-peach-line: #f2b78d;
+  --color-rust: #b5561e;
+  --color-pink: #f28fb4;
+  --color-pink-soft: #fde4ee;
+  --color-blush: #fbe4ec;
+
+  --color-good: #2c9d5b;
+  --color-good-soft: #dff5e7;
+  --color-bad: #dc4a4f;
+  --color-bad-soft: #fde5e6;
+
+  --radius-card: 28px;
+  --radius-pill: 999px;
+
+  --animate-pop: pop 0.25s ease-out;
+  --animate-float: float 2.4s ease-in-out infinite;
+  --animate-up: up 0.3s ease-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes up {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+
+html { -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: linear-gradient(160deg, #fde3ec 0%, #fbeef3 45%, #f9e6ee 100%);
+  min-height: 100dvh;
+}
+
+.jp { font-family: var(--font-jp); }
+ruby rt { font-size: 0.5em; color: var(--color-muted); font-weight: 500; }
+.hide-rt rt { visibility: hidden; }
+
+@layer components {
+/* Duolingo-style 3D buttons */
+.btn3d {
+  @apply inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3.5 font-bold transition active:translate-y-[3px] disabled:opacity-40 disabled:active:translate-y-0;
+  box-shadow: 0 4px 0 var(--shadow, rgba(0, 0, 0, 0.18));
+}
+.btn3d:active { box-shadow: 0 1px 0 var(--shadow, rgba(0, 0, 0, 0.18)); }
+.btn-dark { @apply bg-ink text-white; --shadow: #000; }
+.btn-lav { @apply bg-lavender text-ink; --shadow: #9195e6; }
+.btn-white { @apply border-2 border-line bg-white text-ink; --shadow: var(--color-line); }
+.btn-good { @apply bg-good text-white; --shadow: #1f7442; }
+.btn-bad { @apply bg-bad text-white; --shadow: #a8343a; }
+
+.chip { @apply inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap; }
+.card { @apply rounded-[var(--radius-card)] bg-card; }
+.striped {
+  background-image: repeating-linear-gradient(135deg, var(--color-rust) 0 3px, transparent 3px 11px);
+  border: 2px solid var(--color-rust);
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+}
+
+input, textarea, select { font: inherit; }
+@layer components {
+.field { @apply w-full rounded-2xl border-2 border-line bg-white px-4 py-3 text-[15px] outline-none focus:border-lavender; }
+.label { @apply mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted; }
+}
