@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>Part 1 · Lesson 2 · ～ながら… / ～ところです / ～まで…・～までに…</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row">
+    <a class="icon-btn" href="index.html" aria-label="All lessons"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <span class="crumb">Part 1 · Lesson 2</span>
+    <button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button>
+  </div>
+  <p class="kicker" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> 2<ruby>課<rt>か</rt></ruby></p>
+  <h1 lang="ja">～ながら… / ～ところです / ～まで…・～までに…</h1>
+  <p class="meta">Shin Kanzen Master N4 Grammar, book pages 34–35 (PDF pages 56–57). Answers checked against the book's answer key.</p>
+</header>
+<div class="chips"><a class="chip chip-dark" href="#s1">Grammar</a><a class="chip" href="#s2">Practice 1</a><a class="chip" href="#s3">Practice 2</a></div>
+<div class="stats"><div><b>3</b><span>grammar points</span></div><div><b>12</b><span>questions</span></div><div><b id="score">0</b><span>correct taps</span></div></div>
+<section class="sec" id="s1"><div class="sec-head"><h2>Grammar points on page 34</h2></div><article class="gp tone-lav"><div class="gp-head"><span class="gp-num">1</span><div><h3 lang="ja">～ながら…</h3><p class=gp-en>while doing ~</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: verb ます-stem (drop ます) + ながら
+</li>
+<li lang="ja">Used when you do the main action (…) and, at the same time, a second "side" action (~). The verb before ながら must be an action that continues for a while.
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja">きれいな<ruby>海<rt>うみ</rt></ruby>を<ruby>見<rt>み</rt></ruby>ながらさんぽしました。 <em>I took a walk while looking at the beautiful sea.</em>
+</li>
+<li lang="ja"><ruby>母<rt>はは</rt></ruby>は<ruby>音楽<rt>おんがく</rt></ruby>を<ruby>聞<rt>き</rt></ruby>きながら<ruby>料理<rt>りょうり</rt></ruby>を<ruby>作<rt>つく</rt></ruby>ります。 <em>My mother cooks while listening to music.</em>
+</li>
+<li lang="ja">アルバイトをしながら<ruby>大学<rt>だいがく</rt></ruby>に<ruby>通<rt>かよ</rt></ruby>いました。 <em>I went to university while working a part-time job.</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-dark"><div class="gp-head"><span class="gp-num">2</span><div><h3 lang="ja">～ところです</h3><p class=gp-en>be just about to / be in the middle of / have just done</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: verb dictionary form / ている form / た form + ところです
+</li>
+<li>Shows <em>which stage</em> of an action you are at:
+<ul>
+<li lang="ja">Dictionary form + ところ = just <strong>before</strong> the action starts
+</li>
+<li lang="ja">ている + ところ = <strong>in the middle of</strong> the action
+</li>
+<li lang="ja">た form + ところ = <strong>just after</strong> the action finished
+</li></ul>
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja">あ、<ruby>試合<rt>しあい</rt></ruby>が<ruby>始<rt>はじ</rt></ruby>まるところですよ。<ruby>早<rt>はや</rt></ruby>く、<ruby>早<rt>はや</rt></ruby>く。 <em>Oh, the match is just about to start! Hurry, hurry!</em>
+</li>
+<li lang="ja"><ruby>今<rt>いま</rt></ruby>、インターネットで<ruby>店<rt>みせ</rt></ruby>の<ruby>場所<rt>ばしょ</rt></ruby>をしらべているところです。 <em>I'm looking up the shop's location on the internet right now.</em>
+</li>
+<li lang="ja">サラ「もしもし、<ruby>今<rt>いま</rt></ruby>どこ？もう<ruby>駅<rt>えき</rt></ruby>にいるの？」 トム「うん、ちょうど<ruby>今<rt>こん</rt></ruby><ruby>駅<rt>えき</rt></ruby>に<ruby>着<rt>つ</rt></ruby>いたところだよ。」 <em>Sarah: "Hello, where are you? Are you at the station already?" Tom: "Yeah, I've just this moment arrived at the station."</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-peach"><div class="gp-head"><span class="gp-num">3</span><div><h3 lang="ja">～まで… / ～までに…</h3><p class=gp-en>until ~ / by ~</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: noun / verb dictionary form + まで・までに
+</li>
+<li lang="ja"><strong>まで</strong> = "until". The action after it <strong>continues</strong> the whole time up to that point.
+</li>
+<li lang="ja"><strong>までに</strong> = "by (a deadline)". The action after it happens <strong>once</strong>, at some point before that deadline.
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja">ひこうきの<ruby>出発時間<rt>しゅっぱつじかん</rt></ruby>までここで<ruby>待<rt>ま</rt></ruby>っています。 <em>I'll wait here until the plane's departure time.</em>
+</li>
+<li lang="ja">この<ruby>仕事<rt>しごと</rt></ruby>が<ruby>終<rt>お</rt></ruby>わるまで<ruby>帰<rt>かえ</rt></ruby>らないでください。 <em>Please don't go home until this work is finished.</em>
+</li>
+<li lang="ja"><ruby>二十日<rt>はつか</rt></ruby>までに<ruby>旅行<rt>りょこう</rt></ruby>のお<ruby>金<rt>かね</rt></ruby>をはらいます。 <em>I'll pay for the trip by the 20th.</em>
+</li>
+<li lang="ja">おきゃくさんが<ruby>来<rt>く</rt></ruby>るまでにへやをかたづけてね。 <em>Tidy the room before (by the time) the guests come, OK?</em>
+</li></ol>
+</li></ul></div></article></section><section class="sec" id="s2"><div class="sec-head"><h2 lang="ja">れんしゅう1</h2><span class=sec-en>Practice 1</span><span class="sec-count">6 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja"><span class="blank">　</span>の<ruby>中<rt>なか</rt></ruby>の<ruby>言葉<rt>ことば</rt></ruby>を<ruby>正<rt>ただ</rt></ruby>しい<ruby>形<rt>かたち</rt></ruby>にして、<ruby>書<rt>か</rt></ruby>いてください。</p><p class="instr-en">Change the word in the brackets ( ) into the correct form and write it in the blank.</p></div>
+<article class="q" id="s2-q1" data-correct="">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>兄<rt>あに</rt></ruby>は「うん、うん」と<span class="blank">　</span>ながら、わたしの<ruby>話<rt>はなし</rt></ruby>を<ruby>聞<rt>き</rt></ruby>きました。（<ruby>言<rt>い</rt></ruby>う）</p>
+<p class="q-en">My older brother listened to what I was saying while saying "uh-huh, uh-huh."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>言<rt>い</rt></ruby>い（<ruby>言<rt>い</rt></ruby>いながら）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ます-stem + ながら</span></p>
+<p class="ans-expl">ながら attaches to the ます-stem. <ruby>言<rt>い</rt></ruby>います → drop ます → <ruby>言<rt>い</rt></ruby>い. So <ruby>言<rt>い</rt></ruby>いながら = "while saying." The main action is <ruby>聞<rt>き</rt></ruby>きました (listened); saying "uh-huh" is the side action happening at the same time.</p>
+<p class="ans-romaji"><em>Ani wa "un, un" to iinagara, watashi no hanashi o kikimashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q2" data-correct="">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">A「あれ？まだ<ruby>仕事<rt>しごと</rt></ruby>があるの？」<br>B「いえ、<ruby>今<rt>いま</rt></ruby><span class="blank">　</span>ところです。」（<ruby>帰<rt>かえ</rt></ruby>る）</p>
+<p class="q-en">A: "Huh? Do you still have work to do?"<br>B: "No, I'm just about to go home now."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>帰<rt>かえ</rt></ruby>る（<ruby>帰<rt>かえ</rt></ruby>るところです）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Dictionary form + ところです (just about to)</span></p>
+<p class="ans-expl">B is still at the office but is about to leave. The action hasn't started yet, so we use the dictionary form <ruby>帰<rt>かえ</rt></ruby>る + ところです.</p>
+<p class="ans-romaji"><em>A: "Are? Mada shigoto ga aru no?"<br>B: "Ie, ima kaeru tokoro desu."</em></p>
+</div></details></article>
+<article class="q" id="s2-q3" data-correct="">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">もしもし、<ruby>今<rt>いま</rt></ruby>、<ruby>駅<rt>えき</rt></ruby>に<ruby>向<rt>む</rt></ruby>かって<span class="blank">　</span>ところです。あと5、6<ruby>分<rt>ふん</rt></ruby>で<ruby>着<rt>つ</rt></ruby>きます。（<ruby>歩<rt>ある</rt></ruby>く）</p>
+<p class="q-en">Hello? I'm walking toward the station right now. I'll arrive in another 5 or 6 minutes.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>歩<rt>ある</rt></ruby>いている（<ruby>歩<rt>ある</rt></ruby>いているところです）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ている + ところです (in the middle of)</span></p>
+<p class="ans-expl">The speaker is walking at this moment and hasn't arrived yet ("5 or 6 more minutes"). An action in progress uses ている + ところ.</p>
+<p class="ans-romaji"><em>Moshimoshi, ima, eki ni mukatte aruite iru tokoro desu. Ato go, roppun de tsukimasu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">けん「お<ruby>母<rt>かあ</rt></ruby>さん、ばんご<ruby>飯<rt>はん</rt></ruby>、まだ？」<br><ruby>母<rt>はは</rt></ruby>「<ruby>今<rt>いま</rt></ruby><span class="blank">　</span>ところよ。もう<ruby>少<rt>すこ</rt></ruby>しで<ruby>食<rt>た</rt></ruby>べられるよ。」（<ruby>作<rt>つく</rt></ruby>る）</p>
+<p class="q-en">Ken: "Mom, isn't dinner ready yet?"<br>Mom: "I'm making it right now. You'll be able to eat soon."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>作<rt>つく</rt></ruby>っている（<ruby>作<rt>つく</rt></ruby>っているところ）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ている + ところ (in the middle of)</span></p>
+<p class="ans-expl">Mom is cooking at this moment, and dinner will be ready "in a little while" (もう<ruby>少<rt>すこ</rt></ruby>しで). The action is in progress, so <ruby>作<rt>つく</rt></ruby>っている + ところ.</p>
+<p class="ans-romaji"><em>Ken: "Okaasan, bangohan, mada?"<br>Haha: "Ima tsukutte iru tokoro yo. Mou sukoshi de taberareru yo."</em> The よ endings make it casual family speech.</p>
+</div></details></article>
+<article class="q" id="s2-q5" data-correct="">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">コンサートが<span class="blank">　</span>ところですね。<ruby>人<rt>ひと</rt></ruby>がたくさん<ruby>会場<rt>かいじょう</rt></ruby>から<ruby>出<rt>で</rt></ruby>てきましたよ。（<ruby>終<rt>お</rt></ruby>わる）</p>
+<p class="q-en">The concert seems to have just ended. Lots of people have come out of the venue.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>終<rt>お</rt></ruby>わった（<ruby>終<rt>お</rt></ruby>わったところです）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">た form + ところです (just finished)</span></p>
+<p class="ans-expl">People are already coming out, so the concert has <em>just</em> ended. Something that has just finished uses the た form + ところ.</p>
+<p class="ans-romaji"><em>Konsaato ga owatta tokoro desu ne. Hito ga takusan kaijou kara dete kimashita yo.</em></p>
+</div></details></article>
+<article class="q" id="s2-q6" data-correct="">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">わたしは<ruby>日本<rt>にほん</rt></ruby>に<span class="blank">　</span>までドイツに<ruby>住<rt>す</rt></ruby>んでいました。（<ruby>来<rt>く</rt></ruby>る）</p>
+<p class="q-en">I lived in Germany until I came to Japan.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>来<rt>く</rt></ruby>る（<ruby>来<rt>く</rt></ruby>るまで）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Dictionary form + まで (until)</span></p>
+<p class="ans-expl">まで after a verb uses the dictionary form, even when the sentence is about the past. Living in Germany (<ruby>住<rt>す</rt></ruby>んでいました) is a continuing state that lasted up to the point of coming to Japan, so まで (not までに) fits.</p>
+<p class="ans-romaji"><em>Watashi wa Nihon ni kuru made Doitsu ni sunde imashita.</em></p>
+</div></details></article></section><section class="sec" id="s3"><div class="sec-head"><h2 lang="ja">れんしゅう2</h2><span class=sec-en>Practice 2</span><span class="sec-count">6 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">いちばんいいものをえらんでください。</p><p class="instr-en">Choose the best option.</p></div>
+<article class="q" id="s3-q1" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>子<rt>こ</rt></ruby>どもは<span class="blank">　</span><ruby>学校<rt>がっこう</rt></ruby>のことを<ruby>話<rt>はな</rt></ruby>した。</p>
+<p class="q-en">The child talked about (what happened at) school while ( ).</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">なきながら (while crying)</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>立<rt>た</rt></ruby>ちながら (while standing)</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>大<rt>おお</rt></ruby>きい<ruby>声<rt>こえ</rt></ruby>を<ruby>出<rt>だ</rt></ruby>しながら (while raising a loud voice)</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. なきながら</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ます-stem + ながら (two actions at the same time)</span></p>
+<p class="ans-expl">ながら needs an <em>action</em> happening alongside the main action. Crying while talking is a natural pair. <strong>b</strong> <ruby>立<rt>た</rt></ruby>つ (stand up) is a one-moment change, not a continuing action, so <ruby>立<rt>た</rt></ruby>ちながら sounds wrong; you would say <ruby>立<rt>た</rt></ruby>って<ruby>話<rt>はな</rt></ruby>した. <strong>c</strong> has a different problem: <ruby>声<rt>こえ</rt></ruby>を<ruby>出<rt>だ</rt></ruby>す is the act of speaking itself, so "spoke while making a loud voice" is redundant; you would say <ruby>大<rt>おお</rt></ruby>きい<ruby>声<rt>こえ</rt></ruby>で<ruby>話<rt>はな</rt></ruby>した.</p>
+<p class="ans-romaji"><em>Kodomo wa nakinagara gakkou no koto o hanashita.</em> "The child cried as they told (us) about school."</p>
+</div></details></article>
+<article class="q" id="s3-q2" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">あのいすに<span class="blank">　</span><ruby>話<rt>はな</rt></ruby>しましょう。</p>
+<p class="q-en">Let's ( ) on that chair and talk.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">すわって (sit down, and then)</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">すわりながら (while sitting down)</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja">すわるところで (at the point of sitting down)</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. すわって</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">て form for a sequence of actions vs. ながら</span></p>
+<p class="ans-expl">すわる (to sit down) is a quick, one-time movement, so you first sit, <em>then</em> talk: すわって<ruby>話<rt>はな</rt></ruby>しましょう. <strong>b</strong> ながら needs an ongoing action; "while (in the act of) sitting down" doesn't make sense. <strong>c</strong> ところで is not used like this.</p>
+<p class="ans-romaji"><em>Ano isu ni suwatte hanashimashou.</em></p>
+</div></details></article>
+<article class="q" id="s3-q3" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>雨<rt>あめ</rt></ruby>が<span class="blank">　</span>から、タクシーで<ruby>行<rt>い</rt></ruby>きましょう。</p>
+<p class="q-en">Since it's ( ), let's go by taxi.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">ふって</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">ふっている (is raining)</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja">ふったところだ</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. ふっている</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ている for an ongoing state + から (because)</span></p>
+<p class="ans-expl">"Because it is raining (now)" uses the ongoing form ふっている + から. <strong>a</strong> ふって + から would mean "after it rains," which doesn't fit the reason for taking a taxi. <strong>c</strong> ふったところだ + から is not natural; ところだ is used at the end of a sentence to show a stage of an action, not as a reason.</p>
+<p class="ans-romaji"><em>Ame ga futte iru kara, takushii de ikimashou.</em></p>
+</div></details></article>
+<article class="q" id="s3-q4" data-correct="c">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">このシャツのクリーニング、<ruby>土曜日<rt>どようび</rt></ruby><span class="blank">　</span>できますか。</p>
+<p class="q-en">Can the dry cleaning of this shirt be done ( ) Saturday?</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">から (from)</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">まで (until)</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja">までに (by)</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">c. までに</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">までに (by a deadline)</span></p>
+<p class="ans-expl">The customer is asking whether the cleaning will be finished <em>by</em> Saturday. "Be finished/done" is a one-time event with a deadline, so までに. <strong>b</strong> まで would need a continuing action ("keep cleaning until Saturday"). <strong>a</strong> から ("from Saturday") doesn't fit asking about finishing.</p>
+<p class="ans-romaji"><em>Kono shatsu no kuriiningu, doyoubi made ni dekimasu ka.</em></p>
+</div></details></article>
+<article class="q" id="s3-q5" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">リーさんはこのニュースをもう<span class="blank">　</span>でしょうか。</p>
+<p class="q-en">Does Lee already ( ) this news, I wonder?</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>知<rt>し</rt></ruby>るところ</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>知<rt>し</rt></ruby>っている (know)</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>知<rt>し</rt></ruby>っているところ</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>知<rt>し</rt></ruby>っている</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja"><ruby>知<rt>し</rt></ruby>っている (to know) / misuse of ところ</span></p>
+<p class="ans-expl">"To know" is always <ruby>知<rt>し</rt></ruby>っている in Japanese. With もう, the question is simply "Does Lee already know?" <strong>a</strong> and <strong>c</strong> add ところ, which talks about a stage of an action (about to / in the middle of). Knowing is a state, not an action with stages, so ところ doesn't fit.</p>
+<p class="ans-romaji"><em>Rii-san wa kono nyuusu o mou shitte iru deshou ka.</em></p>
+</div></details></article>
+<article class="q" id="s3-q6" data-correct="c">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>試験<rt>しけん</rt></ruby>が<span class="blank">　</span><ruby>教室<rt>きょうしつ</rt></ruby>に<ruby>入<rt>はい</rt></ruby>ってください。</p>
+<p class="q-en">Please enter the classroom ( ) the exam begins.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>始<rt>はじ</rt></ruby>まるところ</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>始<rt>はじ</rt></ruby>まって</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>始<rt>はじ</rt></ruby>まるまでに (by the time / before)</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">c. <ruby>始<rt>はじ</rt></ruby>まるまでに</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Dictionary form + までに (by a deadline)</span></p>
+<p class="ans-expl">Entering the classroom is a one-time action that must happen before the deadline (the exam starting), so までに. <strong>a</strong> ところ can't connect directly to the next verb like this. <strong>b</strong> <ruby>始<rt>はじ</rt></ruby>まって would mean "the exam starts, and then enter the room," which is the wrong order.</p>
+<p class="ans-romaji"><em>Shiken ga hajimaru made ni kyoushitsu ni haitte kudasai.</em></p>
+</div></details></article></section>
+<div class="pager"><span></span><a class="pager-btn next" href="part1-lesson03.html"><span>Part 1 · Lesson 3</span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#s1" aria-label="Grammar"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>Grammar</span></a>
+<a href="#s2" aria-label="Practice"><svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4zM13 7l4 4"/></svg><span>Practice</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>Part 1 · Lesson 24 · ～(ら)れます (Passive)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row">
+    <a class="icon-btn" href="index.html" aria-label="All lessons"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <span class="crumb">Part 1 · Lesson 24</span>
+    <button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button>
+  </div>
+  <p class="kicker" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> 24<ruby>課<rt>か</rt></ruby></p>
+  <h1 lang="ja">～(ら)れます (Passive)</h1>
+  <p class="meta">Shin Kanzen Master N4 Grammar, book pages 86–87 (PDF pages 108–109). Answers checked against the book's answer key.</p>
+</header>
+<div class="chips"><a class="chip chip-dark" href="#s1">Grammar</a><a class="chip" href="#s2">Practice 1</a><a class="chip" href="#s3">Practice 2</a></div>
+<div class="stats"><div><b>3</b><span>grammar points</span></div><div><b>14</b><span>questions</span></div><div><b id="score">0</b><span>correct taps</span></div></div>
+<section class="sec" id="s1"><div class="sec-head"><h2>Grammar points on page 86</h2></div><article class="gp tone-lav"><div class="gp-head"><span class="gp-num">1</span><div><h3 lang="ja">～</h3><p class=gp-en>ら)れます: Passive 1 (I was ~ed by someone</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: passive form (see book p.24). Group I: しかる → しかられる; Group II: ほめる → ほめられる; する → される; <ruby>来<rt>く</rt></ruby>る → <ruby>来<rt>こ</rt></ruby>られる.
+</li>
+<li lang="ja">The subject is the speaker (or someone close), who <strong>receives someone else's action</strong>. When the subject is わたし, it's usually left out.
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja"><ruby>今日<rt>きょう</rt></ruby>は<ruby>先生<rt>せんせい</rt></ruby>にほめられました。 <em>I was praised by my teacher today.</em>
+</li>
+<li lang="ja"><ruby>朝<rt>あさ</rt></ruby>、サッカーのれんしゅうがあるから、いつも6<ruby>時<rt>じ</rt></ruby>に<ruby>起<rt>お</rt></ruby>こされる。 <em>I have football practice in the morning, so I always get woken up at 6.</em>
+</li>
+<li lang="ja"><ruby>女<rt>おんな</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>に<ruby>道<rt>みち</rt></ruby>を<ruby>聞<rt>き</rt></ruby>かれました。 <em>I was asked for directions by a woman.</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-dark"><div class="gp-head"><span class="gp-num">2</span><div><h3 lang="ja">～</h3><p class=gp-en>ら)れます: Passive 2 (the "suffering" passive</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Used when <strong>your body or belongings</strong> are affected by someone else's action (①②), or when you're <strong>bothered by someone's behaviour or an event</strong> even if it's not directly done to you (③④). It usually shows <strong>annoyance</strong>. If the action is something you're <strong>grateful</strong> for, use ～てくれる / ～てもらう instead.
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja">（わたしは）<ruby>電車<rt>でんしゃ</rt></ruby>の<ruby>中<rt>なか</rt></ruby>で<ruby>足<rt>あし</rt></ruby>をふまれました。 <em>Someone stepped on my foot on the train.</em>
+</li>
+<li lang="ja"><ruby>弟<rt>おとうと</rt></ruby>にケーキを<ruby>食<rt>た</rt></ruby>べられてしまいました。 <em>My younger brother ate my cake (and I'm annoyed).</em>
+</li>
+<li lang="ja">うちの<ruby>前<rt>まえ</rt></ruby>にごみをすてられて、こまっています。 <em>People dump rubbish in front of my house, and it's a real nuisance.</em>
+</li>
+<li lang="ja">きのう、どろぼうに<ruby>入<rt>はい</rt></ruby>られた。 <em>Yesterday our house was broken into by a burglar.</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-peach"><div class="gp-head"><span class="gp-num">3</span><div><h3 lang="ja">～</h3><p class=gp-en>ら)れます: Passive 3 (things as the subject</p></div></div><div class="gp-body"><ul>
+<li>A passive sentence where a <strong>thing or event</strong> is the subject. It just states <strong>facts</strong>, with no feelings from the speaker.
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja"><ruby>来年<rt>らいねん</rt></ruby>、<ruby>夏<rt>なつ</rt></ruby>のオリンピックが<ruby>開<rt>ひら</rt></ruby>かれます。 <em>The Summer Olympics will be held next year.</em>
+</li>
+<li lang="ja">この<ruby>本<rt>ほん</rt></ruby>は<ruby>世界中<rt>せかいじゅう</rt></ruby>で<ruby>読<rt>よ</rt></ruby>まれている。 <em>This book is read all over the world.</em>
+</li>
+<li lang="ja">このえは1800<ruby>年<rt>ねん</rt></ruby>にかかれたそうです。 <em>I hear this picture was painted in 1800.</em>
+</li></ol>
+</li></ul></div></article></section><section class="sec" id="s2"><div class="sec-head"><h2 lang="ja">れんしゅう1</h2><span class=sec-en>Practice 1</span><span class="sec-count">7 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja"><span class="blank">　</span>の<ruby>中<rt>なか</rt></ruby>の<ruby>言葉<rt>ことば</rt></ruby>を<ruby>正<rt>ただ</rt></ruby>しい<ruby>形<rt>かたち</rt></ruby>にして、<ruby>書<rt>か</rt></ruby>いてください。</p><p class="instr-en">Change the word in the brackets ( ) into the correct form and write it in the blank.</p></div>
+<article class="q" id="s2-q1" data-correct="">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>今週<rt>こんしゅう</rt></ruby>は<ruby>部長<rt>ぶちょう</rt></ruby>に<ruby>仕事<rt>しごと</rt></ruby>をたくさん<span class="blank">　</span>ました。（たのむ）</p>
+<p class="q-en">This week I was asked to do a lot of work by the department manager.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">たのまれ（たのまれました）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Group I passive: う-sound → あ-sound + れる</span></p>
+<p class="ans-expl">たのむ → たのまれる → たのまれました.</p>
+<p class="ans-romaji"><em>Konshuu wa buchou ni shigoto o takusan tanomaremashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q2" data-correct="">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">わたしはよく<ruby>父<rt>ちち</rt></ruby>に<span class="blank">　</span>ます。（しかる）</p>
+<p class="q-en">I often get scolded by my father.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">しかられ（しかられます）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>Group I passive</span></p>
+<p class="ans-expl">しかる → しかられる.</p>
+<p class="ans-romaji"><em>Watashi wa yoku chichi ni shikararemasu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q3" data-correct="">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>母<rt>はは</rt></ruby>にまんがをぜんぶ<span class="blank">　</span>ました。（すてる）</p>
+<p class="q-en">My mother threw away all my manga (and I'm upset).</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">すてられ（すてられました）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>Group II passive / suffering passive</span></p>
+<p class="ans-expl">すてる → すてられる. The speaker is annoyed, so the passive fits.</p>
+<p class="ans-romaji"><em>Haha ni manga o zenbu suteraremashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>友<rt>とも</rt></ruby>だちに<ruby>名前<rt>なまえ</rt></ruby>を<span class="blank">　</span>て、かなしかった。（まちがえる）</p>
+<p class="q-en">My friend got my name wrong, and I was sad.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">まちがえられ（まちがえられて）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Group II passive (て form)</span></p>
+<p class="ans-expl">まちがえる → まちがえられる → まちがえられて.</p>
+<p class="ans-romaji"><em>Tomodachi ni namae o machigaerarete, kanashikatta.</em></p>
+</div></details></article>
+<article class="q" id="s2-q5" data-correct="">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">おふろに<ruby>入<rt>はい</rt></ruby>っているとき、<ruby>友<rt>とも</rt></ruby>だちに<span class="blank">　</span>て、こまりました。（<ruby>来<rt>く</rt></ruby>る）</p>
+<p class="q-en">A friend came over while I was in the bath, which was awkward.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>来<rt>こ</rt></ruby>られ（<ruby>来<rt>こ</rt></ruby>られて）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Suffering passive of <ruby>来<rt>く</rt></ruby>る</span></p>
+<p class="ans-expl"><ruby>来<rt>く</rt></ruby>る → <ruby>来<rt>こ</rt></ruby>られる (こられる). Being visited at a bad time is annoying.</p>
+<p class="ans-romaji"><em>Ofuro ni haitte iru toki, tomodachi ni korarete, komarimashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q6" data-correct="">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">さいごにてんを<span class="blank">　</span>て、まけてしまいました。（とる）</p>
+<p class="q-en">We had a point scored against us at the very end and lost.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">とられ（とられて）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>Suffering passive</span></p>
+<p class="ans-expl">とる → とられる → とられて.</p>
+<p class="ans-romaji"><em>Saigo ni ten o torarete, makete shimaimashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q7" data-correct="">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">この<ruby>歌<rt>うた</rt></ruby>は<ruby>世界中<rt>せかいじゅう</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>に<span class="blank">　</span>ています。（<ruby>知<rt>し</rt></ruby>る）</p>
+<p class="q-en">This song is known by people all over the world.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>知<rt>し</rt></ruby>られ（<ruby>知<rt>し</rt></ruby>られています）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>Passive with a thing as the subject</span></p>
+<p class="ans-expl"><ruby>知<rt>し</rt></ruby>る → <ruby>知<rt>し</rt></ruby>られる → <ruby>知<rt>し</rt></ruby>られています.</p>
+<p class="ans-romaji"><em>Kono uta wa sekaijuu no hito ni shirarete imasu.</em></p>
+</div></details></article></section><section class="sec" id="s3"><div class="sec-head"><h2 lang="ja">れんしゅう2</h2><span class=sec-en>Practice 2</span><span class="sec-count">7 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">いちばんいいものをえらんでください。</p><p class="instr-en">Choose the best option.</p></div>
+<article class="q" id="s3-q1" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">きのうの<ruby>夜<rt>よる</rt></ruby>は、<span class="blank">　</span>なかれて、ねられませんでした。</p>
+<p class="q-en">Last night the child kept crying, and I couldn't sleep.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>子<rt>こ</rt></ruby>どもが</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>子<rt>こ</rt></ruby>どもに</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>子<rt>こ</rt></ruby>どもを</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>子<rt>こ</rt></ruby>どもに</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Passive: the doer is marked with に</span></p>
+<p class="ans-expl">In passive sentences, the person doing the action takes に: <ruby>子<rt>こ</rt></ruby>どもになかれて. <strong>a</strong> が and <strong>c</strong> を are wrong for the doer.</p>
+<p class="ans-romaji"><em>Kinou no yoru wa, kodomo ni nakarete, neraremasen deshita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q2" data-correct="">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">わたしは（①　）<ruby>新<rt>あたら</rt></ruby>しい（②　）こわされてしまいました。</p>
+<p class="q-en">My younger brother broke my new game.</p>
+<div class="opts">
+<button class="opt" type="button" data-key=""><span class="opt-k"></span><span class="opt-t" lang="ja">① a. <ruby>弟<rt>おとうと</rt></ruby>が　b. <ruby>弟<rt>おとうと</rt></ruby>に　c. <ruby>弟<rt>おとうと</rt></ruby>を</span></button>
+<button class="opt" type="button" data-key=""><span class="opt-k"></span><span class="opt-t" lang="ja">② a. ゲームが　b. ゲームに　c. ゲームを</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">① b. <ruby>弟<rt>おとうと</rt></ruby>に　② c. ゲームを</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Suffering passive: (わたしは) doer に + object を + passive verb</span></p>
+<p class="ans-expl">The doer (brother) takes に, and the thing affected keeps を: <ruby>弟<rt>おとうと</rt></ruby>に<ruby>新<rt>あたら</rt></ruby>しいゲームをこわされた.</p>
+<p class="ans-romaji"><em>Watashi wa otouto ni atarashii geemu o kowasarete shimaimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q3" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">わたしは<ruby>家族<rt>かぞく</rt></ruby>に「みっちゃん」と<span class="blank">　</span>います。</p>
+<p class="q-en">My family calls me "Micchan."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">よんで</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">よばれて</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja">よべて</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. よばれて</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>Passive 1</span></p>
+<p class="ans-expl">わたしは + <ruby>家族<rt>かぞく</rt></ruby>に → "I am called ~ by my family": よばれています. <strong>a</strong> よんで = "calling (someone)." <strong>c</strong> よべて is the potential ("can call").</p>
+<p class="ans-romaji"><em>Watashi wa kazoku ni "Micchan" to yobarete imasu.</em></p>
+</div></details></article>
+<article class="q" id="s3-q4" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>友<rt>とも</rt></ruby>だちに<ruby>手紙<rt>てがみ</rt></ruby>を<span class="blank">　</span>、<ruby>出<rt>だ</rt></ruby>しました。</p>
+<p class="q-en">I wrote a letter to my friend and sent it.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>書<rt>か</rt></ruby>いて</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>書<rt>か</rt></ruby>けて</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>書<rt>か</rt></ruby>かれて</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. <ruby>書<rt>か</rt></ruby>いて</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Active て form (no passive needed)</span></p>
+<p class="ans-expl">The speaker wrote the letter and posted it: <ruby>書<rt>か</rt></ruby>いて、<ruby>出<rt>だ</rt></ruby>しました. <ruby>友<rt>とも</rt></ruby>だちに here means "to my friend." <strong>b</strong> potential, <strong>c</strong> passive don't fit.</p>
+<p class="ans-romaji"><em>Tomodachi ni tegami o kaite, dashimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q5" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>店<rt>みせ</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>におねがいして、みんなの<ruby>写真<rt>しゃしん</rt></ruby>を<span class="blank">　</span>。</p>
+<p class="q-en">I asked the shop staff and had them take a photo of everyone.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">とってくれました</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">とってもらいました</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja">とられました</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. とってもらいました</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">てもらう (have someone do something for you) vs. passive</span></p>
+<p class="ans-expl">The speaker asked (おねがいして) and is grateful, so てもらう. <strong>a</strong> くれる would need <ruby>店<rt>みせ</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>が. <strong>c</strong> passive shows annoyance, which doesn't fit.</p>
+<p class="ans-romaji"><em>Mise no hito ni onegai shite, minna no shashin o totte moraimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q6" data-correct="c">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>映画館<rt>えいがかん</rt></ruby>で、せが<ruby>高<rt>たか</rt></ruby>い<ruby>人<rt>ひと</rt></ruby>に<ruby>前<rt>まえ</rt></ruby>のせきに<span class="blank">　</span>、こまりました。</p>
+<p class="q-en">At the cinema, a tall person sat in the seat in front of me, which was a problem.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">すわって</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">すわってもらって</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja">すわられて</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">c. すわられて</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>Suffering passive</span></p>
+<p class="ans-expl">The tall person's action annoyed the speaker (こまりました), so the suffering passive: すわられて. <strong>b</strong> てもらう means you're grateful. <strong>a</strong> active doesn't fit <ruby>人<rt>ひと</rt></ruby>に.</p>
+<p class="ans-romaji"><em>Eigakan de, se ga takai hito ni mae no seki ni suwararete, komarimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q7" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">トム「いいスカーフだね。」<br>サラ「ありがとう。<ruby>友<rt>とも</rt></ruby>だちが<ruby>誕生日<rt>たんじょうび</rt></ruby>に<span class="blank">　</span>の。」</p>
+<p class="q-en">Tom: "Nice scarf."<br>Sarah: "Thanks. A friend sent it to me for my birthday."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>送<rt>おく</rt></ruby>ってくれた</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>送<rt>おく</rt></ruby>られた</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>送<rt>おく</rt></ruby>った</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. <ruby>送<rt>おく</rt></ruby>ってくれた</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">てくれる (grateful) vs. passive</span></p>
+<p class="ans-expl"><ruby>友<rt>とも</rt></ruby>だちが (subject) did something nice for Sarah: <ruby>送<rt>おく</rt></ruby>ってくれた. <strong>b</strong> passive would need <ruby>友<rt>とも</rt></ruby>だちに and sounds like annoyance. <strong>c</strong> <ruby>送<rt>おく</rt></ruby>った would mean the friend sent it (to someone), without the "for me."</p>
+<p class="ans-romaji"><em>Sara: "Arigatou. Tomodachi ga tanjoubi ni okutte kureta no."</em></p>
+</div></details></article></section>
+<div class="pager"><a class="pager-btn" href="part1-lesson23.html"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Part 1 · Lesson 23</span></a><a class="pager-btn next" href="part1-lesson25.html"><span>Part 1 · Lesson 25</span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#s1" aria-label="Grammar"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>Grammar</span></a>
+<a href="#s2" aria-label="Practice"><svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4zM13 7l4 4"/></svg><span>Practice</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

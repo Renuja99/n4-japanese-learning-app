@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>Part 1 · Lesson 6 · ～てもいいです / ～てはいけません / ～なくてもいいです / ～なければなりません</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row">
+    <a class="icon-btn" href="index.html" aria-label="All lessons"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <span class="crumb">Part 1 · Lesson 6</span>
+    <button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button>
+  </div>
+  <p class="kicker" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> 6<ruby>課<rt>か</rt></ruby></p>
+  <h1 lang="ja">～てもいいです / ～てはいけません / ～なくてもいいです / ～なければなりません</h1>
+  <p class="meta">Shin Kanzen Master N4 Grammar, book pages 44–45 (PDF pages 66–67). Answers checked against the book's answer key.</p>
+</header>
+<div class="chips"><a class="chip chip-dark" href="#s1">Grammar</a><a class="chip" href="#s2">Practice 1</a><a class="chip" href="#s3">Practice 2</a></div>
+<div class="stats"><div><b>2</b><span>grammar points</span></div><div><b>15</b><span>questions</span></div><div><b id="score">0</b><span>correct taps</span></div></div>
+<section class="sec" id="s1"><div class="sec-head"><h2>Grammar points on page 44</h2></div><article class="gp tone-lav"><div class="gp-head"><span class="gp-num">1</span><div><h3 lang="ja">～てもいいです</h3><p class=gp-en>may / it's OK to ~) / ～てはいけません (must not ~</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: verb て form / い-adj ～くて / な-adj ～で / noun で + もいいです or + はいけません
+</li>
+<li lang="ja">～てもいいです gives <strong>permission</strong> ("you may") or shows that something is <strong>acceptable</strong> ("it's fine even if ~"). ～てはいけません shows <strong>prohibition</strong> ("you must not").
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja">トム「ここにすわってもいいですか。」<ruby>女<rt>おんな</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>「ええ、どうぞ。」 <em>Tom: "May I sit here?" Woman: "Yes, go ahead."</em>
+</li>
+<li lang="ja"><ruby>安<rt>やす</rt></ruby>いへやをさがしています。せまくてもいいです。 <em>I'm looking for a cheap room. It's fine even if it's small.</em>
+</li>
+<li lang="ja">はなちゃん、<ruby>一人<rt>ひとり</rt></ruby>で<ruby>川<rt>かわ</rt></ruby>に<ruby>行<rt>い</rt></ruby>ってはいけないよ。 <em>Hana, you mustn't go to the river by yourself.</em>
+</li>
+<li lang="ja"><ruby>入社<rt>にゅうしゃ</rt></ruby><ruby>試験<rt>しけん</rt></ruby>のときの<ruby>服<rt>ふく</rt></ruby>は、Tシャツではいけません。 <em>You mustn't wear a T-shirt to a company entrance exam.</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-dark"><div class="gp-head"><span class="gp-num">2</span><div><h3 lang="ja">～なくてもいいです</h3><p class=gp-en>don't have to ~) / ～なければなりません (must / have to ~</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: verb ない form (drop い) / い-adj ～く / な-adj ～で / noun で + なくてもいいです or + なければなりません
+</li>
+<li lang="ja">～なくてもいいです = <strong>no need</strong> to do something (or "it's fine even if it isn't ~"). ～なければなりません = <strong>necessity or duty</strong> ("must").
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja"><ruby>医者<rt>いしゃ</rt></ruby>「もう<ruby>薬<rt>くすり</rt></ruby>を<ruby>飲<rt>の</rt></ruby>まなくてもいいですよ。」<ruby>病気<rt>びょうき</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>「そうですか。ああ、よかった。」 <em>Doctor: "You don't need to take the medicine any more." Patient: "Really? Oh, good."</em>
+</li>
+<li lang="ja">いいホテルはありませんか。<ruby>駅<rt>えき</rt></ruby>に<ruby>近<rt>ちか</rt></ruby>くなくてもいいです。 <em>Is there a good hotel? It doesn't have to be near the station.</em>
+</li>
+<li lang="ja">お<ruby>母<rt>かあ</rt></ruby>さん、はこ、ない？じょうぶでなくてもいいよ。 <em>Mom, do you have a box? It doesn't need to be strong.</em>
+</li>
+<li lang="ja">Eメールのへんじを<ruby>書<rt>か</rt></ruby>かなければなりません。 <em>I have to write a reply to the email.</em>
+</li>
+<li lang="ja">ここのサインはあなたのでなければなりません。 <em>The signature here has to be yours.</em>
+</li></ol>
+</li></ul></div></article></section><section class="sec" id="s2"><div class="sec-head"><h2 lang="ja">れんしゅう1</h2><span class=sec-en>Practice 1</span><span class="sec-count">8 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja"><span class="blank">　</span>の<ruby>中<rt>なか</rt></ruby>の<ruby>言葉<rt>ことば</rt></ruby>を<ruby>正<rt>ただ</rt></ruby>しい<ruby>形<rt>かたち</rt></ruby>にして、<ruby>書<rt>か</rt></ruby>いてください。</p><p class="instr-en">Change the word in the brackets ( ) into the correct form and write it in the blank.</p></div>
+<article class="q" id="s2-q1" data-correct="">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">このへやでおべんとうを<span class="blank">　</span>もいいですか。（<ruby>食<rt>た</rt></ruby>べる）</p>
+<p class="q-en">May I eat my lunch box in this room?</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>食<rt>た</rt></ruby>べて（<ruby>食<rt>た</rt></ruby>べてもいいですか）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">て form + もいいですか (asking permission)</span></p>
+<p class="ans-expl">Asking for permission = て form + もいいですか. <ruby>食<rt>た</rt></ruby>べる → <ruby>食<rt>た</rt></ruby>べて.</p>
+<p class="ans-romaji"><em>Kono heya de obentou o tabete mo ii desu ka.</em></p>
+</div></details></article>
+<article class="q" id="s2-q2" data-correct="">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">もうおそいですから、<ruby>仕事<rt>しごと</rt></ruby>のつづきは<span class="blank">　</span>もいいですよ。（あした）</p>
+<p class="q-en">It's already late, so it's fine to do the rest of the work tomorrow.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">あしたで（あしたでもいいですよ）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Noun + でもいいです</span></p>
+<p class="ans-expl">With a noun, add で before もいい: あしたでもいい ("tomorrow is fine too").</p>
+<p class="ans-romaji"><em>Mou osoi desu kara, shigoto no tsuzuki wa ashita de mo ii desu yo.</em></p>
+</div></details></article>
+<article class="q" id="s2-q3" data-correct="">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">あぶないですから、この<ruby>川<rt>かわ</rt></ruby>で<span class="blank">　</span>はいけません。（およぐ）</p>
+<p class="q-en">It's dangerous, so you must not swim in this river.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">およいで（およいではいけません）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">て form + はいけません (prohibition)</span></p>
+<p class="ans-expl">Prohibition = て form + はいけません. およぐ → およいで (ぐ → いで).</p>
+<p class="ans-romaji"><em>Abunai desu kara, kono kawa de oyoide wa ikemasen.</em></p>
+</div></details></article>
+<article class="q" id="s2-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">テストのとき、となりの<ruby>人<rt>ひと</rt></ruby>の<ruby>答<rt>こた</rt></ruby>えを<span class="blank">　</span>はいけません。（<ruby>見<rt>み</rt></ruby>る）</p>
+<p class="q-en">During a test, you must not look at the answers of the person next to you.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>見<rt>み</rt></ruby>て（<ruby>見<rt>み</rt></ruby>てはいけません）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">て form + はいけません</span></p>
+<p class="ans-expl"><ruby>見<rt>み</rt></ruby>る → <ruby>見<rt>み</rt></ruby>て + はいけません.</p>
+<p class="ans-romaji"><em>Tesuto no toki, tonari no hito no kotae o mite wa ikemasen.</em></p>
+</div></details></article>
+<article class="q" id="s2-q5" data-correct="">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>今日<rt>きょう</rt></ruby>は<ruby>休<rt>やす</rt></ruby>みの<ruby>日<rt>ひ</rt></ruby>だから、<ruby>何<rt>なん</rt></ruby>も<span class="blank">　</span>もいい。（する）</p>
+<p class="q-en">Today is a day off, so I don't have to do anything.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">しなくて（しなくてもいい）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ない form → なくてもいい (no need)</span></p>
+<p class="ans-expl"><ruby>何<rt>なん</rt></ruby>も ("nothing") needs a negative. "Don't have to do anything" = しなくてもいい.</p>
+<p class="ans-romaji"><em>Kyou wa yasumi no hi da kara, nani mo shinakute mo ii.</em></p>
+</div></details></article>
+<article class="q" id="s2-q6" data-correct="">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>小<rt>ちい</rt></ruby>さい<ruby>物<rt>もの</rt></ruby>を<ruby>入<rt>い</rt></ruby>れますから、ふくろはあまり<span class="blank">　</span>もいいです。（<ruby>大<rt>おお</rt></ruby>きい）</p>
+<p class="q-en">I'm putting small things in it, so the bag doesn't need to be very big.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>大<rt>おお</rt></ruby>きくなくて（<ruby>大<rt>おお</rt></ruby>きくなくてもいいです）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">い-adjective ～くなくてもいい</span></p>
+<p class="ans-expl">あまり needs a negative. <ruby>大<rt>おお</rt></ruby>きい → <ruby>大<rt>おお</rt></ruby>きくない → <ruby>大<rt>おお</rt></ruby>きくなくて + もいい = "doesn't need to be big."</p>
+<p class="ans-romaji"><em>Chiisai mono o iremasu kara, fukuro wa amari ookikunakute mo ii desu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q7" data-correct="">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>朝<rt>あさ</rt></ruby>のひこうきに<ruby>乗<rt>の</rt></ruby>りますから、<ruby>早<rt>はや</rt></ruby>く<span class="blank">　</span>ばなりません。（<ruby>起<rt>お</rt></ruby>きる）</p>
+<p class="q-en">I'm taking a morning flight, so I have to get up early.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>起<rt>お</rt></ruby>きなけれ（<ruby>起<rt>お</rt></ruby>きなければなりません）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ない form → なければなりません (must)</span></p>
+<p class="ans-expl"><ruby>起<rt>お</rt></ruby>きる → <ruby>起<rt>お</rt></ruby>きない → <ruby>起<rt>お</rt></ruby>きなければ. The ば is already printed, so write <ruby>起<rt>お</rt></ruby>きなけれ.</p>
+<p class="ans-romaji"><em>Asa no hikouki ni norimasu kara, hayaku okinakereba narimasen.</em></p>
+</div></details></article>
+<article class="q" id="s2-q8" data-correct="">
+<div class="q-head">
+<span class="q-num">Q8</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">ひっこしの<ruby>前<rt>まえ</rt></ruby>に、にもつをはこに<span class="blank">　</span>ばならない。（<ruby>入<rt>い</rt></ruby>れる）</p>
+<p class="q-en">Before moving house, I have to put my things into boxes.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>入<rt>い</rt></ruby>れなけれ（<ruby>入<rt>い</rt></ruby>れなければならない）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">なければならない (must, plain form)</span></p>
+<p class="ans-expl"><ruby>入<rt>い</rt></ruby>れる → <ruby>入<rt>い</rt></ruby>れない → <ruby>入<rt>い</rt></ruby>れなければならない. Same pattern as Q7, in plain form.</p>
+<p class="ans-romaji"><em>Hikkoshi no mae ni, nimotsu o hako ni irenakereba naranai.</em></p>
+</div></details></article></section><section class="sec" id="s3"><div class="sec-head"><h2 lang="ja">れんしゅう2</h2><span class=sec-en>Practice 2</span><span class="sec-count">7 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">aかbか いいほうをえらんでください。</p><p class="instr-en">Choose the better option, a or b.</p></div>
+<article class="q" id="s3-q1" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">パンフレットはただですから、お<ruby>金<rt>かね</rt></ruby>を（a はらってもいいです　b はらわなくてもいいです）。</p>
+<p class="q-en">The pamphlet is free, so you don't have to pay.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">はらってもいいです</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">はらわなくてもいいです</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. はらわなくてもいいです</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">なくてもいい (no need)</span></p>
+<p class="ans-expl">ただ = free, so there's no need to pay. <strong>a</strong> "you may pay" doesn't fit something free.</p>
+<p class="ans-romaji"><em>Panfuretto wa tada desu kara, okane o harawanakute mo ii desu.</em></p>
+</div></details></article>
+<article class="q" id="s3-q2" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">このはこにはさらが<ruby>入<rt>はい</rt></ruby>っていますから、<ruby>気<rt>き</rt></ruby>をつけて（a <ruby>運<rt>はこ</rt></ruby>んでもいいです　b <ruby>運<rt>はこ</rt></ruby>ばなければなりません）。</p>
+<p class="q-en">There are plates in this box, so you have to carry it carefully.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>運<rt>はこ</rt></ruby>んでもいいです</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>運<rt>はこ</rt></ruby>ばなければなりません</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>運<rt>はこ</rt></ruby>ばなければなりません</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">なければなりません (must)</span></p>
+<p class="ans-expl">Plates can break, so carrying carefully is a must. <strong>a</strong> "you may carry it carefully" sounds like optional permission, which doesn't fit the warning.</p>
+<p class="ans-romaji"><em>Kono hako ni wa sara ga haitte imasu kara, ki o tsukete hakobanakereba narimasen.</em></p>
+</div></details></article>
+<article class="q" id="s3-q3" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">サラ「この<ruby>紙<rt>かみ</rt></ruby>はもうすててもいいですか。」<br><ruby>先生<rt>せんせい</rt></ruby>「いいえ、（a すててはいけませんよ　b すてなくてもいいですよ）。」</p>
+<p class="q-en">Sarah: "Can I throw away this paper now?"<br>Teacher: "No, you mustn't throw it away."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">すててはいけませんよ</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">すてなくてもいいですよ</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. すててはいけませんよ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Answering ～てもいいですか with "No" → ～てはいけません</span></p>
+<p class="ans-expl">The "no" answer to "May I ~?" is "You must not ~." <strong>b</strong> "You don't have to throw it away" answers a different question (～なければなりませんか).</p>
+<p class="ans-romaji"><em>Sensei: "Iie, sutete wa ikemasen yo."</em></p>
+</div></details></article>
+<article class="q" id="s3-q4" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">トム「<ruby>旅行<rt>りょこう</rt></ruby>のとき、タオルはひつようですか。」<br><ruby>先生<rt>せんせい</rt></ruby>「いいえ、（a <ruby>持<rt>も</rt></ruby>っていってもいいですよ　b <ruby>持<rt>も</rt></ruby>っていかなくてもいいですよ）。」</p>
+<p class="q-en">Tom: "Do we need towels for the trip?"<br>Teacher: "No, you don't have to bring them."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>持<rt>も</rt></ruby>っていってもいいですよ</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>持<rt>も</rt></ruby>っていかなくてもいいですよ</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>持<rt>も</rt></ruby>っていかなくてもいいですよ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">なくてもいい (not necessary)</span></p>
+<p class="ans-expl">"Are towels necessary?" "No" → you don't have to bring them. <strong>a</strong> "you may bring them" doesn't answer whether they're needed.</p>
+<p class="ans-romaji"><em>Sensei: "Iie, motte ikanakute mo ii desu yo."</em></p>
+</div></details></article>
+<article class="q" id="s3-q5" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「ここでたばこを（a すってもいいですか　b すわなければなりませんか）。」<br>B「すみません、あそこですってください。」</p>
+<p class="q-en">A: "May I smoke here?"<br>B: "Sorry, please smoke over there."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">すってもいいですか</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">すわなければなりませんか</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. すってもいいですか</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～てもいいですか (asking permission)</span></p>
+<p class="ans-expl">A asks for permission to smoke, and B politely says no and points to another place. <strong>b</strong> "Do I have to smoke here?" is a strange question.</p>
+<p class="ans-romaji"><em>A: "Koko de tabako o sutte mo ii desu ka."<br>B: "Sumimasen, asoko de sutte kudasai."</em></p>
+</div></details></article>
+<article class="q" id="s3-q6" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>車<rt>くるま</rt></ruby>がほしいな。（a <ruby>新<rt>あたら</rt></ruby>しくてもいい　b <ruby>新<rt>あたら</rt></ruby>しくなくてもいい）けど、<ruby>大<rt>おお</rt></ruby>きい<ruby>車<rt>くるま</rt></ruby>がいいな。</p>
+<p class="q-en">I want a car. It doesn't have to be new, but I'd like a big one.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>新<rt>あたら</rt></ruby>しくてもいい</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>新<rt>あたら</rt></ruby>しくなくてもいい</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>新<rt>あたら</rt></ruby>しくなくてもいい</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">い-adjective ～くなくてもいい ("doesn't need to be ~")</span></p>
+<p class="ans-expl">The speaker is relaxed about the car being old, but wants it big. "It doesn't have to be new" = <ruby>新<rt>あたら</rt></ruby>しくなくてもいい. <strong>a</strong> "it's OK even if it's new" is a strange thing to say, since new is usually good.</p>
+<p class="ans-romaji"><em>Kuruma ga hoshii na. Atarashikunakute mo ii kedo, ookii kuruma ga ii na.</em></p>
+</div></details></article>
+<article class="q" id="s3-q7" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">【<ruby>動物園<rt>どうぶつえん</rt></ruby>で】「<ruby>大人<rt>おとな</rt></ruby>は500<ruby>円<rt>えん</rt></ruby>ですか。あの、<ruby>子<rt>こ</rt></ruby>どももお<ruby>金<rt>かね</rt></ruby>を（a はらわなくてもいいですか　b はらわなければなりませんか）。」</p>
+<p class="q-en">[At the zoo] "Adults are 500 yen? Um, do children also have to pay?"</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">はらわなくてもいいですか</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">はらわなければなりませんか</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. はらわなければなりませんか</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">なければなりませんか (asking if something is required)</span></p>
+<p class="ans-expl">The particle も ("children <strong>also</strong>") is the hint. "Do children <em>also</em> have to pay (like adults)?" = はらわなければなりませんか. <strong>a</strong> "Is it OK for children also not to pay?" doesn't match も, since adults <em>do</em> pay.</p>
+<p class="ans-romaji"><em>"Otona wa gohyaku-en desu ka. Ano, kodomo mo okane o harawanakereba narimasen ka."</em></p>
+</div></details></article></section>
+<div class="pager"><a class="pager-btn" href="part1-review-lessons01-05.html"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Part 1 · Review 1–5</span></a><a class="pager-btn next" href="part1-lesson07.html"><span>Part 1 · Lesson 7</span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#s1" aria-label="Grammar"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>Grammar</span></a>
+<a href="#s2" aria-label="Practice"><svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4zM13 7l4 4"/></svg><span>Practice</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

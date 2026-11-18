@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>N4 Grammar Lessons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row"><p class="kicker">JLPT N4 · Shin Kanzen Master</p><button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button></div>
+  <h1>Grow your grammar,<br>one lesson at a time.</h1>
+</header>
+<div class="lessons"><a class="lesson tone-lav" href="part1-lesson02.html"><span class="lesson-tag">Part 1 · Lesson 2</span><span class="lesson-jp" lang="ja">～ながら… / ～ところです / ～まで…・～までに…</span><span class="lesson-meta">12 questions</span></a><a class="lesson tone-dark" href="part1-lesson03.html"><span class="lesson-tag">Part 1 · Lesson 3</span><span class="lesson-jp" lang="ja">～ませんか / ～ましょう(か)</span><span class="lesson-meta">10 questions</span></a><a class="lesson tone-peach" href="part1-lesson04.html"><span class="lesson-tag">Part 1 · Lesson 4</span><span class="lesson-jp" lang="ja">～(られ)ます / ～ができます・～ことができます / <ruby>見<rt>み</rt></ruby>えます・<ruby>聞<rt>き</rt></ruby>こえます</span><span class="lesson-meta">15 questions</span></a><a class="lesson tone-pink" href="part1-lesson05.html"><span class="lesson-tag">Part 1 · Lesson 5</span><span class="lesson-jp" lang="ja">～たことがあります / ～ことがあります</span><span class="lesson-meta">14 questions</span></a><a class="lesson tone-lav" href="part1-review-lessons01-05.html"><span class="lesson-tag">Part 1 · Review 1–5</span><span class="lesson-jp" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> まとめ<ruby>問題<rt>もんだい</rt></ruby> (Review test: Lessons 1–5)</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-dark" href="part1-lesson06.html"><span class="lesson-tag">Part 1 · Lesson 6</span><span class="lesson-jp" lang="ja">～てもいいです / ～てはいけません / ～なくてもいいです / ～なければなりません</span><span class="lesson-meta">15 questions</span></a><a class="lesson tone-peach" href="part1-lesson07.html"><span class="lesson-tag">Part 1 · Lesson 7</span><span class="lesson-jp" lang="ja">～がほしいです・～たいです / ～といいです</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-pink" href="part1-lesson08.html"><span class="lesson-tag">Part 1 · Lesson 8</span><span class="lesson-jp" lang="ja">～そうです / ～がっています・～がります / ～まま…</span><span class="lesson-meta">21 questions</span></a><a class="lesson tone-lav" href="part1-lesson09.html"><span class="lesson-tag">Part 1 · Lesson 9</span><span class="lesson-jp" lang="ja">～から…・～からです / ～ので… / ～て…・～くて…・～で…</span><span class="lesson-meta">19 questions</span></a><a class="lesson tone-dark" href="part1-lesson10.html"><span class="lesson-tag">Part 1 · Lesson 10</span><span class="lesson-jp" lang="ja">～に… / ～ため(に)… / ～ように…</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-peach" href="part1-review-lessons01-10.html"><span class="lesson-tag">Part 1 · Review 1–10</span><span class="lesson-jp" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> まとめ<ruby>問題<rt>もんだい</rt></ruby> (Review test: Lessons 1–10)</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-pink" href="part1-lesson11.html"><span class="lesson-tag">Part 1 · Lesson 11</span><span class="lesson-jp" lang="ja">(～も)～し、(～も)… / ～たり～たりします</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-lav" href="part1-lesson12.html"><span class="lesson-tag">Part 1 · Lesson 12</span><span class="lesson-jp" lang="ja">～かもしれません / ～はずです / ～ようです・～みたいです</span><span class="lesson-meta">14 questions</span></a><a class="lesson tone-dark" href="part1-lesson13.html"><span class="lesson-tag">Part 1 · Lesson 13</span><span class="lesson-jp" lang="ja">～なさい / ～ほうがいいです / ～ないと</span><span class="lesson-meta">12 questions</span></a><a class="lesson tone-peach" href="part1-lesson14.html"><span class="lesson-tag">Part 1 · Lesson 14</span><span class="lesson-jp" lang="ja">～たら… / ～ば…・～なら… / ～と…</span><span class="lesson-meta">14 questions</span></a><a class="lesson tone-pink" href="part1-lesson15.html"><span class="lesson-tag">Part 1 · Lesson 15</span><span class="lesson-jp" lang="ja">～たら… / ～なら…</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-lav" href="part1-review-lessons01-15.html"><span class="lesson-tag">Part 1 · Review 1–15</span><span class="lesson-jp" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> まとめ<ruby>問題<rt>もんだい</rt></ruby> (Review test: Lessons 1–15)</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-dark" href="part1-lesson16.html"><span class="lesson-tag">Part 1 · Lesson 16</span><span class="lesson-jp" lang="ja">～ても… / ～のに…</span><span class="lesson-meta">17 questions</span></a><a class="lesson tone-peach" href="part1-lesson17.html"><span class="lesson-tag">Part 1 · Lesson 17</span><span class="lesson-jp" lang="ja">～と… / ～か…・～かどうか…</span><span class="lesson-meta">14 questions</span></a><a class="lesson tone-pink" href="part1-lesson18.html"><span class="lesson-tag">Part 1 · Lesson 18</span><span class="lesson-jp" lang="ja">～(よ)うと<ruby>思<rt>おも</rt></ruby>います / ～つもりです</span><span class="lesson-meta">16 questions</span></a><a class="lesson tone-lav" href="part1-lesson19.html"><span class="lesson-tag">Part 1 · Lesson 19</span><span class="lesson-jp" lang="ja">～と<ruby>言<rt>い</rt></ruby>っていました / ～そうです / ～らしいです</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-dark" href="part1-lesson20.html"><span class="lesson-tag">Part 1 · Lesson 20</span><span class="lesson-jp" lang="ja">～くします・～にします / ～くなります・～になります・～ようになります</span><span class="lesson-meta">23 questions</span></a><a class="lesson tone-peach" href="part1-review-lessons01-20.html"><span class="lesson-tag">Part 1 · Review 1–20</span><span class="lesson-jp" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> まとめ<ruby>問題<rt>もんだい</rt></ruby> (Review test: Lessons 1–20)</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-pink" href="part1-lesson21.html"><span class="lesson-tag">Part 1 · Lesson 21</span><span class="lesson-jp" lang="ja">～にします・～ことにします / ～になります・～ことになります</span><span class="lesson-meta">17 questions</span></a><a class="lesson tone-lav" href="part1-lesson22.html"><span class="lesson-tag">Part 1 · Lesson 22</span><span class="lesson-jp" lang="ja">～てみます / ～ておきます / ～てしまいます</span><span class="lesson-meta">11 questions</span></a><a class="lesson tone-dark" href="part1-lesson23.html"><span class="lesson-tag">Part 1 · Lesson 23</span><span class="lesson-jp" lang="ja">あげます・～てあげます / くれます・～てくれます / もらいます・～てもらいます</span><span class="lesson-meta">11 questions</span></a><a class="lesson tone-peach" href="part1-lesson24.html"><span class="lesson-tag">Part 1 · Lesson 24</span><span class="lesson-jp" lang="ja">～(ら)れます (Passive)</span><span class="lesson-meta">14 questions</span></a><a class="lesson tone-pink" href="part1-lesson25.html"><span class="lesson-tag">Part 1 · Lesson 25</span><span class="lesson-jp" lang="ja">～(さ)せます / ～さ(せら)れます</span><span class="lesson-meta">15 questions</span></a><a class="lesson tone-lav" href="part1-review-lessons01-25.html"><span class="lesson-tag">Part 1 · Review 1–25</span><span class="lesson-jp" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> まとめ<ruby>問題<rt>もんだい</rt></ruby> (Review test: Lessons 1–25)</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-dark" href="part2-lesson01.html"><span class="lesson-tag">Part 2 · Lesson 1</span><span class="lesson-jp" lang="ja">で・に</span><span class="lesson-meta">20 questions</span></a><a class="lesson tone-peach" href="part2-lesson02.html"><span class="lesson-tag">Part 2 · Lesson 2</span><span class="lesson-jp" lang="ja">を・と</span><span class="lesson-meta">19 questions</span></a><a class="lesson tone-pink" href="part2-lesson03.html"><span class="lesson-tag">Part 2 · Lesson 3</span><span class="lesson-jp" lang="ja">も・しか</span><span class="lesson-meta">17 questions</span></a><a class="lesson tone-lav" href="part2-lesson04.html"><span class="lesson-tag">Part 2 · Lesson 4</span><span class="lesson-jp" lang="ja">だけ・でも</span><span class="lesson-meta">18 questions</span></a><a class="lesson tone-dark" href="part2-lesson05.html"><span class="lesson-tag">Part 2 · Lesson 5</span><span class="lesson-jp" lang="ja">は・が</span><span class="lesson-meta">12 questions</span></a><a class="lesson tone-peach" href="part2-review-lessons01-05.html"><span class="lesson-tag">Part 2 · Review 1–5</span><span class="lesson-jp" lang="ja"><ruby>第<rt>だい</rt></ruby>2<ruby>部<rt>ぶ</rt></ruby> まとめ<ruby>問題<rt>もんだい</rt></ruby> (Review test: Part 2, Lessons 1–5)</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-pink" href="part2-lesson06.html"><span class="lesson-tag">Part 2 · Lesson 6</span><span class="lesson-jp" lang="ja">の・こと</span><span class="lesson-meta">15 questions</span></a><a class="lesson tone-lav" href="part2-lesson07.html"><span class="lesson-tag">Part 2 · Lesson 7</span><span class="lesson-jp" lang="ja">～て… ・ ～ないで…</span><span class="lesson-meta">20 questions</span></a><a class="lesson tone-dark" href="part2-lesson08.html"><span class="lesson-tag">Part 2 · Lesson 8</span><span class="lesson-jp" lang="ja"><ruby>他動詞<rt>たどうし</rt></ruby>・<ruby>自動詞<rt>じどうし</rt></ruby> (Transitive and intransitive verbs)</span><span class="lesson-meta">16 questions</span></a><a class="lesson tone-peach" href="part2-lesson09.html"><span class="lesson-tag">Part 2 · Lesson 9</span><span class="lesson-jp" lang="ja">～ています・～てあります</span><span class="lesson-meta">14 questions</span></a><a class="lesson tone-pink" href="part2-lesson10.html"><span class="lesson-tag">Part 2 · Lesson 10</span><span class="lesson-jp" lang="ja">～てきます・～ていきます</span><span class="lesson-meta">14 questions</span></a><a class="lesson tone-lav" href="part2-review-lessons01-10.html"><span class="lesson-tag">Part 2 · Review 1–10</span><span class="lesson-jp" lang="ja"><ruby>第<rt>だい</rt></ruby>2<ruby>部<rt>ぶ</rt></ruby> まとめ<ruby>問題<rt>もんだい</rt></ruby> (Review test: Part 2, Lessons 1–10)</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-dark" href="part2-lesson11.html"><span class="lesson-tag">Part 2 · Lesson 11</span><span class="lesson-jp" lang="ja">こ・そ・あ</span><span class="lesson-meta">9 questions</span></a><a class="lesson tone-peach" href="part2-lesson12.html"><span class="lesson-tag">Part 2 · Lesson 12</span><span class="lesson-jp" lang="ja"><ruby>接続<rt>せつぞく</rt></ruby>の<ruby>言葉<rt>ことば</rt></ruby> (Conjunctive terms)</span><span class="lesson-meta">14 questions</span></a><a class="lesson tone-pink" href="part2-lesson13.html"><span class="lesson-tag">Part 2 · Lesson 13</span><span class="lesson-jp" lang="ja"><ruby>副詞<rt>ふくし</rt></ruby> (Adverbs)</span><span class="lesson-meta">20 questions</span></a><a class="lesson tone-lav" href="part2-lesson14.html"><span class="lesson-tag">Part 2 · Lesson 14</span><span class="lesson-jp" lang="ja">～すぎます・～にくいです・～やすいです</span><span class="lesson-meta">19 questions</span></a><a class="lesson tone-dark" href="part2-lesson15.html"><span class="lesson-tag">Part 2 · Lesson 15</span><span class="lesson-jp" lang="ja"><ruby>品詞<rt>ひんし</rt></ruby> (Parts of speech)</span><span class="lesson-meta">17 questions</span></a><a class="lesson tone-peach" href="part2-review-lessons01-15.html"><span class="lesson-tag">Part 2 · Review 1–15</span><span class="lesson-jp" lang="ja"><ruby>第<rt>だい</rt></ruby>2<ruby>部<rt>ぶ</rt></ruby> まとめ<ruby>問題<rt>もんだい</rt></ruby> (Review test: Part 2, Lessons 1–15)</span><span class="lesson-meta">13 questions</span></a><a class="lesson tone-pink" href="mock-test.html"><span class="lesson-tag">Mock test</span><span class="lesson-jp" lang="ja"><ruby>模擬試験<rt>もぎしけん</rt></ruby> (Mock test)</span><span class="lesson-meta">25 questions</span></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" class="active" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>Part 1 · Lesson 15 · ～たら… / ～なら…</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row">
+    <a class="icon-btn" href="index.html" aria-label="All lessons"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <span class="crumb">Part 1 · Lesson 15</span>
+    <button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button>
+  </div>
+  <p class="kicker" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> 15<ruby>課<rt>か</rt></ruby></p>
+  <h1 lang="ja">～たら… / ～なら…</h1>
+  <p class="meta">Shin Kanzen Master N4 Grammar, book pages 64–65 (PDF pages 86–87). Answers checked against the book's answer key.</p>
+</header>
+<div class="chips"><a class="chip chip-dark" href="#s1">Grammar</a><a class="chip" href="#s2">Practice 1</a><a class="chip" href="#s3">Practice 2</a></div>
+<div class="stats"><div><b>2</b><span>grammar points</span></div><div><b>13</b><span>questions</span></div><div><b id="score">0</b><span>correct taps</span></div></div>
+<section class="sec" id="s1"><div class="sec-head"><h2>Grammar points on page 64</h2></div><article class="gp tone-lav"><div class="gp-head"><span class="gp-num">1</span><div><h3 lang="ja">～たら…</h3><p class=gp-en>when ~ / after ~ happens</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: verb た form + ら
+</li>
+<li>"<strong>After ~ happens</strong>, do …." Here ~ is <strong>not a guess</strong>: it's something you know <strong>will</strong> happen (3 o'clock will come, you will graduate, the water will boil).
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja">3<ruby>時<rt>じ</rt></ruby>になったら、<ruby>休<rt>やす</rt></ruby>みましょう。 <em>When it gets to 3 o'clock, let's take a break.</em>
+</li>
+<li lang="ja">この<ruby>学校<rt>がっこう</rt></ruby>をそつぎょうしたら、<ruby>何<rt>なん</rt></ruby>をしますか。 <em>What will you do after you graduate from this school?</em>
+</li>
+<li lang="ja">おゆがわいたら、<ruby>火<rt>ひ</rt></ruby>を<ruby>止<rt>と</rt></ruby>めてください。 <em>When the water boils, please turn off the heat.</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-dark"><div class="gp-head"><span class="gp-num">2</span><div><h3 lang="ja">～なら…</h3><p class=gp-en>if (it's the case that) ~ / if you're talking about ~</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: plain form + なら (な-adj and nouns drop だ)
+</li>
+<li>Picks up <strong>information from another person's words or situation</strong>, then gives the speaker's <strong>judgment, intention or suggestion</strong> about it.
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja">サラ「ケーキがおいしい<ruby>店<rt>みせ</rt></ruby>を<ruby>知<rt>し</rt></ruby>りませんか。」<ruby>山田<rt>やまだ</rt></ruby>「ケーキなら、<ruby>駅前<rt>えきまえ</rt></ruby>のセボンがおいしいですよ。」 <em>Sarah: "Do you know a shop with good cake?" Yamada: "If it's cake you want, Seibon in front of the station is good."</em>
+</li>
+<li lang="ja">トム「<ruby>春休<rt>はるやす</rt></ruby>みに<ruby>京都<rt>きょうと</rt></ruby>に<ruby>行<rt>い</rt></ruby>きたいです。」<ruby>先生<rt>せんせい</rt></ruby>「<ruby>京都<rt>きょうと</rt></ruby>に<ruby>行<rt>い</rt></ruby>くなら、ガイドブックを<ruby>貸<rt>か</rt></ruby>しましょうか。」 <em>Tom: "I want to go to Kyoto in the spring break." Teacher: "If you're going to Kyoto, shall I lend you a guidebook?"</em>
+</li>
+<li lang="ja">【テレビがついているが、<ruby>子<rt>こ</rt></ruby>どもは<ruby>見<rt>み</rt></ruby>ていない】<ruby>母<rt>はは</rt></ruby>「<ruby>見<rt>み</rt></ruby>ていないなら、テレビはもう<ruby>消<rt>け</rt></ruby>すよ。」 <em>[The TV is on, but the child isn't watching] Mother: "If you're not watching it, I'm turning the TV off."</em>
+</li></ol>
+</li></ul>
+<p class="tip" lang="ja"><strong>Quick tip:</strong> たら = <strong>after</strong> ~ happens. なら = "<strong>if that's the case</strong>" (based on what someone just said). With なら, the speaker's action can even happen <em>before</em> ~ (e.g. lend the guidebook before the trip).</p></div></article></section><section class="sec" id="s2"><div class="sec-head"><h2 lang="ja">れんしゅう1</h2><span class=sec-en>Practice 1</span><span class="sec-count">8 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja"><span class="blank">　</span>の<ruby>中<rt>なか</rt></ruby>の<ruby>言葉<rt>ことば</rt></ruby>を<ruby>正<rt>ただ</rt></ruby>しい<ruby>形<rt>かたち</rt></ruby>にして、<ruby>書<rt>か</rt></ruby>いてください。</p><p class="instr-en">Change the word in the brackets ( ) into the correct form and write it in the blank.</p></div>
+<article class="q" id="s2-q1" data-correct="">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>作文<rt>さくぶん</rt></ruby>をさいごまで<span class="blank">　</span>ら、<ruby>見<rt>み</rt></ruby>せてください。（<ruby>書<rt>か</rt></ruby>く）</p>
+<p class="q-en">When you've written your essay to the end, please show it to me.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>書<rt>か</rt></ruby>いた（<ruby>書<rt>か</rt></ruby>いたら）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">た form + ら (after ~ happens)</span></p>
+<p class="ans-expl"><ruby>書<rt>か</rt></ruby>く → <ruby>書<rt>か</rt></ruby>いた + ら.</p>
+<p class="ans-romaji"><em>Sakubun o saigo made kaitara, misete kudasai.</em></p>
+</div></details></article>
+<article class="q" id="s2-q2" data-correct="">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">うちへ<span class="blank">　</span>ら、<ruby>少<rt>すこ</rt></ruby>し<ruby>休<rt>やす</rt></ruby>みます。（<ruby>帰<rt>かえ</rt></ruby>る）</p>
+<p class="q-en">When I get home, I'll rest a little.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>帰<rt>かえ</rt></ruby>った（<ruby>帰<rt>かえ</rt></ruby>ったら）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">た form + ら</span></p>
+<p class="ans-expl"><ruby>帰<rt>かえ</rt></ruby>る (Group I) → <ruby>帰<rt>かえ</rt></ruby>った + ら.</p>
+<p class="ans-romaji"><em>Uchi e kaettara, sukoshi yasumimasu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q3" data-correct="">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>朝<rt>あさ</rt></ruby><span class="blank">　</span>ら、まず<ruby>水<rt>みず</rt></ruby>をコップ<ruby>一<rt>いっ</rt></ruby>ぱい<ruby>飲<rt>の</rt></ruby>みます。（<ruby>起<rt>お</rt></ruby>きる）</p>
+<p class="q-en">When I get up in the morning, the first thing I do is drink a glass of water.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>起<rt>お</rt></ruby>きた（<ruby>起<rt>お</rt></ruby>きたら）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">た form + ら</span></p>
+<p class="ans-expl"><ruby>起<rt>お</rt></ruby>きる → <ruby>起<rt>お</rt></ruby>きた + ら.</p>
+<p class="ans-romaji"><em>Asa okitara, mazu mizu o koppu ippai nomimasu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>夫<rt>おっと</rt></ruby>「<ruby>新<rt>あたら</rt></ruby>しいテレビ、<ruby>買<rt>か</rt></ruby>おうか。」<br><ruby>妻<rt>つま</rt></ruby>「テレビを<span class="blank">　</span>なら、<ruby>大<rt>おお</rt></ruby>きいのがほしいな。」（<ruby>買<rt>か</rt></ruby>う）</p>
+<p class="q-en">Husband: "Shall we buy a new TV?"<br>Wife: "If we're buying a TV, I'd like a big one."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>買<rt>か</rt></ruby>う（<ruby>買<rt>か</rt></ruby>うなら）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Dictionary form + なら</span></p>
+<p class="ans-expl">The wife picks up her husband's idea: <ruby>買<rt>か</rt></ruby>うなら.</p>
+<p class="ans-romaji"><em>Tsuma: "Terebi o kau nara, ookii no ga hoshii na."</em></p>
+</div></details></article>
+<article class="q" id="s2-q5" data-correct="">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">サラ「ピザの<ruby>作<rt>つく</rt></ruby>り<ruby>方<rt>かた</rt></ruby>を<ruby>知<rt>し</rt></ruby>っている？」<br>トム「ピザの<span class="blank">　</span>なら、この<ruby>本<rt>ほん</rt></ruby>に<ruby>書<rt>か</rt></ruby>いてあるよ。」（<ruby>作<rt>つく</rt></ruby>り<ruby>方<rt>かた</rt></ruby>）</p>
+<p class="q-en">Sarah: "Do you know how to make pizza?"<br>Tom: "If it's how to make pizza, it's written in this book."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>作<rt>つく</rt></ruby>り<ruby>方<rt>かた</rt></ruby>（<ruby>作<rt>つく</rt></ruby>り<ruby>方<rt>かた</rt></ruby>なら）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Noun + なら</span></p>
+<p class="ans-expl">Nouns connect directly to なら.</p>
+<p class="ans-romaji"><em>Tomu: "Piza no tsukurikata nara, kono hon ni kaite aru yo."</em></p>
+</div></details></article>
+<article class="q" id="s2-q6" data-correct="">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">サラ「あしたはアルバイトが<ruby>休<rt>やす</rt></ruby>みなんだ。」<br>トム「<span class="blank">　</span>なら、どこかへあそびに<ruby>行<rt>い</rt></ruby>こうか。」（<ruby>休<rt>やす</rt></ruby>み）</p>
+<p class="q-en">Sarah: "I've got tomorrow off from my part-time job."<br>Tom: "If you've got the day off, shall we go out somewhere?"</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>休<rt>やす</rt></ruby>み（<ruby>休<rt>やす</rt></ruby>みなら）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Noun + なら (responding to info)</span></p>
+<p class="ans-expl">Tom picks up Sarah's info: <ruby>休<rt>やす</rt></ruby>みなら.</p>
+<p class="ans-romaji"><em>Tomu: "Yasumi nara, dokoka e asobi ni ikou ka."</em></p>
+</div></details></article>
+<article class="q" id="s2-q7" data-correct="">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">トム「うーん、ちょっと<ruby>頭<rt>あたま</rt></ruby>が……。」<br><ruby>山田<rt>やまだ</rt></ruby>「<ruby>頭<rt>あたま</rt></ruby>が<span class="blank">　</span>なら、<ruby>今日<rt>きょう</rt></ruby>は<ruby>早<rt>はや</rt></ruby>くねたほうがいいよ。」（いたい）</p>
+<p class="q-en">Tom: "Ugh, my head is a bit…"<br>Yamada: "If your head hurts, you'd better go to bed early today."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">いたい（いたいなら）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">い-adjective + なら</span></p>
+<p class="ans-expl">い-adjectives connect directly: いたいなら.</p>
+<p class="ans-romaji"><em>Yamada: "Atama ga itai nara, kyou wa hayaku neta hou ga ii yo."</em></p>
+</div></details></article>
+<article class="q" id="s2-q8" data-correct="">
+<div class="q-head">
+<span class="q-num">Q8</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">トム「この<ruby>映画<rt>えいが</rt></ruby>は<ruby>見<rt>み</rt></ruby>ましたよ。」<br><ruby>先生<rt>せんせい</rt></ruby>「<span class="blank">　</span>なら、ストーリーを<ruby>知<rt>し</rt></ruby>っているでしょう？」（<ruby>見<rt>み</rt></ruby>る）</p>
+<p class="q-en">Tom: "I've seen this movie."<br>Teacher: "If you've seen it, you know the story, right?"</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>見<rt>み</rt></ruby>た（<ruby>見<rt>み</rt></ruby>たなら）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Past plain form + なら</span></p>
+<p class="ans-expl">Tom already saw it (past), so <ruby>見<rt>み</rt></ruby>たなら.</p>
+<p class="ans-romaji"><em>Sensei: "Mita nara, sutoorii o shitte iru deshou?"</em></p>
+</div></details></article></section><section class="sec" id="s3"><div class="sec-head"><h2 lang="ja">れんしゅう2</h2><span class=sec-en>Practice 2</span><span class="sec-count">5 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">いちばんいいものをえらんでください。</p><p class="instr-en">Choose the best option.</p></div>
+<article class="q" id="s3-q1" data-correct="c">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">この<ruby>本<rt>ほん</rt></ruby>、おもしろいよ。<ruby>読<rt>よ</rt></ruby>んだら、<span class="blank">　</span>。</p>
+<p class="q-en">This book is interesting. When I've finished reading it, shall I lend it to you?</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>貸<rt>か</rt></ruby>したよ</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>貸<rt>か</rt></ruby>してね</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>貸<rt>か</rt></ruby>そうか</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">c. <ruby>貸<rt>か</rt></ruby>そうか</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">たら (after ~) + offer</span></p>
+<p class="ans-expl">"After I finish reading it, shall I lend it to you?" is a future offer. <strong>a</strong> <ruby>貸<rt>か</rt></ruby>したよ is past ("I lent it"), which doesn't fit たら about the future. <strong>b</strong> <ruby>貸<rt>か</rt></ruby>してね asks the other person to lend, but the speaker owns the book.</p>
+<p class="ans-romaji"><em>Kono hon, omoshiroi yo. Yondara, kasou ka.</em></p>
+</div></details></article>
+<article class="q" id="s3-q2" data-correct="c">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">ケーキを<ruby>作<rt>つく</rt></ruby>るんですか。<ruby>作<rt>つく</rt></ruby>ったら、<span class="blank">　</span>。</p>
+<p class="q-en">You're making a cake? When you've made it, give me some too, OK?</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>手伝<rt>てつだ</rt></ruby>いましょうか</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">たまごとさとうがひつようですね</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja">わたしにもくださいね</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">c. わたしにもくださいね</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">たら (after ~ is done)</span></p>
+<p class="ans-expl"><ruby>作<rt>つく</rt></ruby>ったら = "after it's made." Asking for a piece fits <em>after</em>. <strong>a</strong> Offering to help belongs <em>before/while</em> making, not after. <strong>b</strong> Eggs and sugar are needed before making it.</p>
+<p class="ans-romaji"><em>Keeki o tsukuru n desu ka. Tsukuttara, watashi ni mo kudasai ne.</em></p>
+</div></details></article>
+<article class="q" id="s3-q3" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>先生<rt>せんせい</rt></ruby>「サラさんを<ruby>見<rt>み</rt></ruby>なかった？」<br>ジョー「<span class="blank">　</span>、さっきとなりのへやにいましたよ。」</p>
+<p class="q-en">Teacher: "Have you seen Sarah?"<br>Joe: "If it's Sarah you mean, she was in the next room a moment ago."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">サラさんなら</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">サラさんを<ruby>見<rt>み</rt></ruby>たなら</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja">サラさんを<ruby>見<rt>み</rt></ruby>なかったなら</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. サラさんなら</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Noun + なら (picking up the topic)</span></p>
+<p class="ans-expl">Joe picks up the topic the teacher raised: "Sarah? (If it's Sarah,) she was next door." <strong>b</strong> and <strong>c</strong> don't make sense: Joe is the one who saw her.</p>
+<p class="ans-romaji"><em>Joo: "Sara-san nara, sakki tonari no heya ni imashita yo."</em></p>
+</div></details></article>
+<article class="q" id="s3-q4" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">サラ「トム、あしたのパーティーに<ruby>行<rt>い</rt></ruby>く？トムが<span class="blank">　</span>、わたしも<ruby>行<rt>い</rt></ruby>く。」</p>
+<p class="q-en">Sarah: "Tom, are you going to tomorrow's party? If you're going, I'll go too."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>行<rt>い</rt></ruby>くなら</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>行<rt>い</rt></ruby>ったら</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>行<rt>い</rt></ruby>ったなら</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. <ruby>行<rt>い</rt></ruby>くなら</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">なら (if that's the case) + speaker's intention</span></p>
+<p class="ans-expl">Sarah decides based on Tom's plan: "if you're going, then I'll go too." <strong>b</strong> <ruby>行<rt>い</rt></ruby>ったら = "after you've gone," but they'd go together. <strong>c</strong> <ruby>行<rt>い</rt></ruby>ったなら = "if you went (already)," the wrong timing.</p>
+<p class="ans-romaji"><em>Sara: "Tomu, ashita no paatii ni iku? Tomu ga iku nara, watashi mo iku."</em></p>
+</div></details></article>
+<article class="q" id="s3-q5" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>先生<rt>せんせい</rt></ruby>「<ruby>試験<rt>しけん</rt></ruby>が<span class="blank">　</span>、<ruby>夏休<rt>なつやす</rt></ruby>みですから、それまでがんばってください。」</p>
+<p class="q-en">Teacher: "When the exams are over, it's summer vacation, so please work hard until then."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>終<rt>お</rt></ruby>わるなら</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>終<rt>お</rt></ruby>わったら</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>終<rt>お</rt></ruby>わったなら</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>終<rt>お</rt></ruby>わったら</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">たら (after something that will surely happen)</span></p>
+<p class="ans-expl">The exams will definitely end, and then vacation starts: <ruby>終<rt>お</rt></ruby>わったら. <strong>a</strong> and <strong>c</strong> なら suggest "if it's the case that…," which doesn't fit a certain future event.</p>
+<p class="ans-romaji"><em>Sensei: "Shiken ga owattara, natsuyasumi desu kara, sore made ganbatte kudasai."</em></p>
+</div></details></article></section>
+<div class="pager"><a class="pager-btn" href="part1-lesson14.html"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Part 1 · Lesson 14</span></a><a class="pager-btn next" href="part1-review-lessons01-15.html"><span>Part 1 · Review 1–15</span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#s1" aria-label="Grammar"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>Grammar</span></a>
+<a href="#s2" aria-label="Practice"><svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4zM13 7l4 4"/></svg><span>Practice</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

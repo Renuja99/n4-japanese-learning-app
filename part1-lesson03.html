@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>Part 1 · Lesson 3 · ～ませんか / ～ましょう(か)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row">
+    <a class="icon-btn" href="index.html" aria-label="All lessons"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <span class="crumb">Part 1 · Lesson 3</span>
+    <button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button>
+  </div>
+  <p class="kicker" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> 3<ruby>課<rt>か</rt></ruby></p>
+  <h1 lang="ja">～ませんか / ～ましょう(か)</h1>
+  <p class="meta">Shin Kanzen Master N4 Grammar, book pages 36–37 (PDF pages 58–59). Answers checked against the book's answer key.</p>
+</header>
+<div class="chips"><a class="chip chip-dark" href="#s1">Grammar</a><a class="chip" href="#s2">Practice 1</a><a class="chip" href="#s3">Practice 2</a></div>
+<div class="stats"><div><b>2</b><span>grammar points</span></div><div><b>10</b><span>questions</span></div><div><b id="score">0</b><span>correct taps</span></div></div>
+<section class="sec" id="s1"><div class="sec-head"><h2>Grammar points on page 36</h2></div><article class="gp tone-lav"><div class="gp-head"><span class="gp-num">1</span><div><h3 lang="ja">～ませんか</h3><p class=gp-en>Won't you ~? / Why don't we ~?</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: verb ます-stem + ませんか. In casual speech: ない form + ？ (e.g. <ruby>食<rt>た</rt></ruby>べない？)
+</li>
+<li>Used to suggest or invite. It can be for something you do <strong>together</strong> (①) or something only the <strong>other person</strong> does (②③). It's softer than a direct order because it asks for the other person's opinion.
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja">A「ひさしぶりにテニスをしませんか。」B「あ、いいですね。」 <em>A: "Shall we play tennis? It's been a while." B: "Oh, sounds good."</em>
+</li>
+<li lang="ja">A「あした、うちに<ruby>来<rt>き</rt></ruby>ませんか。」B「あの、あしたはちょっと……。」 <em>A: "Would you like to come to my place tomorrow?" B: "Um, tomorrow is a bit…" (polite refusal)</em>
+</li>
+<li lang="ja">トム「これ、<ruby>食<rt>た</rt></ruby>べない？おいしいよ。」サラ「じゃ、<ruby>一<rt>ひと</rt></ruby>つもらうね。」 <em>Tom: "Want to eat this? It's tasty." Sarah: "OK, I'll take one."</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-dark"><div class="gp-head"><span class="gp-num">2</span><div><h3 lang="ja">～ましょう</h3><p class=gp-en>か) (Let's ~ / Shall we ~? / Shall I ~?</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: verb ます-stem + ましょう(か). In casual speech: volitional う/よう form (<ruby>持<rt>も</rt></ruby>とうか).
+</li>
+<li>Two uses:
+<ul>
+<li>Suggesting doing something <strong>together</strong> when the other person is likely to agree (①②): "Let's ~ / Shall we ~?"
+</li>
+<li><strong>Offering</strong> to do something <strong>yourself</strong> for the other person (③④): "Shall I ~?"
+</li></ul>
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja">A「もう5<ruby>時<rt>じ</rt></ruby>ですね。」B「じゃ、<ruby>帰<rt>かえ</rt></ruby>りましょうか。」 <em>A: "It's already 5 o'clock." B: "Well then, shall we go home?"</em>
+</li>
+<li lang="ja">A「いっしょに<ruby>食事<rt>しょくじ</rt></ruby>をしませんか。」B「いいですね。<ruby>何<rt>なん</rt></ruby>を<ruby>食<rt>た</rt></ruby>べましょうか。」A「すしを<ruby>食<rt>た</rt></ruby>べませんか。」B「そうですね。じゃ、<ruby>行<rt>い</rt></ruby>きましょう。」 <em>A: "Would you like to have a meal together?" B: "Sounds good. What shall we eat?" A: "How about sushi?" B: "Good idea. OK, let's go."</em>
+</li>
+<li lang="ja">A「<ruby>電気<rt>でんき</rt></ruby>、つけましょうか。」B「ええ、おねがいします。」 <em>A: "Shall I turn on the light?" B: "Yes, please."</em>
+</li>
+<li lang="ja">トム「そのにもつ、<ruby>持<rt>も</rt></ruby>とうか。」サラ「あ、ありがとう。」 <em>Tom: "Shall I carry that bag?" Sarah: "Oh, thanks."</em>
+</li></ol>
+</li></ul>
+<p class="tip" lang="ja"><strong>Quick tip:</strong> ませんか asks "do you want to?", so it's polite when you don't know the answer. ましょう assumes "yes" ("let's!"), so it's often used <em>after</em> someone has already agreed.</p></div></article></section><section class="sec" id="s2"><div class="sec-head"><h2 lang="ja">れんしゅう1</h2><span class=sec-en>Practice 1</span><span class="sec-count">4 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja"><span class="blank">　</span>の<ruby>中<rt>なか</rt></ruby>の<ruby>言葉<rt>ことば</rt></ruby>を<ruby>正<rt>ただ</rt></ruby>しい<ruby>形<rt>かたち</rt></ruby>にして、<ruby>書<rt>か</rt></ruby>いてください。</p><p class="instr-en">Change the word in the brackets ( ) into the correct form and write it in the blank.</p></div>
+<article class="q" id="s2-q1" data-correct="">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">A「どこかでお<ruby>茶<rt>ちゃ</rt></ruby>を ①<span class="blank">　</span>ませんか。」（<ruby>飲<rt>の</rt></ruby>む） B「そうですね。あの<ruby>店<rt>みせ</rt></ruby>に ②<span class="blank">　</span>ましょう。」（<ruby>入<rt>はい</rt></ruby>る）</p>
+<p class="q-en">A: "Shall we have some tea somewhere?"<br>B: "Good idea. Let's go into that shop."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">① <ruby>飲<rt>の</rt></ruby>み（<ruby>飲<rt>の</rt></ruby>みませんか） ② <ruby>入<rt>はい</rt></ruby>り（<ruby>入<rt>はい</rt></ruby>りましょう）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ます-stem + ませんか / ましょう</span></p>
+<p class="ans-expl">Both ませんか and ましょう attach to the ます-stem. <ruby>飲<rt>の</rt></ruby>みます → <ruby>飲<rt>の</rt></ruby>み, <ruby>入<rt>はい</rt></ruby>ります → <ruby>入<rt>い</rt></ruby>り. (<ruby>入<rt>はい</rt></ruby>る looks like a Group II verb, but it's Group I, so its stem is <ruby>入<rt>はい</rt></ruby>り, not <ruby>入<rt>いり</rt></ruby>.)</p>
+<p class="ans-romaji"><em>A: "Dokoka de ocha o nomimasen ka."<br>B: "Sou desu ne. Ano mise ni hairimashou."</em></p>
+</div></details></article>
+<article class="q" id="s2-q2" data-correct="">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">A「これから<ruby>花見<rt>はなみ</rt></ruby>に<ruby>行<rt>い</rt></ruby>くんですが、Bさんも<span class="blank">　</span>ませんか。」（<ruby>行<rt>い</rt></ruby>く） B「あ、<ruby>今日<rt>きょう</rt></ruby>はちょっと……。」</p>
+<p class="q-en">A: "We're going cherry-blossom viewing now. Would you like to come too, B?"<br>B: "Oh, today is a bit…"</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>行<rt>い</rt></ruby>き（<ruby>行<rt>い</rt></ruby>きませんか）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ます-stem + ませんか (invitation)</span></p>
+<p class="ans-expl"><ruby>行<rt>い</rt></ruby>きます → <ruby>行<rt>い</rt></ruby>き + ませんか. It's an invitation for the other person to join. B's "ちょっと……" is the typical polite way to say no.</p>
+<p class="ans-romaji"><em>A: "Kore kara hanami ni iku n desu ga, B-san mo ikimasen ka."<br>B: "A, kyou wa chotto…"</em></p>
+</div></details></article>
+<article class="q" id="s2-q3" data-correct="">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">トム「サラ、いそがしい？<span class="blank">　</span>か。」（<ruby>手伝<rt>てつだ</rt></ruby>う） サラ「うん、ありがとう。」</p>
+<p class="q-en">Tom: "Sarah, are you busy? Shall I help?"<br>Sarah: "Yeah, thanks."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>手伝<rt>てつだ</rt></ruby>おう（<ruby>手伝<rt>てつだ</rt></ruby>おうか）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Casual volitional form + か (offering: "Shall I ~?")</span></p>
+<p class="ans-expl">Tom and Sarah are friends, so instead of <ruby>手伝<rt>てつだ</rt></ruby>いましょうか they use the casual volitional form. <ruby>手伝<rt>てつだ</rt></ruby>う (Group I, ending う) → <ruby>手伝<rt>てつだ</rt></ruby>おう. Adding か makes it an offer.</p>
+<p class="ans-romaji"><em>Tomu: "Sara, isogashii? Tetsudaou ka."<br>Sara: "Un, arigatou."</em></p>
+</div></details></article>
+<article class="q" id="s2-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">A「あそこに ①<span class="blank">　</span>ましょうか。」（すわる） B「そうですね。そう ②<span class="blank">　</span>ましょう。」（する）</p>
+<p class="q-en">A: "Shall we sit over there?"<br>B: "Sure. Let's do that."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">① すわり（すわりましょうか） ② し（しましょう）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ます-stem + ましょう(か)</span></p>
+<p class="ans-expl">すわります → すわり, します → し. A suggests with ましょうか, and B agrees with そうしましょう ("let's do that").</p>
+<p class="ans-romaji"><em>A: "Asoko ni suwarimashou ka."<br>B: "Sou desu ne. Sou shimashou."</em></p>
+</div></details></article></section><section class="sec" id="s3"><div class="sec-head"><h2 lang="ja">れんしゅう2</h2><span class=sec-en>Practice 2</span><span class="sec-count">6 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">aかbか いいほうをえらんでください。</p><p class="instr-en">Choose the better option, a or b.</p></div>
+<article class="q" id="s3-q1" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「<ruby>駅<rt>えき</rt></ruby>まで<ruby>行<rt>い</rt></ruby>くんですか。じゃ、<ruby>車<rt>くるま</rt></ruby>で（a <ruby>送<rt>おく</rt></ruby>りませんか　b <ruby>送<rt>おく</rt></ruby>りましょうか）。」<br>B「ありがとうございます。」</p>
+<p class="q-en">A: "Are you going to the station? Then shall I drive you there?"<br>B: "Thank you very much."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>送<rt>おく</rt></ruby>りませんか</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>送<rt>おく</rt></ruby>りましょうか</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>送<rt>おく</rt></ruby>りましょうか</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ましょうか (offering to do something yourself)</span></p>
+<p class="ans-expl">A is offering to drive B, an action A will do for B. That's ましょうか ("Shall I ~?"). <strong>a</strong> <ruby>送<rt>おく</rt></ruby>りませんか would mean "Won't you drive (someone)?", asking B to do the driving, which doesn't fit.</p>
+<p class="ans-romaji"><em>A: "Eki made iku n desu ka. Ja, kuruma de okurimashou ka."<br>B: "Arigatou gozaimasu."</em></p>
+</div></details></article>
+<article class="q" id="s3-q2" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">トム「この<ruby>本<rt>ほん</rt></ruby>、おもしろかったよ。（a <ruby>読<rt>よ</rt></ruby>んでみない？　b <ruby>読<rt>よ</rt></ruby>んでみようか。）」<br>サラ「うん、<ruby>読<rt>よ</rt></ruby>んでみる。」</p>
+<p class="q-en">Tom: "This book was interesting. Why don't you try reading it?"<br>Sarah: "Yeah, I'll give it a try."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>読<rt>よ</rt></ruby>んでみない？</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>読<rt>よ</rt></ruby>んでみようか。</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. <ruby>読<rt>よ</rt></ruby>んでみない？</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Casual ～ない？ (suggesting the other person do something)</span></p>
+<p class="ans-expl">Tom already read the book; he's suggesting that <em>Sarah</em> read it. The casual form of ませんか is ない？. <strong>b</strong> <ruby>読<rt>よ</rt></ruby>んでみようか would mean "Shall I try reading it?", but Tom has already read it.</p>
+<p class="ans-romaji"><em>Tomu: "Kono hon, omoshirokatta yo. Yonde minai?"<br>Sara: "Un, yonde miru."</em></p>
+</div></details></article>
+<article class="q" id="s3-q3" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">サラ「かさがないの？このかさを（a <ruby>貸<rt>か</rt></ruby>さない？　b <ruby>貸<rt>か</rt></ruby>そうか。）」<br>トム「ありがとう。」</p>
+<p class="q-en">Sarah: "You don't have an umbrella? Shall I lend you this umbrella?"<br>Tom: "Thanks."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>貸<rt>か</rt></ruby>さない？</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>貸<rt>か</rt></ruby>そうか。</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>貸<rt>か</rt></ruby>そうか。</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Casual volitional + か (offering)</span></p>
+<p class="ans-expl">Sarah is offering to lend her own umbrella, so she uses the offer form <ruby>貸<rt>か</rt></ruby>そうか ("Shall I lend it?"). <strong>a</strong> <ruby>貸<rt>か</rt></ruby>さない？ would mean "Won't you lend (it)?", asking Tom to lend something, which makes no sense since he has no umbrella.</p>
+<p class="ans-romaji"><em>Sara: "Kasa ga nai no? Kono kasa o kasou ka."<br>Tomu: "Arigatou."</em></p>
+</div></details></article>
+<article class="q" id="s3-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「<ruby>日曜日<rt>にちようび</rt></ruby>、いっしょに<ruby>海<rt>うみ</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きませんか。」<br>B「いいですね。どうやって（① a <ruby>行<rt>い</rt></ruby>きませんか　b <ruby>行<rt>い</rt></ruby>きましょうか）。」<br>A「<ruby>車<rt>くるま</rt></ruby>で<ruby>行<rt>い</rt></ruby>きませんか。<ruby>運転<rt>うんてん</rt></ruby>しますよ。」<br>B「<ruby>車<rt>くるま</rt></ruby>があるんですか。じゃ、そう（② a しませんね　b しましょう）。」</p>
+<p class="q-en">A: "Would you like to go to the beach together on Sunday?"<br>B: "Sounds good. How shall we get there?"<br>A: "How about going by car? I'll drive."<br>B: "You have a car? Then let's do that."</p>
+<div class="opts">
+<button class="opt" type="button" data-key=""><span class="opt-k"></span><span class="opt-t" lang="ja">① a. <ruby>行<rt>い</rt></ruby>きませんか　b. <ruby>行<rt>い</rt></ruby>きましょうか</span></button>
+<button class="opt" type="button" data-key=""><span class="opt-k"></span><span class="opt-t" lang="ja">② a. しませんね　b. しましょう</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">① b. <ruby>行<rt>い</rt></ruby>きましょうか　② b. しましょう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Question word + ましょうか / agreeing with ましょう</span></p>
+<p class="ans-expl">① B has already agreed to go and now asks <em>how</em> "we" will go. With a question word (どうやって, <ruby>何<rt>なん</rt></ruby>を, etc.) you use ましょうか: "How shall we go?" ませんか is for inviting, and B isn't inviting anyone. ② B accepts A's idea: そうしましょう "Let's do that." <strong>a</strong> しませんね isn't a real suggestion form.</p>
+<p class="ans-romaji"><em>B: "Ii desu ne. Dou yatte ikimashou ka." … B: "Kuruma ga aru n desu ka. Ja, sou shimashou."</em></p>
+</div></details></article>
+<article class="q" id="s3-q5" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「<ruby>行<rt>い</rt></ruby>き<ruby>方<rt>かた</rt></ruby>はわかりますか。<ruby>地図<rt>ちず</rt></ruby>をかきましょうか。」<br>B「ええ、（a かきましょう　b かいてください）。」</p>
+<p class="q-en">A: "Do you know how to get there? Shall I draw you a map?"<br>B: "Yes, please draw one."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">かきましょう</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">かいてください</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. かいてください</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Responding to an offer (ましょうか → てください / おねがいします)</span></p>
+<p class="ans-expl">A offered to draw the map. B accepts by asking A to do it: かいてください. <strong>a</strong> かきましょう would mean "Let's draw (together)", but A is the one drawing.</p>
+<p class="ans-romaji"><em>A: "Ikikata wa wakarimasu ka. Chizu o kakimashou ka."<br>B: "Ee, kaite kudasai."</em></p>
+</div></details></article>
+<article class="q" id="s3-q6" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「いい<ruby>天気<rt>てんき</rt></ruby>ですね。<ruby>少<rt>すこ</rt></ruby>しさんぽしませんか。」<br>B「そうですね。（a さんぽしましょう　b さんぽしてください）。」</p>
+<p class="q-en">A: "Nice weather, isn't it? Would you like to take a little walk?"<br>B: "Yes, let's take a walk."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">さんぽしましょう</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">さんぽしてください</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. さんぽしましょう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Accepting an invitation with ましょう</span></p>
+<p class="ans-expl">A invited B to walk together. B agrees with "let's walk": さんぽしましょう. <strong>b</strong> さんぽしてください would tell A to go walking alone, which doesn't answer the invitation.</p>
+<p class="ans-romaji"><em>A: "Ii tenki desu ne. Sukoshi sanpo shimasen ka."<br>B: "Sou desu ne. Sanpo shimashou."</em></p>
+</div></details></article></section>
+<div class="pager"><a class="pager-btn" href="part1-lesson02.html"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Part 1 · Lesson 2</span></a><a class="pager-btn next" href="part1-lesson04.html"><span>Part 1 · Lesson 4</span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#s1" aria-label="Grammar"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>Grammar</span></a>
+<a href="#s2" aria-label="Practice"><svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4zM13 7l4 4"/></svg><span>Practice</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

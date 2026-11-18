@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>Part 2 · Lesson 15 · 品詞 (Parts of speech)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row">
+    <a class="icon-btn" href="index.html" aria-label="All lessons"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <span class="crumb">Part 2 · Lesson 15</span>
+    <button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button>
+  </div>
+  <p class="kicker" lang="ja"><ruby>第<rt>だい</rt></ruby>2<ruby>部<rt>ぶ</rt></ruby> 15<ruby>課<rt>か</rt></ruby></p>
+  <h1 lang="ja"><ruby>品詞<rt>ひんし</rt></ruby> (Parts of speech)</h1>
+  <p class="meta">Shin Kanzen Master N4 Grammar, book pages 126–127 (PDF pages 148–149). Answers checked against the book's answer key.</p>
+</header>
+<div class="chips"><a class="chip chip-dark" href="#s1">Grammar</a><a class="chip" href="#s2">Practice 1</a><a class="chip" href="#s3">Practice 2</a></div>
+<div class="stats"><div><b>4</b><span>grammar points</span></div><div><b>17</b><span>questions</span></div><div><b id="score">0</b><span>correct taps</span></div></div>
+<section class="sec" id="s1"><div class="sec-head"><h2>Grammar points on page 126</h2></div><div class="prose"><p>This lesson is about changing one kind of word into another: verbs into nouns, adjectives into nouns or adverbs, and whole sentences into nouns.</p></div>
+<article class="gp tone-lav"><div class="gp-head"><span class="gp-num">1</span><div><h3 lang="ja">Noun ⇔ Verb</h3></div></div><div class="gp-body"><ul>
+<li lang="ja">Nouns that take する (<ruby>料理<rt>りょうり</rt></ruby>, そうじ) work as nouns on their own.
+</li>
+<li lang="ja">Some verbs' ます-stem also works as a noun (<ruby>帰<rt>かえ</rt></ruby>り, <ruby>休<rt>やす</rt></ruby>み), but only for certain common words. When a particle like を, で or に is needed, it's dropped (<ruby>山<rt>やま</rt></ruby>にのぼります → <ruby>山<rt>やま</rt></ruby>のぼり).
+<ol>
+<li lang="ja"><ruby>料理<rt>りょうり</rt></ruby>は<ruby>好<rt>す</rt></ruby>きですが、そうじは<ruby>好<rt>す</rt></ruby>きではありません。 <em>I like cooking, but I don't like cleaning.</em> [⇔ <ruby>料理<rt>りょうり</rt></ruby>します、そうじします]
+</li>
+<li lang="ja"><ruby>帰<rt>かえ</rt></ruby>りのきっぷはもう<ruby>買<rt>か</rt></ruby>いました。 <em>I've already bought the return ticket.</em> [⇔ <ruby>帰<rt>かえ</rt></ruby>ります]
+</li>
+<li lang="ja"><ruby>山<rt>やま</rt></ruby>のぼりは<ruby>楽<rt>たの</rt></ruby>しいですよ。 <em>Mountain climbing is fun.</em> [⇔ <ruby>山<rt>やま</rt></ruby>にのぼります]
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-dark"><div class="gp-head"><span class="gp-num">2</span><div><h3 lang="ja">Noun ⇔ Adjective</h3><p class=gp-en>～さ</p></div></div><div class="gp-body"><ul>
+<li lang="ja"><strong>い-adjective without い + さ</strong> (exception: いい → <strong>よさ</strong>), or <strong>な-adjective without な + さ</strong>, makes a noun meaning "how ～ something is."
+<ol>
+<li lang="ja"><ruby>東京<rt>とうきょう</rt></ruby>スカイツリーの<ruby>高<rt>たか</rt></ruby>さは634メートルです。 <em>The height of Tokyo Skytree is 634 metres.</em> [⇔ <ruby>高<rt>たか</rt></ruby>い]
+</li>
+<li lang="ja"><ruby>場所<rt>ばしょ</rt></ruby>のべんりさを<ruby>考<rt>かんが</rt></ruby>えて、ホテルをえらびます。 <em>I choose hotels thinking about how convenient the location is.</em> [⇔ べんりな]
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-peach"><div class="gp-head"><span class="gp-num">3</span><div><h3 lang="ja">Adverb ⇔ Adjective</h3><p class=gp-en>～く / ～に</p></div></div><div class="gp-body"><ul>
+<li lang="ja"><strong>い-adjective without い + く</strong> (exception: いい → <strong>よく</strong>), or <strong>な-adjective + に</strong>, makes an adverb that describes how you do something.
+<ol>
+<li lang="ja">みんなで<ruby>楽<rt>たの</rt></ruby>しく<ruby>話<rt>はな</rt></ruby>しましょう。 <em>Let's all chat happily together.</em> [⇔ <ruby>楽<rt>たの</rt></ruby>しい]
+</li>
+<li lang="ja"><ruby>手<rt>て</rt></ruby>をきれいにあらってください。 <em>Please wash your hands well (clean).</em> [⇔ きれいな]
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-pink"><div class="gp-head"><span class="gp-num">4</span><div><h3 lang="ja">Noun ⇔ Sentence</h3><p class=gp-en>～の / ～こと</p></div></div><div class="gp-body"><ul>
+<li lang="ja"><strong>Plain form + の or こと</strong> turns a whole phrase into a noun.
+<ol>
+<li lang="ja"><ruby>友<rt>とも</rt></ruby>だちと<ruby>話<rt>はな</rt></ruby>すの／ことは<ruby>楽<rt>たの</rt></ruby>しいです。 <em>Talking with friends is fun.</em> [⇔ <ruby>友<rt>とも</rt></ruby>だちと<ruby>話<rt>はな</rt></ruby>す]
+</li>
+<li lang="ja">トムさんと<ruby>会<rt>あ</rt></ruby>うやくそくをしたの／ことをわすれていました。 <em>I forgot that I'd promised to meet Tom.</em> [⇔ <ruby>会<rt>あ</rt></ruby>うやくそくをした]
+</li></ol>
+</li></ul>
+<p class="tip" lang="ja"><strong>Quick tip:</strong> Look at what comes <strong>right after</strong> the blank. Before a particle (は・が・を) you need a <strong>noun</strong> (～さ, ～こと, stem). Before a verb you need an <strong>adverb</strong> (～く, ～に).</p></div></article></section><section class="sec" id="s2"><div class="sec-head"><h2 lang="ja">れんしゅう1</h2><span class=sec-en>Practice 1</span><span class="sec-count">10 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja"><span class="blank">　</span>の<ruby>中<rt>なか</rt></ruby>の<ruby>言葉<rt>ことば</rt></ruby>を<ruby>正<rt>ただ</rt></ruby>しい<ruby>形<rt>かたち</rt></ruby>にして、<ruby>書<rt>か</rt></ruby>いてください。</p><p class="instr-en">Change the word in the brackets ( ) into the correct form and write it in the blank.</p></div>
+<article class="q" id="s2-q1" data-correct="">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">この<ruby>店<rt>みせ</rt></ruby>は<ruby>日曜日<rt>にちようび</rt></ruby>は<span class="blank">　</span>です。（<ruby>休<rt>やす</rt></ruby>む）</p>
+<p class="q-en">This shop is closed (has its day off) on Sundays.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>休<rt>やす</rt></ruby>み</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Verb ます-stem as a noun</span></p>
+<p class="ans-expl">Before です you need a noun: <ruby>休<rt>やす</rt></ruby>む → <ruby>休<rt>やす</rt></ruby>み ("a day off").</p>
+<p class="ans-romaji"><em>Kono mise wa nichiyoubi wa yasumi desu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q2" data-correct="">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">わたしのしゅみは<span class="blank">　</span>です。（<ruby>魚<rt>さかな</rt></ruby>をつる）</p>
+<p class="q-en">My hobby is fishing.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>魚<rt>さかな</rt></ruby>つり</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>Verb → noun (particle dropped)</span></p>
+<p class="ans-expl"><ruby>魚<rt>さかな</rt></ruby>をつる → drop を, use the stem: <ruby>魚<rt>さかな</rt></ruby>つり. Like <ruby>山<rt>やま</rt></ruby>にのぼる → <ruby>山<rt>やま</rt></ruby>のぼり.</p>
+<p class="ans-romaji"><em>Watashi no shumi wa sakanatsuri desu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q3" data-correct="">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">パーティーの<ruby>後<rt>あと</rt></ruby>の<span class="blank">　</span>はぼくたちがするよ。（かたづける）</p>
+<p class="q-en">We'll do the tidying up after the party.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">かたづけ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Verb ます-stem as a noun</span></p>
+<p class="ans-expl">After の and before は you need a noun: かたづける → かたづけ.</p>
+<p class="ans-romaji"><em>Paatii no ato no katazuke wa boku-tachi ga suru yo.</em></p>
+</div></details></article>
+<article class="q" id="s2-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">サービスの<span class="blank">　</span>ではKホテルがいちばんです。（いい）</p>
+<p class="q-en">In terms of good service, K Hotel is the best.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">よさ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">い-adjective → noun with さ (exception いい → よさ)</span></p>
+<p class="ans-expl">You need a noun. いい is irregular: よさ, not いさ.</p>
+<p class="ans-romaji"><em>Saabisu no yosa de wa Kei-hoteru ga ichiban desu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q5" data-correct="">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">にもつの①<span class="blank">　</span>と②<span class="blank">　</span>を<ruby>教<rt>おし</rt></ruby>えてください。（<ruby>大<rt>おお</rt></ruby>きい、<ruby>重<rt>おも</rt></ruby>い）</p>
+<p class="q-en">Please tell me the size and weight of the parcel.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">① <ruby>大<rt>おお</rt></ruby>きさ　② <ruby>重<rt>おも</rt></ruby>さ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">い-adjective → noun with さ</span></p>
+<p class="ans-expl"><ruby>大<rt>おお</rt></ruby>きい → <ruby>大<rt>おお</rt></ruby>きさ (size), <ruby>重<rt>おも</rt></ruby>い → <ruby>重<rt>おも</rt></ruby>さ (weight). Both are nouns before と and を.</p>
+<p class="ans-romaji"><em>Nimotsu no ookisa to omosa o oshiete kudasai.</em></p>
+</div></details></article>
+<article class="q" id="s2-q6" data-correct="">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>家族<rt>かぞく</rt></ruby>の<span class="blank">　</span>がよくわかりました。（<ruby>大切<rt>たいせつ</rt></ruby>）</p>
+<p class="q-en">I really understood how important family is.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>大切<rt>たいせつ</rt></ruby>さ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">な-adjective → noun with さ</span></p>
+<p class="ans-expl"><ruby>大切<rt>な</rt></ruby> + さ = <ruby>大切<rt>たいせつ</rt></ruby>さ ("importance").</p>
+<p class="ans-romaji"><em>Kazoku no taisetsusa ga yoku wakarimashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q7" data-correct="">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>毎日<rt>まいにち</rt></ruby><ruby>遠<rt>とお</rt></ruby>くから<span class="blank">　</span>のはたいへんだね。（<ruby>通<rt>かよ</rt></ruby>う）</p>
+<p class="q-en">Commuting from far away every day must be hard.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>通<rt>かよ</rt></ruby>う</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Plain form + の (sentence → noun)</span></p>
+<p class="ans-expl">の after a verb needs the plain (dictionary) form: <ruby>通<rt>かよ</rt></ruby>うの.</p>
+<p class="ans-romaji"><em>Mainichi tooku kara kayou no wa taihen da ne.</em></p>
+</div></details></article>
+<article class="q" id="s2-q8" data-correct="">
+<div class="q-head">
+<span class="q-num">Q8</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>母<rt>はは</rt></ruby>がきのう<ruby>日本<rt>にほん</rt></ruby>に<span class="blank">　</span>ことを<ruby>先生<rt>せんせい</rt></ruby>に<ruby>話<rt>はな</rt></ruby>した。（<ruby>来<rt>く</rt></ruby>る）</p>
+<p class="q-en">I told my teacher that my mother came to Japan yesterday.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>来<rt>き</rt></ruby>た</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Plain form + こと</span></p>
+<p class="ans-expl">きのう (yesterday) → past plain form: <ruby>来<rt>き</rt></ruby>た + こと.</p>
+<p class="ans-romaji"><em>Haha ga kinou Nihon ni kita koto o sensei ni hanashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q9" data-correct="">
+<div class="q-head">
+<span class="q-num">Q9</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">みなさんの<ruby>意見<rt>いけん</rt></ruby>を<span class="blank">　</span><ruby>言<rt>い</rt></ruby>ってください。（じゆう）</p>
+<p class="q-en">Please give your opinions freely, everyone.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">じゆうに</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">な-adjective + に (adverb)</span></p>
+<p class="ans-expl">Before the verb <ruby>言<rt>い</rt></ruby>う you need an adverb: じゆう + に.</p>
+<p class="ans-romaji"><em>Minasan no iken o jiyuu ni itte kudasai.</em></p>
+</div></details></article>
+<article class="q" id="s2-q10" data-correct="">
+<div class="q-head">
+<span class="q-num">Q10</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">ピーターさんは<ruby>日本<rt>にほん</rt></ruby>に<span class="blank">　</span><ruby>住<rt>す</rt></ruby>んでいます。（<ruby>長<rt>なが</rt></ruby>い）</p>
+<p class="q-en">Peter has lived in Japan for a long time.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>長<rt>なが</rt></ruby>く</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">い-adjective → adverb with く</span></p>
+<p class="ans-expl">Before the verb <ruby>住<rt>す</rt></ruby>む you need an adverb: <ruby>長<rt>なが</rt></ruby>い → <ruby>長<rt>なが</rt></ruby>く.</p>
+<p class="ans-romaji"><em>Piitaa-san wa Nihon ni nagaku sunde imasu.</em></p>
+</div></details></article></section><section class="sec" id="s3"><div class="sec-head"><h2 lang="ja">れんしゅう2</h2><span class=sec-en>Practice 2</span><span class="sec-count">7 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">いちばんいいものをえらんでください。</p><p class="instr-en">Choose the best option.</p></div>
+<article class="q" id="s3-q1" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>外<rt>そと</rt></ruby>は<span class="blank">　</span>から、<ruby>早<rt>はや</rt></ruby>く<ruby>中<rt>なか</rt></ruby>に<ruby>入<rt>はい</rt></ruby>って。</p>
+<p class="q-en">It's cold outside, so come inside quickly.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>寒<rt>さむ</rt></ruby>さ</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>寒<rt>さむ</rt></ruby>い</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>寒<rt>さむ</rt></ruby>いこと</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>寒<rt>さむ</rt></ruby>い</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Adjective as the predicate (before から)</span></p>
+<p class="ans-expl">"Outside is cold" is a normal sentence, so the plain adjective <ruby>寒<rt>さむ</rt></ruby>い goes before から. <strong>a</strong> and <strong>c</strong> are nouns, which would need だ.</p>
+<p class="ans-romaji"><em>Soto wa samui kara, hayaku naka ni haitte.</em></p>
+</div></details></article>
+<article class="q" id="s3-q2" data-correct="c">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">くだもののねだんが<span class="blank">　</span>におどろきました。</p>
+<p class="q-en">I was surprised at how expensive the fruit was.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>高<rt>たか</rt></ruby>い</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>高<rt>たか</rt></ruby>さ</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>高<rt>たか</rt></ruby>いこと</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">c. <ruby>高<rt>たか</rt></ruby>いこと</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Plain form + こと (sentence → noun)</span></p>
+<p class="ans-expl">ねだんが<ruby>高<rt>たか</rt></ruby>い ("the price is high") is a full phrase with が, so you turn it into a noun with こと. <strong>a</strong> can't come before に. <strong>b</strong> <ruby>高<rt>たか</rt></ruby>さ is "height," and doesn't go with ねだんが.</p>
+<p class="ans-romaji"><em>Kudamono no nedan ga takai koto ni odorokimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q3" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>東京<rt>とうきょう</rt></ruby>の<ruby>地下鉄<rt>ちかてつ</rt></ruby>の<span class="blank">　</span>は<ruby>有名<rt>ゆうめい</rt></ruby>です。</p>
+<p class="q-en">The complexity of the Tokyo subway is famous.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">ふくざつさ</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">ふくざつ</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja">ふくざつの</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. ふくざつさ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">な-adjective → noun with さ</span></p>
+<p class="ans-expl">After の and before は you need a noun: ふくざつさ ("how complicated it is"). <strong>b</strong> and <strong>c</strong> aren't nouns here.</p>
+<p class="ans-romaji"><em>Toukyou no chikatetsu no fukuzatsusa wa yuumei desu.</em></p>
+</div></details></article>
+<article class="q" id="s3-q4" data-correct="c">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">この<ruby>店<rt>みせ</rt></ruby>は<ruby>店員<rt>てんいん</rt></ruby>がとても<span class="blank">　</span>、<ruby>気持<rt>きも</rt></ruby>ちがいいです。</p>
+<p class="q-en">The staff in this shop are very kind, and it feels nice.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>親切<rt>しんせつ</rt></ruby>な</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>親切<rt>しんせつ</rt></ruby>に</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>親切<rt>しんせつ</rt></ruby>で</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">c. <ruby>親切<rt>しんせつ</rt></ruby>で</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">な-adjective て-form (で) to link sentences</span></p>
+<p class="ans-expl">"Kind, and…" links two clauses: <ruby>親切<rt>しんせつ</rt></ruby>で. <strong>a</strong> <ruby>親切<rt>しんせつ</rt></ruby>な needs a noun after it. <strong>b</strong> <ruby>親切<rt>しんせつ</rt></ruby>に needs a verb after it.</p>
+<p class="ans-romaji"><em>Kono mise wa ten'in ga totemo shinsetsu de, kimochi ga ii desu.</em></p>
+</div></details></article>
+<article class="q" id="s3-q5" data-correct="c">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">ヨーロッパの<ruby>家<rt>いえ</rt></ruby>では、<ruby>日本<rt>にほん</rt></ruby>の<ruby>家<rt>いえ</rt></ruby>ほど<ruby>電気<rt>でんき</rt></ruby>を<span class="blank">　</span>つけません。</p>
+<p class="q-en">In European homes, people don't light their homes as brightly as in Japanese homes.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>明<rt>あか</rt></ruby>るい</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>明<rt>あか</rt></ruby>るくて</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>明<rt>あか</rt></ruby>るく</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">c. <ruby>明<rt>あか</rt></ruby>るく</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">い-adjective → adverb with く</span></p>
+<p class="ans-expl">Before the verb つける you need an adverb: <ruby>明<rt>あか</rt></ruby>るく. <strong>a</strong> needs a noun after it. <strong>b</strong> <ruby>明<rt>あか</rt></ruby>るくて links clauses ("bright, and…").</p>
+<p class="ans-romaji"><em>Yooroppa no ie de wa, Nihon no ie hodo denki o akaruku tsukemasen.</em></p>
+</div></details></article>
+<article class="q" id="s3-q6" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">わたしの<ruby>国<rt>くに</rt></ruby>と<ruby>日本<rt>にほん</rt></ruby>とでは、いろいろな<ruby>文化<rt>ぶんか</rt></ruby>の<span class="blank">　</span>があります。</p>
+<p class="q-en">There are many cultural differences between my country and Japan.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">ちがう</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">ちがい</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja">ちがいこと</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. ちがい</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Verb ます-stem as a noun</span></p>
+<p class="ans-expl">After の and before が you need a noun: ちがう → ちがい ("a difference"). <strong>a</strong> is a verb. <strong>c</strong> isn't a real form (it would be ちがうこと).</p>
+<p class="ans-romaji"><em>Watashi no kuni to Nihon to de wa, iroiro na bunka no chigai ga arimasu.</em></p>
+</div></details></article>
+<article class="q" id="s3-q7" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><span class="blank">　</span>、たくさん<ruby>食<rt>た</rt></ruby>べてください。</p>
+<p class="q-en">If it's tasty, please eat lots.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">おいしかったら</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">おいしさだったら</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja">おいしいことだったら</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. おいしかったら</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">い-adjective + たら (if)</span></p>
+<p class="ans-expl">"If it's tasty": おいしい → おいしかったら. <strong>b</strong> and <strong>c</strong> turn it into a noun, which doesn't make sense here.</p>
+<p class="ans-romaji"><em>Oishikattara, takusan tabete kudasai.</em></p>
+</div></details></article></section>
+<div class="pager"><a class="pager-btn" href="part2-lesson14.html"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Part 2 · Lesson 14</span></a><a class="pager-btn next" href="part2-review-lessons01-15.html"><span>Part 2 · Review 1–15</span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#s1" aria-label="Grammar"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>Grammar</span></a>
+<a href="#s2" aria-label="Practice"><svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4zM13 7l4 4"/></svg><span>Practice</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

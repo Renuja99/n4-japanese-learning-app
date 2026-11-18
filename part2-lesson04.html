@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>Part 2 · Lesson 4 · だけ・でも</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row">
+    <a class="icon-btn" href="index.html" aria-label="All lessons"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <span class="crumb">Part 2 · Lesson 4</span>
+    <button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button>
+  </div>
+  <p class="kicker" lang="ja"><ruby>第<rt>だい</rt></ruby>2<ruby>部<rt>ぶ</rt></ruby> 4<ruby>課<rt>か</rt></ruby></p>
+  <h1 lang="ja">だけ・でも</h1>
+  <p class="meta">Shin Kanzen Master N4 Grammar, book pages 100–101 (PDF pages 122–123). Answers checked against the book's answer key.</p>
+</header>
+<div class="chips"><a class="chip chip-dark" href="#s1">Grammar</a><a class="chip" href="#s2">Practice 1</a><a class="chip" href="#s3">Practice 2</a></div>
+<div class="stats"><div><b>2</b><span>grammar points</span></div><div><b>18</b><span>questions</span></div><div><b id="score">0</b><span>correct taps</span></div></div>
+<section class="sec" id="s1"><div class="sec-head"><h2>Grammar points on page 100</h2></div><article class="gp tone-lav"><div class="gp-head"><span class="gp-num">1</span><div><h3 lang="ja">Uses of だけ</h3><p class=gp-en>only / just</p></div></div><div class="gp-body"><ul>
+<li lang="ja"><strong>A. Limiting.</strong> Unlike しか, だけ works with <strong>positive or negative</strong> sentences.
+<ol>
+<li lang="ja">わたしのほんとうの<ruby>友<rt>とも</rt></ruby>だちはサラだけだ。 <em>My only true friend is Sarah.</em>
+</li>
+<li lang="ja">そのみかんを<ruby>一<rt>ひと</rt></ruby>つだけわたしにください。 <em>Please give me just one of those mandarins.</em>
+</li>
+<li lang="ja">とうふは<ruby>日本<rt>にほん</rt></ruby>にだけある<ruby>食<rt>た</rt></ruby>べ<ruby>物<rt>もの</rt></ruby>でしょうか。 <em>Is tofu a food found only in Japan?</em>
+</li>
+<li lang="ja"><ruby>日本<rt>にほん</rt></ruby>で<ruby>雨<rt>あめ</rt></ruby>が<ruby>多<rt>おお</rt></ruby>い<ruby>月<rt>つき</rt></ruby>は6<ruby>月<rt>がつ</rt></ruby>だけではない。9<ruby>月<rt>がつ</rt></ruby>にもよく<ruby>雨<rt>あめ</rt></ruby>がふる。 <em>June isn't the only rainy month in Japan. It often rains in September too.</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-dark"><div class="gp-head"><span class="gp-num">2</span><div><h3 lang="ja">Uses of でも</h3></div></div><div class="gp-body"><ul>
+<li><strong>A. "Even ~": an extreme or unexpected example; it's still true.</strong> (See Part 1, Lesson 16.)
+<ol>
+<li lang="ja">こんなかんたんなことは<ruby>小学生<rt>しょうがくせい</rt></ruby>でもわかります。 <em>Even an elementary school kid can understand something this easy.</em>
+</li></ol>
+</li>
+<li lang="ja"><strong>B. 1 + counter + でも: "even if it's just ~" (minimum).</strong>
+<ol>
+<li lang="ja">1<ruby>分<rt>ふん</rt></ruby>でも<ruby>長<rt>なが</rt></ruby>くねていたいです。 <em>I want to stay in bed even one minute longer.</em>
+</li>
+<li lang="ja">1<ruby>円<rt>えん</rt></ruby>でも<ruby>安<rt>やす</rt></ruby>いほうがいい。 <em>Cheaper is better, even by one yen.</em>
+</li>
+<li lang="ja">わたしは<ruby>少<rt>すこ</rt></ruby>しでもみんなのやくに<ruby>立<rt>た</rt></ruby>ちたい。 <em>I want to be of use to everyone, even just a little.</em>
+</li></ol>
+</li>
+<li><strong>C. Soft suggestion: "~ or something."</strong> Used in suggestions, requests and intentions.
+<ol>
+<li lang="ja">さあ、あまい<ruby>物<rt>もの</rt></ruby>でも<ruby>食<rt>た</rt></ruby>べませんか。 <em>Well, shall we have something sweet or something?</em>
+</li>
+<li lang="ja">ここでざっしでも<ruby>読<rt>よ</rt></ruby>んで<ruby>待<rt>ま</rt></ruby>っていてください。 <em>Please wait here and read a magazine or something.</em>
+</li>
+<li lang="ja"><ruby>日曜日<rt>にちようび</rt></ruby>には<ruby>花見<rt>はなみ</rt></ruby>にでも<ruby>行<rt>い</rt></ruby>こうかな。 <em>Maybe I'll go flower-viewing or something on Sunday.</em>
+</li></ol>
+</li>
+<li lang="ja"><strong>D. Question word + でも: "any ~ / every ~."</strong>
+<ol>
+<li lang="ja">いつでも<ruby>好<rt>す</rt></ruby>きなときに<ruby>来<rt>き</rt></ruby>てください。 <em>Come any time you like.</em>
+</li>
+<li lang="ja">このクラブにはだれでも<ruby>入<rt>い</rt></ruby>れます。 <em>Anyone can join this club.</em>
+</li>
+<li lang="ja"><ruby>今<rt>いま</rt></ruby>、コーヒーは<ruby>世界<rt>せかい</rt></ruby>のどこにでもあります。 <em>Nowadays coffee is everywhere in the world.</em>
+</li></ol>
+</li></ul>
+<p class="tip" lang="ja"><strong>Quick tip:</strong> Question word + <strong>も</strong> + negative = "no ~" (だれも<ruby>来<rt>こ</rt></ruby>ない). Question word + <strong>でも</strong> + positive = "any ~" (だれでも<ruby>入<rt>い</rt></ruby>れる).</p></div></article></section><section class="sec" id="s2"><div class="sec-head"><h2 lang="ja">れんしゅう1</h2><span class=sec-en>Practice 1</span><span class="sec-count">10 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja"><span class="blank">　</span>の<ruby>中<rt>なか</rt></ruby>に「だけ」か「でも」を<ruby>書<rt>か</rt></ruby>いてください。</p><p class="instr-en">Write だけ or でも in the brackets.</p></div>
+<article class="q" id="s2-q1" data-correct="">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">このふくろには<ruby>紙<rt>かみ</rt></ruby>のごみ<span class="blank">　</span><ruby>入<rt>い</rt></ruby>れてね。ほかのごみは<ruby>入<rt>い</rt></ruby>れないでね。</p>
+<p class="q-en">Only put paper rubbish in this bag. Don't put any other rubbish in.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">だけ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">だけ = only</span></p>
+<p class="ans-expl">"Not other rubbish" shows a limit: <ruby>紙<rt>かみ</rt></ruby>のごみだけ.</p>
+<p class="ans-romaji"><em>Kono fukuro ni wa kami no gomi dake irete ne.</em></p>
+</div></details></article>
+<article class="q" id="s2-q2" data-correct="">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">このまんがが<ruby>好<rt>す</rt></ruby>きだと<ruby>答<rt>こた</rt></ruby>えた<ruby>人<rt>ひと</rt></ruby>は<ruby>子<rt>こ</rt></ruby>ども<span class="blank">　</span>ではなかった。</p>
+<p class="q-en">The people who said they liked this manga weren't only children.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">だけ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">だけではない = not only</span></p>
+<p class="ans-expl">～だけではない = "not just ~."</p>
+<p class="ans-romaji"><em>Kono manga ga suki da to kotaeta hito wa kodomo dake de wa nakatta.</em></p>
+</div></details></article>
+<article class="q" id="s2-q3" data-correct="">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">うちの<ruby>子<rt>こ</rt></ruby>はだれと<span class="blank">　</span>すぐ<ruby>友<rt>とも</rt></ruby>だちになります。</p>
+<p class="q-en">My child makes friends with anyone right away.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">でも</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Question word + でも = anyone</span></p>
+<p class="ans-expl">だれとでも = "with anyone."</p>
+<p class="ans-romaji"><em>Uchi no ko wa dare to demo sugu tomodachi ni narimasu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">すみません。あと5<ruby>分<rt>ふん</rt></ruby><span class="blank">　</span><ruby>待<rt>ま</rt></ruby>ってください。</p>
+<p class="q-en">Sorry. Please wait just five more minutes.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">だけ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">だけ = just</span></p>
+<p class="ans-expl">"Only five more minutes": 5<ruby>分<rt>ふん</rt></ruby>だけ.</p>
+<p class="ans-romaji"><em>Sumimasen. Ato gofun dake matte kudasai.</em></p>
+</div></details></article>
+<article class="q" id="s2-q5" data-correct="">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>二人<rt>ふたり</rt></ruby>（①　）でしずかに<ruby>音楽<rt>おんがく</rt></ruby>（②　）<ruby>聞<rt>き</rt></ruby>きたいね。</p>
+<p class="q-en">I'd like to listen to some music or something quietly, just the two of us.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">① だけ　② でも</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">だけ = only; でも = soft suggestion</span></p>
+<p class="ans-expl">① <ruby>二人<rt>ふたり</rt></ruby>だけで = "just the two of us." ② <ruby>音楽<rt>おんがく</rt></ruby>でも = "music or something."</p>
+<p class="ans-romaji"><em>Futari dake de shizuka ni ongaku demo kikitai ne.</em></p>
+</div></details></article>
+<article class="q" id="s2-q6" data-correct="">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">すぐ<ruby>帰<rt>かえ</rt></ruby>ってくるよ。ここでゲーム<span class="blank">　</span>していて。</p>
+<p class="q-en">I'll be right back. Play a game or something here.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">でも</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">でも = soft suggestion</span></p>
+<p class="ans-expl">ゲームでも = "a game or something."</p>
+<p class="ans-romaji"><em>Sugu kaette kuru yo. Koko de geemu demo shite ite.</em></p>
+</div></details></article>
+<article class="q" id="s2-q7" data-correct="">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">しっかりあいさつしなさいね。3さいの<ruby>子<rt>こ</rt></ruby>ども<span class="blank">　</span>できるよ。</p>
+<p class="q-en">Greet people properly. Even a three-year-old can do it.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">でも</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">でも = even</span></p>
+<p class="ans-expl">An extreme example: "even a 3-year-old."</p>
+<p class="ans-romaji"><em>Shikkari aisatsu shinasai ne. Sansai no kodomo demo dekiru yo.</em></p>
+</div></details></article>
+<article class="q" id="s2-q8" data-correct="">
+<div class="q-head">
+<span class="q-num">Q8</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">A「コーヒーにミルクとさとうを<ruby>入<rt>い</rt></ruby>れますか。」<br>B「あ、ミルク<span class="blank">　</span><ruby>入<rt>い</rt></ruby>れてください。」</p>
+<p class="q-en">A: "Do you take milk and sugar in your coffee?"<br>B: "Oh, just milk, please."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">だけ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">だけ = only</span></p>
+<p class="ans-expl">Only milk, not sugar: ミルクだけ.</p>
+<p class="ans-romaji"><em>B: "A, miruku dake irete kudasai."</em></p>
+</div></details></article>
+<article class="q" id="s2-q9" data-correct="">
+<div class="q-head">
+<span class="q-num">Q9</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">わたしはピアノ<span class="blank">　</span>はずっとつづけたいなあ。</p>
+<p class="q-en">Piano, at least, is the one thing I want to keep doing forever.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">だけ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">だけは = at least this one thing</span></p>
+<p class="ans-expl">ピアノだけは = "piano, if nothing else."</p>
+<p class="ans-romaji"><em>Watashi wa piano dake wa zutto tsuzuketai naa.</em></p>
+</div></details></article>
+<article class="q" id="s2-q10" data-correct="">
+<div class="q-head">
+<span class="q-num">Q10</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">A「ちょっとパンを<ruby>買<rt>か</rt></ruby>ってきて。」<br>B「パン（①　）でいいの？くだもの（②　）<ruby>買<rt>か</rt></ruby>ってこようか。」<br>A「そうね。おねがい。」</p>
+<p class="q-en">A: "Can you go and buy some bread?"<br>B: "Is just bread OK? Shall I buy some fruit or something too?"<br>A: "Yes, please."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">① だけ　② でも</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">だけ = only; でも = soft suggestion</span></p>
+<p class="ans-expl">① パンだけでいい = "is only bread OK?" ② くだものでも = "fruit or something."</p>
+<p class="ans-romaji"><em>B: "Pan dake de ii no? Kudamono demo katte koyou ka."</em></p>
+</div></details></article></section><section class="sec" id="s3"><div class="sec-head"><h2 lang="ja">れんしゅう2</h2><span class=sec-en>Practice 2</span><span class="sec-count">8 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">aかbか いいほうをえらんでください。</p><p class="instr-en">Choose the better option, a or b.</p></div>
+<article class="q" id="s3-q1" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">ジョンさんは（a <ruby>何<rt>なん</rt></ruby>も　b <ruby>何<rt>なん</rt></ruby>でも）できて、すごいですね。</p>
+<p class="q-en">John can do anything. Amazing!</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>何<rt>なん</rt></ruby>も</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>何<rt>なん</rt></ruby>でも</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>何<rt>なん</rt></ruby>でも</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja"><ruby>何<rt>なん</rt></ruby>でも + positive = anything</span></p>
+<p class="ans-expl">The sentence is positive (できて、すごい), so <ruby>何<rt>なん</rt></ruby>でも. <strong>a</strong> <ruby>何<rt>なん</rt></ruby>も needs a negative.</p>
+<p class="ans-romaji"><em>Jon-san wa nan demo dekite, sugoi desu ne.</em></p>
+</div></details></article>
+<article class="q" id="s3-q2" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">この<ruby>町<rt>まち</rt></ruby>に<ruby>映画館<rt>えいがかん</rt></ruby>は（a <ruby>一<rt>ひと</rt></ruby>つでも　b <ruby>一<rt>ひと</rt></ruby>つも）ありません。</p>
+<p class="q-en">There isn't a single cinema in this town.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>一<rt>ひと</rt></ruby>つでも</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>一<rt>ひと</rt></ruby>つも</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>一<rt>ひと</rt></ruby>つも</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">1 + counter + も + negative = not even one</span></p>
+<p class="ans-expl"><ruby>一<rt>ひと</rt></ruby>つもありません = "not even one." <strong>a</strong> <ruby>一<rt>ひと</rt></ruby>つでも means "even if just one" and is used in positive wishes.</p>
+<p class="ans-romaji"><em>Kono machi ni eigakan wa hitotsu mo arimasen.</em></p>
+</div></details></article>
+<article class="q" id="s3-q3" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">つかれましたね。コーヒーでも（a <ruby>飲<rt>の</rt></ruby>みました　b <ruby>飲<rt>の</rt></ruby>みましょう）。</p>
+<p class="q-en">We're tired, aren't we? Let's have a coffee or something.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>飲<rt>の</rt></ruby>みました</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>飲<rt>の</rt></ruby>みましょう</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>飲<rt>の</rt></ruby>みましょう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">でも + suggestion</span></p>
+<p class="ans-expl">でも (soft suggestion) goes with suggestions, not past statements.</p>
+<p class="ans-romaji"><em>Tsukaremashita ne. Koohii demo nomimashou.</em></p>
+</div></details></article>
+<article class="q" id="s3-q4" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">みんな<ruby>帰<rt>かえ</rt></ruby>った。わたしだけ<ruby>教室<rt>きょうしつ</rt></ruby>に（a のこっている　b のこっていない）。</p>
+<p class="q-en">Everyone's gone home. I'm the only one left in the classroom.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">のこっている</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">のこっていない</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. のこっている</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">だけ + positive</span></p>
+<p class="ans-expl">"Everyone left; only I remain." <strong>b</strong> contradicts it.</p>
+<p class="ans-romaji"><em>Minna kaetta. Watashi dake kyoushitsu ni nokotte iru.</em></p>
+</div></details></article>
+<article class="q" id="s3-q5" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">わたしはきらいな<ruby>食<rt>た</rt></ruby>べ<ruby>物<rt>もの</rt></ruby>はあまりありませんが、なっとうだけは（a <ruby>食<rt>た</rt></ruby>べられます　b <ruby>食<rt>た</rt></ruby>べられません）。</p>
+<p class="q-en">There aren't many foods I dislike, but natto is the one thing I can't eat.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>食<rt>た</rt></ruby>べられます</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>食<rt>た</rt></ruby>べられません</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>食<rt>た</rt></ruby>べられません</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">だけは (the one exception)</span></p>
+<p class="ans-expl">が ("but") sets up natto as the exception to "I like most foods": can't eat it.</p>
+<p class="ans-romaji"><em>…nattou dake wa taberaremasen.</em></p>
+</div></details></article>
+<article class="q" id="s3-q6" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">この<ruby>国<rt>くに</rt></ruby>は<ruby>冬<rt>ふゆ</rt></ruby>でも（a ゆきがふります　b ゆきはふりません）。</p>
+<p class="q-en">In this country it doesn't snow, even in winter.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">ゆきがふります</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">ゆきはふりません</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. ゆきはふりません</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">でも = even (unexpected result)</span></p>
+<p class="ans-expl">"Even in winter" leads to a surprising result: no snow. <strong>a</strong> Snowing in winter is expected, so でも doesn't fit.</p>
+<p class="ans-romaji"><em>Kono kuni wa fuyu demo yuki wa furimasen.</em></p>
+</div></details></article>
+<article class="q" id="s3-q7" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">あの<ruby>店<rt>みせ</rt></ruby>は<ruby>夜<rt>よる</rt></ruby>の12<ruby>時<rt>じ</rt></ruby>でも（a <ruby>開<rt>ひら</rt></ruby>いていますよ　b <ruby>開<rt>ひら</rt></ruby>いていませんよ）。</p>
+<p class="q-en">That shop is open even at midnight.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>開<rt>ひら</rt></ruby>いていますよ</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>開<rt>ひら</rt></ruby>いていませんよ</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. <ruby>開<rt>ひら</rt></ruby>いていますよ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">でも = even (unexpected result)</span></p>
+<p class="ans-expl">Being open at midnight is surprising, so でも fits. <strong>b</strong> Being closed at midnight is normal.</p>
+<p class="ans-romaji"><em>Ano mise wa yoru no juuniji demo aite imasu yo.</em></p>
+</div></details></article>
+<article class="q" id="s3-q8" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q8</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>一人<rt>ひとり</rt></ruby>でも<ruby>多<rt>おお</rt></ruby>くわたしの<ruby>店<rt>みせ</rt></ruby>に<ruby>買<rt>か</rt></ruby>いに<ruby>来<rt>き</rt></ruby>て（a もらいたいです　b もらいたくないです）。</p>
+<p class="q-en">I want as many people as possible, even one more, to come and shop at my store.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">もらいたいです</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">もらいたくないです</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. もらいたいです</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">1 + counter + でも (even just one more)</span></p>
+<p class="ans-expl"><ruby>一人<rt>ひとり</rt></ruby>でも<ruby>多<rt>おお</rt></ruby>く = "even one more person" fits a positive wish.</p>
+<p class="ans-romaji"><em>Hitori demo ooku watashi no mise ni kai ni kite moraitai desu.</em></p>
+</div></details></article></section>
+<div class="pager"><a class="pager-btn" href="part2-lesson03.html"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Part 2 · Lesson 3</span></a><a class="pager-btn next" href="part2-lesson05.html"><span>Part 2 · Lesson 5</span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#s1" aria-label="Grammar"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>Grammar</span></a>
+<a href="#s2" aria-label="Practice"><svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4zM13 7l4 4"/></svg><span>Practice</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>Part 2 · Lesson 3 · も・しか</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row">
+    <a class="icon-btn" href="index.html" aria-label="All lessons"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <span class="crumb">Part 2 · Lesson 3</span>
+    <button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button>
+  </div>
+  <p class="kicker" lang="ja"><ruby>第<rt>だい</rt></ruby>2<ruby>部<rt>ぶ</rt></ruby> 3<ruby>課<rt>か</rt></ruby></p>
+  <h1 lang="ja">も・しか</h1>
+  <p class="meta">Shin Kanzen Master N4 Grammar, book pages 98–99 (PDF pages 120–121). Answers checked against the book's answer key.</p>
+</header>
+<div class="chips"><a class="chip chip-dark" href="#s1">Grammar</a><a class="chip" href="#s2">Practice 1</a><a class="chip" href="#s3">Practice 2</a></div>
+<div class="stats"><div><b>2</b><span>grammar points</span></div><div><b>17</b><span>questions</span></div><div><b id="score">0</b><span>correct taps</span></div></div>
+<section class="sec" id="s1"><div class="sec-head"><h2>Grammar points on page 98</h2></div><article class="gp tone-lav"><div class="gp-head"><span class="gp-num">1</span><div><h3 lang="ja">Uses of も</h3></div></div><div class="gp-body"><ul>
+<li><strong>A. "Also / too": adding something similar.</strong>
+<ol>
+<li lang="ja">あしたはわたしが<ruby>料理<rt>りょうり</rt></ruby>を<ruby>作<rt>つく</rt></ruby>ります。おかしも<ruby>作<rt>つく</rt></ruby>ります。 <em>I'll cook tomorrow. I'll make sweets too.</em>
+</li>
+<li lang="ja">わたしは<ruby>海<rt>うみ</rt></ruby>も<ruby>山<rt>やま</rt></ruby>も<ruby>好<rt>す</rt></ruby>きです。 <em>I like both the sea and the mountains.</em>
+</li></ol>
+</li>
+<li lang="ja"><strong>B. Number + も: emphasizes "that many / that much."</strong> Used with quantities or <ruby>何<rt>なん</rt></ruby> + counter.
+<ol>
+<li lang="ja">うちから<ruby>会社<rt>かいしゃ</rt></ruby>まで2<ruby>時間<rt>じかん</rt></ruby>もかかります。 <em>It takes a whole two hours from home to work.</em>
+</li>
+<li lang="ja"><ruby>何度<rt>なんど</rt></ruby>も<ruby>電話<rt>でんわ</rt></ruby>しましたよ。 <em>I called you so many times!</em>
+</li></ol>
+</li>
+<li lang="ja"><strong>C. 1 + counter + も + negative: "not even one."</strong>
+<ol>
+<li lang="ja">セーターを1まいも<ruby>持<rt>も</rt></ruby>っていません。 <em>I don't have a single sweater.</em>
+</li>
+<li lang="ja"><ruby>日本<rt>にほん</rt></ruby><ruby>人<rt>ひと</rt></ruby>の<ruby>友<rt>とも</rt></ruby>だちはまだ<ruby>一人<rt>ひとり</rt></ruby>もいません。 <em>I don't have even one Japanese friend yet.</em>
+</li></ol>
+</li>
+<li lang="ja"><strong>D. Question word (+ particle) + も + negative: "nobody / nowhere / nothing."</strong>
+<ol>
+<li lang="ja">だれも<ruby>来<rt>き</rt></ruby>ませんでしたよ。 <em>Nobody came.</em>
+</li>
+<li lang="ja">きのうはどこへも<ruby>行<rt>い</rt></ruby>きませんでした。 <em>I didn't go anywhere yesterday.</em>
+</li></ol>
+</li>
+<li><strong>E. "Even ~": an extreme example implying the rest is obvious.</strong>
+<ol>
+<li lang="ja">この<ruby>子<rt>こ</rt></ruby>はもう<ruby>漢字<rt>かんじ</rt></ruby>も<ruby>読<rt>よ</rt></ruby>めます。 <em>This child can even read kanji already.</em>
+</li>
+<li lang="ja">この<ruby>言葉<rt>ことば</rt></ruby>はいちばん<ruby>新<rt>あたら</rt></ruby>しいじしょにもない。 <em>This word isn't even in the newest dictionary.</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-dark"><div class="gp-head"><span class="gp-num">2</span><div><h3 lang="ja">Uses of しか (only) — always with a negative</h3></div></div><div class="gp-body"><ul>
+<li lang="ja"><strong>A. Quantity + しか + negative: emphasizes "only that little."</strong>
+<ol>
+<li lang="ja">うちから<ruby>会社<rt>かいしゃ</rt></ruby>まで20<ruby>分<rt>ふん</rt></ruby>しかかかりません。 <em>It only takes 20 minutes from home to work.</em>
+</li>
+<li lang="ja">100てんの<ruby>人<rt>ひと</rt></ruby>は<ruby>2人<rt>ふたり</rt></ruby>しかいませんでした。 <em>Only two people got 100 points.</em>
+</li></ol>
+</li>
+<li><strong>B. Limits to one thing and excludes everything else.</strong>
+<ol>
+<li lang="ja">この<ruby>村<rt>むら</rt></ruby>に<ruby>外国人<rt>がいこくじん</rt></ruby>はわたししかいません。 <em>I'm the only foreigner in this village.</em>
+</li>
+<li lang="ja">この<ruby>話<rt>はなし</rt></ruby>はまだ<ruby>母<rt>はは</rt></ruby>にしか<ruby>話<rt>はな</rt></ruby>していません。 <em>I've only told my mother about this so far.</em>
+</li></ol>
+</li></ul>
+<p class="tip" lang="ja"><strong>Quick tip:</strong> Number + <strong>も</strong> = "that many!" (a lot). Number + <strong>しか</strong> + negative = "only that many" (a little).</p></div></article></section><section class="sec" id="s2"><div class="sec-head"><h2 lang="ja">れんしゅう1</h2><span class=sec-en>Practice 1</span><span class="sec-count">10 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja"><span class="blank">　</span>の<ruby>中<rt>なか</rt></ruby>に「も」か「しか」を<ruby>書<rt>か</rt></ruby>いてください。どちらも<ruby>必要<rt>ひつよう</rt></ruby>ではない<ruby>場合<rt>ばあい</rt></ruby>は「×」を<ruby>入<rt>い</rt></ruby>れてください。</p><p class="instr-en">Write も or しか in the brackets. If neither is needed, write ×.</p></div>
+<article class="q" id="s2-q1" data-correct="">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">このことはだれに<span class="blank">　</span><ruby>言<rt>い</rt></ruby>わないでね。</p>
+<p class="q-en">Don't tell anyone about this, OK?</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">も</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Question word + (particle) + も + negative</span></p>
+<p class="ans-expl">だれにも + negative = "to nobody."</p>
+<p class="ans-romaji"><em>Kono koto wa dare ni mo iwanaide ne.</em></p>
+</div></details></article>
+<article class="q" id="s2-q2" data-correct="">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">きのうは<ruby>大雨<rt>おおあめ</rt></ruby>がふりました。<ruby>風<rt>かぜ</rt></ruby><span class="blank">　</span><ruby>強<rt>つよ</rt></ruby>かったです。</p>
+<p class="q-en">There was heavy rain yesterday. The wind was strong too.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">も</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">も = also</span></p>
+<p class="ans-expl">Adding a similar thing: rain, and wind too.</p>
+<p class="ans-romaji"><em>Kinou wa ooame ga furimashita. Kaze mo tsuyokatta desu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q3" data-correct="">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">A「おさけを1ぱい<span class="blank">　</span><ruby>飲<rt>の</rt></ruby>みませんか。」<br>B「いいですね。<ruby>飲<rt>の</rt></ruby>みましょう。」</p>
+<p class="q-en">A: "Shall we have a drink?"<br>B: "Sounds good. Let's."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span>×</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>No particle needed</span></p>
+<p class="ans-expl">1ぱい<ruby>飲<rt>の</rt></ruby>みませんか is a normal invitation. も would make "not even one," and しか would make "only one" — neither fits.</p>
+<p class="ans-romaji"><em>A: "Osake o ippai nomimasen ka."</em></p>
+</div></details></article>
+<article class="q" id="s2-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>今日<rt>きょう</rt></ruby>は<ruby>朝<rt>あさ</rt></ruby>から<ruby>何人<rt>なんにん</rt></ruby><span class="blank">　</span>おきゃくさんが<ruby>来<rt>き</rt></ruby>て、いそがしかったです。</p>
+<p class="q-en">Lots of customers came from the morning today, so I was busy.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">も</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja"><ruby>何<rt>なん</rt></ruby> + counter + も = many</span></p>
+<p class="ans-expl"><ruby>何人<rt>なんにん</rt></ruby>も = "many people."</p>
+<p class="ans-romaji"><em>Kyou wa asa kara nannin mo okyakusan ga kite, isogashikatta desu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q5" data-correct="">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">このデザインのバッグが<ruby>買<rt>か</rt></ruby>える<ruby>店<rt>みせ</rt></ruby>はここ<span class="blank">　</span>ありません。</p>
+<p class="q-en">This is the only shop where you can buy a bag with this design.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">しか</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">しか + negative = only</span></p>
+<p class="ans-expl">ここしかありません = "nowhere but here."</p>
+<p class="ans-romaji"><em>Kono dezain no baggu ga kaeru mise wa koko shika arimasen.</em></p>
+</div></details></article>
+<article class="q" id="s2-q6" data-correct="">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">すみません。500<ruby>円<rt>えん</rt></ruby><span class="blank">　</span><ruby>貸<rt>か</rt></ruby>してくれませんか。</p>
+<p class="q-en">Excuse me. Could you lend me 500 yen?</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span>×</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>No particle needed</span></p>
+<p class="ans-expl">A simple request. しか needs a negative statement, and も would add emphasis that doesn't fit.</p>
+<p class="ans-romaji"><em>Sumimasen. Gohyaku-en kashite kuremasen ka.</em></p>
+</div></details></article>
+<article class="q" id="s2-q7" data-correct="">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">こんなおいしい<ruby>物<rt>もの</rt></ruby>はどこに<span class="blank">　</span>ありませんね。</p>
+<p class="q-en">You won't find anything this delicious anywhere else.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">も</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">どこにも + negative</span></p>
+<p class="ans-expl">どこにもない = "nowhere."</p>
+<p class="ans-romaji"><em>Konna oishii mono wa doko ni mo arimasen ne.</em></p>
+</div></details></article>
+<article class="q" id="s2-q8" data-correct="">
+<div class="q-head">
+<span class="q-num">Q8</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">ぼくはネクタイをこの1<ruby>本<rt>ぽん</rt></ruby><span class="blank">　</span><ruby>持<rt>も</rt></ruby>っていないんだよ。</p>
+<p class="q-en">This is the only tie I have.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">しか</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">しか + negative</span></p>
+<p class="ans-expl">この1<ruby>本<rt>ぽん</rt></ruby>しか<ruby>持<rt>も</rt></ruby>っていない = "I have only this one." (も would mean "not even one," but "this one" shows he has one.)</p>
+<p class="ans-romaji"><em>Boku wa nekutai o kono ippon shika motte inai n da yo.</em></p>
+</div></details></article>
+<article class="q" id="s2-q9" data-correct="">
+<div class="q-head">
+<span class="q-num">Q9</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>安<rt>やす</rt></ruby>かったので、パンをいくつ<span class="blank">　</span><ruby>買<rt>か</rt></ruby>いました。</p>
+<p class="q-en">It was cheap, so I bought quite a few loaves of bread.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">も</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">いくつも = many</span></p>
+<p class="ans-expl">いくつも = "a lot / several." The sentence is positive, so しか doesn't fit.</p>
+<p class="ans-romaji"><em>Yasukatta node, pan o ikutsu mo kaimashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q10" data-correct="">
+<div class="q-head">
+<span class="q-num">Q10</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">いつか<ruby>一度<rt>いちど</rt></ruby><span class="blank">　</span>ふねで<ruby>世界<rt>せかい</rt></ruby><ruby>旅行<rt>りょこう</rt></ruby>をしたいです。</p>
+<p class="q-en">Someday I'd like to travel the world by ship once.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span>×</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>No particle needed</span></p>
+<p class="ans-expl">Just "once": <ruby>一度<rt>いちど</rt></ruby>. The sentence is a positive wish, so neither も nor しか fits.</p>
+<p class="ans-romaji"><em>Itsuka ichido fune de sekai ryokou o shitai desu.</em></p>
+</div></details></article></section><section class="sec" id="s3"><div class="sec-head"><h2 lang="ja">れんしゅう2</h2><span class=sec-en>Practice 2</span><span class="sec-count">7 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">aかbか いいほうをえらんでください。</p><p class="instr-en">Choose the better option, a or b.</p></div>
+<article class="q" id="s3-q1" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">へえ、1か<ruby>月<rt>げつ</rt></ruby>も（a <ruby>旅行<rt>りょこう</rt></ruby>したんですか　b <ruby>旅行<rt>りょこう</rt></ruby>しなかったんですか）。</p>
+<p class="q-en">Wow, you travelled for a whole month?</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>旅行<rt>りょこう</rt></ruby>したんですか</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>旅行<rt>りょこう</rt></ruby>しなかったんですか</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. <ruby>旅行<rt>りょこう</rt></ruby>したんですか</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Number + も (emphasizing a lot)</span></p>
+<p class="ans-expl">1か<ruby>月<rt>げつ</rt></ruby>も = "a whole month!" with a positive verb. <strong>b</strong> negative doesn't fit the surprised "so long!"</p>
+<p class="ans-romaji"><em>Hee, ikkagetsu mo ryokou shita n desu ka.</em></p>
+</div></details></article>
+<article class="q" id="s3-q2" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>今<rt>いま</rt></ruby>、<ruby>何<rt>なん</rt></ruby>も（a <ruby>食<rt>た</rt></ruby>べたいです　b <ruby>食<rt>た</rt></ruby>べたくないです）。</p>
+<p class="q-en">I don't want to eat anything right now.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>食<rt>た</rt></ruby>べたいです</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>食<rt>た</rt></ruby>べたくないです</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>食<rt>た</rt></ruby>べたくないです</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja"><ruby>何<rt>なん</rt></ruby>も + negative</span></p>
+<p class="ans-expl"><ruby>何<rt>なん</rt></ruby>も always takes a negative: <ruby>食<rt>た</rt></ruby>べたくない.</p>
+<p class="ans-romaji"><em>Ima, nani mo tabetakunai desu.</em></p>
+</div></details></article>
+<article class="q" id="s3-q3" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>試験<rt>しけん</rt></ruby>の<ruby>日<rt>ひ</rt></ruby>まで<ruby>時間<rt>じかん</rt></ruby>が<ruby>少<rt>すこ</rt></ruby>ししか（a あるから　b ないから）、がんばろう。</p>
+<p class="q-en">There's only a little time until the exam, so let's work hard.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">あるから</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">ないから</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. ないから</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">しか + negative</span></p>
+<p class="ans-expl">しか always needs a negative: <ruby>少<rt>すこ</rt></ruby>ししかない.</p>
+<p class="ans-romaji"><em>Shiken no hi made jikan ga sukoshi shika nai kara, ganbarou.</em></p>
+</div></details></article>
+<article class="q" id="s3-q4" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">5<ruby>時間<rt>じかん</rt></ruby>（a も<ruby>歩<rt>ある</rt></ruby>いたから　b しか<ruby>歩<rt>ある</rt></ruby>かなかったから）、つかれました。</p>
+<p class="q-en">I walked for a whole five hours, so I'm tired.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">も<ruby>歩<rt>ある</rt></ruby>いたから</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">しか<ruby>歩<rt>ある</rt></ruby>かなかったから</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. も<ruby>歩<rt>ある</rt></ruby>いたから</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Number + も (a lot)</span></p>
+<p class="ans-expl">Being tired fits walking "a whole 5 hours." <strong>b</strong> "only 5 hours" wouldn't explain being tired.</p>
+<p class="ans-romaji"><em>Gojikan mo aruita kara, tsukaremashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q5" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">こまりましたね。いすが12（a もありますね　b しかありませんね）。おきゃくさんは15<ruby>人<rt>にん</rt></ruby><ruby>来<rt>き</rt></ruby>ますよ。</p>
+<p class="q-en">That's a problem. There are only 12 chairs. Fifteen guests are coming.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">もありますね</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">しかありませんね</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. しかありませんね</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">しか + negative (not enough)</span></p>
+<p class="ans-expl">12 chairs for 15 guests is not enough: しかありません. <strong>a</strong> も would mean "a whole 12!", which doesn't fit こまりました.</p>
+<p class="ans-romaji"><em>Komarimashita ne. Isu ga juuni shika arimasen ne. Okyakusan wa juugonin kimasu yo.</em></p>
+</div></details></article>
+<article class="q" id="s3-q6" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「わたしは<ruby>何<rt>なん</rt></ruby><ruby>年<rt>ねん</rt></ruby>もこの<ruby>町<rt>まち</rt></ruby>に<ruby>住<rt>す</rt></ruby>んでいます。」<br>B「そうですか。じゃ、<ruby>町<rt>まち</rt></ruby>のことを（a もうよく<ruby>知<rt>し</rt></ruby>っているでしょう　b まだよく<ruby>知<rt>し</rt></ruby>らないでしょう）？」</p>
+<p class="q-en">A: "I've lived in this town for many years."<br>B: "Really? Then you must already know the town well."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">もうよく<ruby>知<rt>し</rt></ruby>っているでしょう</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">まだよく<ruby>知<rt>し</rt></ruby>らないでしょう</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. もうよく<ruby>知<rt>し</rt></ruby>っているでしょう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja"><ruby>何<rt>なん</rt></ruby><ruby>年<rt>ねん</rt></ruby>も = many years</span></p>
+<p class="ans-expl">Many years living there → you know it well. <strong>b</strong> contradicts that.</p>
+<p class="ans-romaji"><em>B: "Sou desu ka. Ja, machi no koto o mou yoku shitte iru deshou?"</em></p>
+</div></details></article>
+<article class="q" id="s3-q7" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">だれもわたしの<ruby>仕事<rt>しごと</rt></ruby>を（a <ruby>手伝<rt>てつだ</rt></ruby>ってくれました　b <ruby>手伝<rt>てつだ</rt></ruby>ってくれませんでした）。</p>
+<p class="q-en">Nobody helped me with my work.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>手伝<rt>てつだ</rt></ruby>ってくれました</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>手伝<rt>てつだ</rt></ruby>ってくれませんでした</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>手伝<rt>てつだ</rt></ruby>ってくれませんでした</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">だれも + negative</span></p>
+<p class="ans-expl">だれも needs a negative: くれませんでした.</p>
+<p class="ans-romaji"><em>Dare mo watashi no shigoto o tetsudatte kuremasen deshita.</em></p>
+</div></details></article></section>
+<div class="pager"><a class="pager-btn" href="part2-lesson02.html"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Part 2 · Lesson 2</span></a><a class="pager-btn next" href="part2-lesson04.html"><span>Part 2 · Lesson 4</span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#s1" aria-label="Grammar"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>Grammar</span></a>
+<a href="#s2" aria-label="Practice"><svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4zM13 7l4 4"/></svg><span>Practice</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

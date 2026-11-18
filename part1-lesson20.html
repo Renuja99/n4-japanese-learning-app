@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>Part 1 · Lesson 20 · ～くします・～にします / ～くなります・～になります・～ようになります</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row">
+    <a class="icon-btn" href="index.html" aria-label="All lessons"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <span class="crumb">Part 1 · Lesson 20</span>
+    <button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button>
+  </div>
+  <p class="kicker" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> 20<ruby>課<rt>か</rt></ruby></p>
+  <h1 lang="ja">～くします・～にします / ～くなります・～になります・～ようになります</h1>
+  <p class="meta">Shin Kanzen Master N4 Grammar, book pages 76–77 (PDF pages 98–99). Answers checked against the book's answer key.</p>
+</header>
+<div class="chips"><a class="chip chip-dark" href="#s1">Grammar</a><a class="chip" href="#s2">Practice 1</a><a class="chip" href="#s3">Practice 2</a></div>
+<div class="stats"><div><b>2</b><span>grammar points</span></div><div><b>23</b><span>questions</span></div><div><b id="score">0</b><span>correct taps</span></div></div>
+<section class="sec" id="s1"><div class="sec-head"><h2>Grammar points on page 76</h2></div><article class="gp tone-lav"><div class="gp-head"><span class="gp-num">1</span><div><h3 lang="ja">～くします / ～にします</h3><p class=gp-en>make something ~</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: い-adj ～く / な-adj ～に / noun に + します. Exception: いい → <strong>よく</strong>します.
+</li>
+<li>A person <strong>deliberately changes</strong> a thing or situation.
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja">テレビの<ruby>音<rt>おと</rt></ruby>を<ruby>大<rt>おお</rt></ruby>きくしました。 <em>I turned up the TV volume.</em>
+</li>
+<li lang="ja">このズボンを<ruby>少<rt>すこ</rt></ruby>し<ruby>短<rt>みじか</rt></ruby>くしてください。 <em>Please make these trousers a little shorter.</em>
+</li>
+<li lang="ja">つくえの<ruby>上<rt>うえ</rt></ruby>をきれいにしましょう。 <em>Let's tidy up the top of the desk.</em>
+</li>
+<li lang="ja">ご<ruby>飯<rt>はん</rt></ruby>のりょうを<ruby>半分<rt>はんぶん</rt></ruby>にしてください。 <em>Please make the rice portion half.</em>
+</li>
+<li lang="ja">かみのけの<ruby>色<rt>いろ</rt></ruby>を<ruby>茶色<rt>ちゃいろ</rt></ruby>にしたいです。 <em>I want to dye my hair brown.</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-dark"><div class="gp-head"><span class="gp-num">2</span><div><h3 lang="ja">～くなります / ～になります / ～ようになります</h3><p class=gp-en>become ~ / come to ~</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: い-adj ～く / な-adj ～に / noun に + なります (いい → よくなります); verb dictionary form + ように + なります; verb ない form → ～なく + なります
+</li>
+<li lang="ja">Shows that a thing or situation <strong>changes</strong> (naturally). <strong>Not</strong> used with verbs that already mean "change" (<ruby>変<rt>か</rt></ruby>わる, <ruby>太<rt>ふと</rt></ruby>る, <ruby>増<rt>ふ</rt></ruby>える, etc.).
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja"><ruby>子犬<rt>こいぬ</rt></ruby>はすぐ<ruby>大<rt>おお</rt></ruby>きくなります。 <em>Puppies grow big quickly.</em>
+</li>
+<li lang="ja">ていねいにそうじすれば、へやがもっときれいになります。 <em>If you clean carefully, the room will become cleaner.</em>
+</li>
+<li lang="ja">さいきん、この<ruby>店<rt>みせ</rt></ruby>ではおきゃくさんのかずが<ruby>半分<rt>はんぶん</rt></ruby>になりました。 <em>Recently the number of customers at this shop has halved.</em>
+</li>
+<li lang="ja"><ruby>日本<rt>にほん</rt></ruby><ruby>語<rt>ご</rt></ruby>が<ruby>上手<rt>じょうず</rt></ruby>に<ruby>話<rt>はな</rt></ruby>せるようになりたいです。 <em>I want to become able to speak Japanese well.</em>
+</li>
+<li lang="ja">うちのにわに<ruby>鳥<rt>とり</rt></ruby>が<ruby>来<rt>く</rt></ruby>るようになりました。 <em>Birds have started coming to our garden.</em>
+</li>
+<li lang="ja">このごろ、<ruby>前<rt>まえ</rt></ruby>ほど<ruby>本<rt>ほん</rt></ruby>を<ruby>読<rt>よ</rt></ruby>まなくなった。 <em>These days I don't read as much as I used to.</em>
+</li></ol>
+</li></ul>
+<p class="tip" lang="ja"><strong>Quick tip:</strong> <strong>します</strong> = someone <strong>makes</strong> it change (on purpose). <strong>なります</strong> = it <strong>becomes</strong> that way (by itself).</p></div></article></section><section class="sec" id="s2"><div class="sec-head"><h2 lang="ja">れんしゅう1</h2><span class=sec-en>Practice 1</span><span class="sec-count">8 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja"><span class="blank">　</span>の<ruby>中<rt>なか</rt></ruby>の<ruby>言葉<rt>ことば</rt></ruby>を<ruby>正<rt>ただ</rt></ruby>しい<ruby>形<rt>かたち</rt></ruby>にして、<ruby>書<rt>か</rt></ruby>いてください。</p><p class="instr-en">Change the word in the brackets ( ) into the correct form and write it in the blank.</p></div>
+<article class="q" id="s2-q1" data-correct="">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>漢字<rt>かんじ</rt></ruby>のまちがいをもっと<span class="blank">　</span>したいです。（<ruby>少<rt>すく</rt></ruby>ない）</p>
+<p class="q-en">I want to make fewer kanji mistakes.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>少<rt>すく</rt></ruby>なく（<ruby>少<rt>すく</rt></ruby>なくしたい）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">い-adj ～く + する</span></p>
+<p class="ans-expl"><ruby>少<rt>すく</rt></ruby>ない → <ruby>少<rt>すく</rt></ruby>なく + する.</p>
+<p class="ans-romaji"><em>Kanji no machigai o motto sukunaku shitai desu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q2" data-correct="">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">カーテンをもう<ruby>少<rt>すこ</rt></ruby>し<ruby>明<rt>あか</rt></ruby>るい<span class="blank">　</span>します。（<ruby>色<rt>いろ</rt></ruby>）</p>
+<p class="q-en">I'll make the curtains a slightly brighter colour.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>色<rt>いろ</rt></ruby>に（<ruby>色<rt>いろ</rt></ruby>にします）</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Noun + に + する</span></p>
+<p class="ans-expl"><ruby>明<rt>あか</rt></ruby>るい<ruby>色<rt>いろ</rt></ruby> is a noun phrase, so に + します.</p>
+<p class="ans-romaji"><em>Kaaten o mou sukoshi akarui iro ni shimasu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q3" data-correct="">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">さとうを<ruby>入<rt>い</rt></ruby>れて、コーヒーを<span class="blank">　</span>しましょう。（あまい）</p>
+<p class="q-en">Let's put in sugar and make the coffee sweet.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">あまく</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">い-adj ～く + する</span></p>
+<p class="ans-expl">あまい → あまく + しましょう.</p>
+<p class="ans-romaji"><em>Satou o irete, koohii o amaku shimashou.</em></p>
+</div></details></article>
+<article class="q" id="s2-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">さいきん、ちょっと<span class="blank">　</span>なりました。（いそがしい）</p>
+<p class="q-en">Recently I've become a bit busy.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">いそがしく</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">い-adj ～く + なる</span></p>
+<p class="ans-expl">いそがしい → いそがしく + なりました.</p>
+<p class="ans-romaji"><em>Saikin, chotto isogashiku narimashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q5" data-correct="">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">あの<ruby>店<rt>みせ</rt></ruby>はサービスが<span class="blank">　</span>なりました。（いい）</p>
+<p class="q-en">The service at that shop has got better.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">よく</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Exception: いい → よくなる</span></p>
+<p class="ans-expl">いい becomes よく: よくなりました.</p>
+<p class="ans-romaji"><em>Ano mise wa saabisu ga yoku narimashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q6" data-correct="">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">もう<ruby>少<rt>すこ</rt></ruby>しれんしゅうすれば、<span class="blank">　</span>なりますよ。（<ruby>上手<rt>じょうず</rt></ruby>）</p>
+<p class="q-en">If you practise a little more, you'll get good at it.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>上手<rt>じょうず</rt></ruby>に</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">な-adj ～に + なる</span></p>
+<p class="ans-expl"><ruby>上手<rt>じょうず</rt></ruby> → <ruby>上手<rt>じょうず</rt></ruby>に + なります.</p>
+<p class="ans-romaji"><em>Mou sukoshi renshuu sureba, jouzu ni narimasu yo.</em></p>
+</div></details></article>
+<article class="q" id="s2-q7" data-correct="">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>日本<rt>にほん</rt></ruby><ruby>語<rt>ご</rt></ruby>の<ruby>新聞<rt>しんぶん</rt></ruby>が<span class="blank">　</span>なりたいです。（<ruby>読<rt>よ</rt></ruby>める）</p>
+<p class="q-en">I want to become able to read Japanese newspapers.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>読<rt>よ</rt></ruby>めるように</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Dictionary form + ようになる</span></p>
+<p class="ans-expl">Verbs use ようになる for a change in ability: <ruby>読<rt>よ</rt></ruby>めるようになりたい.</p>
+<p class="ans-romaji"><em>Nihongo no shinbun ga yomeru you ni naritai desu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q8" data-correct="">
+<div class="q-head">
+<span class="q-num">Q8</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">メモをなくして、やくそくの<ruby>時間<rt>じかん</rt></ruby>が<span class="blank">　</span>なりました。（わからない）</p>
+<p class="q-en">I lost my memo, and now I don't know the meeting time.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">わからなく</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ない → なく + なる</span></p>
+<p class="ans-expl">わからない → わからなく + なりました ("came to not know").</p>
+<p class="ans-romaji"><em>Memo o nakushite, yakusoku no jikan ga wakaranaku narimashita.</em></p>
+</div></details></article></section><section class="sec" id="s3"><div class="sec-head"><h2 lang="ja">れんしゅう2</h2><span class=sec-en>Practice 2</span><span class="sec-count">15 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">aかbか いいほうをえらんでください。</p><p class="instr-en">Choose the better option, a or b.</p></div>
+<article class="q" id="s3-q1" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>雨<rt>あめ</rt></ruby>がやんで、いい<ruby>天気<rt>てんき</rt></ruby>に（a なりました　b しました）。</p>
+<p class="q-en">The rain stopped and the weather became nice.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">なりました</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">しました</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. なりました</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">なる (natural change)</span></p>
+<p class="ans-expl">Nobody made the weather nice; it changed by itself. <strong>b</strong> します is for deliberate changes.</p>
+<p class="ans-romaji"><em>Ame ga yande, ii tenki ni narimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q2" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">はなちゃんは1さいのときに、<ruby>歩<rt>ある</rt></ruby>けるように（a なりました　b しました）。</p>
+<p class="q-en">Hana became able to walk when she was one.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">なりました</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">しました</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. なりました</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ようになる (change in ability)</span></p>
+<p class="ans-expl">Becoming able to walk is a natural change: ようになりました. <strong>b</strong> ようにしました means "made a point of doing," which doesn't fit.</p>
+<p class="ans-romaji"><em>Hana-chan wa issai no toki ni, arukeru you ni narimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q3" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>寒<rt>さむ</rt></ruby>いですね。エアコンを<ruby>強<rt>つよ</rt></ruby>く（a なりましょう　b しましょう）。</p>
+<p class="q-en">It's cold, isn't it? Let's turn the air conditioning up.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">なりましょう</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">しましょう</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. しましょう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">する (deliberate change)</span></p>
+<p class="ans-expl">A person changes the setting on purpose, with エアコンを as the object: <ruby>強<rt>つよ</rt></ruby>くしましょう. <strong>a</strong> なる doesn't take an object.</p>
+<p class="ans-romaji"><em>Samui desu ne. Eakon o tsuyoku shimashou.</em></p>
+</div></details></article>
+<article class="q" id="s3-q4" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">おじいちゃん、<ruby>早<rt>はや</rt></ruby>く<ruby>元気<rt>げんき</rt></ruby>に（a なってね　b してね）。</p>
+<p class="q-en">Grandpa, get well soon, OK?</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">なってね</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">してね</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. なってね</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja"><ruby>元気<rt>げんき</rt></ruby>になる (get well)</span></p>
+<p class="ans-expl">Getting well is a change in the grandfather himself: <ruby>元気<rt>げんき</rt></ruby>になって. <strong>b</strong> <ruby>元気<rt>げんき</rt></ruby>にする would mean "make (something) lively."</p>
+<p class="ans-romaji"><em>Ojiichan, hayaku genki ni natte ne.</em></p>
+</div></details></article>
+<article class="q" id="s3-q5" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">おふろはあまりあつく（a ならない　b しない）ほうがいいですよ。</p>
+<p class="q-en">You'd better not make the bath too hot.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">ならない</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">しない</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. しない</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">する (deliberate change) + ないほうがいい</span></p>
+<p class="ans-expl">Advice (ほうがいい) is about something you control: don't <em>make</em> the bath too hot. <strong>a</strong> ならない is about a natural change you can't control, which doesn't fit advice.</p>
+<p class="ans-romaji"><em>Ofuro wa amari atsuku shinai hou ga ii desu yo.</em></p>
+</div></details></article>
+<article class="q" id="s3-q6" data-correct="">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>大人<rt>おとな</rt></ruby>に（①a なったら　b したら）、<ruby>何<rt>なん</rt></ruby>に（②a なりたいの　b したいの）？</p>
+<p class="q-en">When you grow up, what do you want to be?</p>
+<div class="opts">
+<button class="opt" type="button" data-key=""><span class="opt-k"></span><span class="opt-t" lang="ja">① a. なったら　b. したら</span></button>
+<button class="opt" type="button" data-key=""><span class="opt-k"></span><span class="opt-t" lang="ja">② a. なりたいの　b. したいの</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">① a. なったら　② a. なりたいの</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja"><ruby>大人<rt>おとな</rt></ruby>になる / <ruby>何<rt>なん</rt></ruby>になる (become)</span></p>
+<p class="ans-expl">Both are about becoming something: <ruby>大人<rt>おとな</rt></ruby>になる ("grow up"), <ruby>何<rt>なん</rt></ruby>になりたい ("what do you want to become?"). <strong>b</strong> forms with する would mean "make into," which doesn't fit.</p>
+<p class="ans-romaji"><em>Otona ni nattara, nani ni naritai no?</em></p>
+</div></details></article>
+<article class="q" id="s3-q7" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>売<rt>う</rt></ruby>れないので、ねだんを<ruby>安<rt>やす</rt></ruby>く（a なりましょう　b しましょう）。</p>
+<p class="q-en">It's not selling, so let's lower the price.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">なりましょう</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">しましょう</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. しましょう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">する (deliberate change, with を)</span></p>
+<p class="ans-expl">ねだんを (object) + deliberate change → <ruby>安<rt>やす</rt></ruby>くしましょう.</p>
+<p class="ans-romaji"><em>Urenai node, nedan o yasuku shimashou.</em></p>
+</div></details></article>
+<article class="q" id="s3-q8" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q8</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">れんしゅうして、もっとはやく（a およぐ　b およげる）ようになりたい。</p>
+<p class="q-en">I want to practise and become able to swim faster.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">およぐ</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">およげる</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. およげる</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Potential verb + ようになる</span></p>
+<p class="ans-expl">"Become <strong>able</strong> to swim faster" uses the potential form: およげるようになる. <strong>a</strong> およぐようになる would mean "start swimming (as a habit)."</p>
+<p class="ans-romaji"><em>Renshuu shite, motto hayaku oyogeru you ni naritai.</em></p>
+</div></details></article>
+<article class="q" id="s3-q9" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q9</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>日本<rt>にほん</rt></ruby>では<ruby>子<rt>こ</rt></ruby>どもが（a <ruby>少<rt>すく</rt></ruby>なくなるようになりました　b <ruby>少<rt>すく</rt></ruby>なくなりました）。</p>
+<p class="q-en">In Japan, the number of children has decreased.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>少<rt>すく</rt></ruby>なくなるようになりました</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>少<rt>すく</rt></ruby>なくなりました</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>少<rt>すく</rt></ruby>なくなりました</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Don't double up なる</span></p>
+<p class="ans-expl"><ruby>少<rt>すく</rt></ruby>なくなる already shows the change. Adding ようになる on top is redundant.</p>
+<p class="ans-romaji"><em>Nihon de wa kodomo ga sukunaku narimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q10" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q10</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>去年<rt>きょねん</rt></ruby>より3キロ（a <ruby>太<rt>ふと</rt></ruby>りました　b <ruby>太<rt>ふと</rt></ruby>るようになりました）。</p>
+<p class="q-en">I've gained 3 kilos since last year.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>太<rt>ふと</rt></ruby>りました</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>太<rt>ふと</rt></ruby>るようになりました</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. <ruby>太<rt>ふと</rt></ruby>りました</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ようになる isn't used with "change" verbs</span></p>
+<p class="ans-expl"><ruby>太<rt>ふと</rt></ruby>る already means "gain weight" (a change), so you don't add ようになる.</p>
+<p class="ans-romaji"><em>Kyonen yori sankiro futorimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q11" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q11</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">このおもちゃ、<ruby>動<rt>うご</rt></ruby>かなく（a なったよ　b したよ）。こわれたかな？</p>
+<p class="q-en">This toy has stopped moving. I wonder if it's broken?</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">なったよ</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">したよ</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. なったよ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～なくなる (stop doing / no longer)</span></p>
+<p class="ans-expl">The toy stopped moving by itself: <ruby>動<rt>うご</rt></ruby>かなくなった. <strong>b</strong> would mean someone stopped it on purpose, which doesn't fit "is it broken?"</p>
+<p class="ans-romaji"><em>Kono omocha, ugokanaku natta yo. Kowareta ka na?</em></p>
+</div></details></article>
+<article class="q" id="s3-q12" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q12</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">このへや、<ruby>暗<rt>くら</rt></ruby>いですね。もっと<ruby>明<rt>あか</rt></ruby>るく（a しましょう　b なりましょう）。</p>
+<p class="q-en">This room is dark, isn't it? Let's make it brighter.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">しましょう</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">なりましょう</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. しましょう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">する (deliberate change)</span></p>
+<p class="ans-expl">Someone will make the room brighter (e.g. turn on lights): <ruby>明<rt>あか</rt></ruby>るくしましょう. <strong>b</strong> なりましょう would mean "let's (we) become brighter."</p>
+<p class="ans-romaji"><em>Kono heya, kurai desu ne. Motto akaruku shimashou.</em></p>
+</div></details></article>
+<article class="q" id="s3-q13" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q13</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">ショッピングセンターができて、とてもべんりに（a なりました　b しました）。</p>
+<p class="q-en">A shopping centre opened, and it's become very convenient.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">なりました</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">しました</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. なりました</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">なる (change in situation)</span></p>
+<p class="ans-expl">The situation became more convenient as a result: べんりになりました.</p>
+<p class="ans-romaji"><em>Shoppingu sentaa ga dekite, totemo benri ni narimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q14" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q14</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">へんですね。テレビの<ruby>音<rt>おと</rt></ruby>が<ruby>小<rt>ちい</rt></ruby>さく（a しません　b なりません）。</p>
+<p class="q-en">That's strange. The TV sound won't go down.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">しません</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">なりません</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. なりません</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">なる (the thing's own change)</span></p>
+<p class="ans-expl"><ruby>音<rt>おと</rt></ruby>が (subject) "won't become quieter": <ruby>小<rt>ちい</rt></ruby>さくなりません. <strong>a</strong> する would need the speaker as subject with <ruby>音<rt>おと</rt></ruby>を.</p>
+<p class="ans-romaji"><em>Hen desu ne. Terebi no oto ga chiisaku narimasen.</em></p>
+</div></details></article>
+<article class="q" id="s3-q15" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q15</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">このごろ、あまりゲームを（a しなくなった　b するようにならなかった）。</p>
+<p class="q-en">These days I don't play games much any more.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">しなくなった</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">するようにならなかった</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. しなくなった</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～なくなる (no longer do)</span></p>
+<p class="ans-expl">"Stopped playing (as much)" = しなくなった. <strong>b</strong> "didn't come to play" means you never started, which doesn't fit このごろ.</p>
+<p class="ans-romaji"><em>Konogoro, amari geemu o shinaku natta.</em></p>
+</div></details></article></section>
+<div class="pager"><a class="pager-btn" href="part1-lesson19.html"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Part 1 · Lesson 19</span></a><a class="pager-btn next" href="part1-review-lessons01-20.html"><span>Part 1 · Review 1–20</span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#s1" aria-label="Grammar"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>Grammar</span></a>
+<a href="#s2" aria-label="Practice"><svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4zM13 7l4 4"/></svg><span>Practice</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

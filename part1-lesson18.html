@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>Part 1 · Lesson 18 · ～(よ)うと思います / ～つもりです</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row">
+    <a class="icon-btn" href="index.html" aria-label="All lessons"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <span class="crumb">Part 1 · Lesson 18</span>
+    <button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button>
+  </div>
+  <p class="kicker" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> 18<ruby>課<rt>か</rt></ruby></p>
+  <h1 lang="ja">～(よ)うと<ruby>思<rt>おも</rt></ruby>います / ～つもりです</h1>
+  <p class="meta">Shin Kanzen Master N4 Grammar, book pages 72–73 (PDF pages 94–95). Answers checked against the book's answer key.</p>
+</header>
+<div class="chips"><a class="chip chip-dark" href="#s1">Grammar</a><a class="chip" href="#s2">Practice 1</a><a class="chip" href="#s3">Practice 2</a></div>
+<div class="stats"><div><b>2</b><span>grammar points</span></div><div><b>16</b><span>questions</span></div><div><b id="score">0</b><span>correct taps</span></div></div>
+<section class="sec" id="s1"><div class="sec-head"><h2>Grammar points on page 72</h2></div><article class="gp tone-lav"><div class="gp-head"><span class="gp-num">1</span><div><h3 lang="ja">～</h3><p class=gp-en>よ)うと<ruby>思<rt>おも</rt></ruby>います (I think I'll ~ / I'm planning to ~</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: verb volitional (う・よう) form + と<ruby>思<rt>おも</rt></ruby>います (see book p.22 for the volitional form)
+</li>
+<li lang="ja">Shows the <strong>speaker's intention</strong>. The subject is "I." Use <strong>と<ruby>思<rt>おも</rt></ruby>っています</strong> when the intention has <strong>continued for some time</strong> (②③④). <strong>～とは<ruby>思<rt>おも</rt></ruby>いません</strong> shows a strong refusal (⑤).
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja">いい<ruby>天気<rt>てんき</rt></ruby>だから、<ruby>出<rt>で</rt></ruby>かけようと<ruby>思<rt>おも</rt></ruby>います。 <em>It's nice weather, so I think I'll go out.</em>
+</li>
+<li lang="ja"><ruby>旅行<rt>りょこう</rt></ruby>に<ruby>行<rt>い</rt></ruby>くので、かばんを<ruby>買<rt>か</rt></ruby>おうと<ruby>思<rt>おも</rt></ruby>っています。 <em>I'm going on a trip, so I'm planning to buy a bag.</em>
+</li>
+<li lang="ja"><ruby>今日<rt>きょう</rt></ruby>は<ruby>帰<rt>かえ</rt></ruby>るとき、<ruby>図書館<rt>としょかん</rt></ruby>によろうと<ruby>思<rt>おも</rt></ruby>っています。 <em>Today I'm planning to stop by the library on my way home.</em>
+</li>
+<li lang="ja"><ruby>来年<rt>らいねん</rt></ruby>ヨーロッパを<ruby>旅行<rt>りょこう</rt></ruby>しようと<ruby>思<rt>おも</rt></ruby>っている。 <em>I'm planning to travel around Europe next year.</em>
+</li>
+<li lang="ja">わたしは<ruby>一人<rt>ひとり</rt></ruby>でカラオケに<ruby>行<rt>い</rt></ruby>こうとは<ruby>思<rt>おも</rt></ruby>いません。 <em>I have no intention of going to karaoke by myself.</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-dark"><div class="gp-head"><span class="gp-num">2</span><div><h3 lang="ja">～つもりです</h3><p class=gp-en>I intend to ~ / I plan to ~</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: verb dictionary form / ない form + つもりです; dictionary form + つもりはありません
+</li>
+<li lang="ja">A <strong>slightly stronger</strong> intention than ～ようと<ruby>思<rt>おも</rt></ruby>っています. Used for a decision made <strong>beforehand</strong>, not one made at the moment of speaking. The subject is "I"; for a third person, add そうです, らしいです, と<ruby>言<rt>い</rt></ruby>っていました, etc. (③). <strong>つもりはありません</strong> is a stronger "no" than ～ないつもりです (⑥).
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja"><ruby>先生<rt>せんせい</rt></ruby>「<ruby>夏休<rt>なつやす</rt></ruby>みに<ruby>何<rt>なん</rt></ruby>をしますか。」トム「<ruby>国<rt>くに</rt></ruby>へ<ruby>帰<rt>かえ</rt></ruby>るつもりです。」 <em>Teacher: "What will you do in the summer holidays?" Tom: "I plan to go back to my country."</em>
+</li>
+<li lang="ja"><ruby>日曜日<rt>にちようび</rt></ruby>は<ruby>大<rt>だい</rt></ruby>そうじをするつもりだ。 <em>I intend to do a big clean on Sunday.</em>
+</li>
+<li lang="ja"><ruby>妹<rt>いもうと</rt></ruby>はけっこんしきにこの<ruby>服<rt>ふく</rt></ruby>を<ruby>着<rt>き</rt></ruby>ていくつもりらしいです。 <em>It seems my younger sister intends to wear this outfit to the wedding.</em>
+</li>
+<li lang="ja"><ruby>今日<rt>きょう</rt></ruby>は<ruby>品物<rt>しなもの</rt></ruby>を<ruby>見<rt>み</rt></ruby>るだけで、<ruby>何<rt>なん</rt></ruby>も<ruby>買<rt>か</rt></ruby>わないつもりです。 <em>Today I'm just going to look at things; I don't intend to buy anything.</em>
+</li>
+<li lang="ja">つぎの<ruby>日本<rt>にほん</rt></ruby><ruby>語<rt>ご</rt></ruby><ruby>能力<rt>のうりょく</rt></ruby><ruby>試験<rt>しけん</rt></ruby>はうけないつもりです。 <em>I don't plan to take the next JLPT.</em>
+</li>
+<li lang="ja">わたしは<ruby>自分<rt>じぶん</rt></ruby>の<ruby>意見<rt>いけん</rt></ruby>をかえるつもりはありません。 <em>I have absolutely no intention of changing my opinion.</em>
+</li></ol>
+</li></ul></div></article></section><section class="sec" id="s2"><div class="sec-head"><h2 lang="ja">れんしゅう1</h2><span class=sec-en>Practice 1</span><span class="sec-count">7 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja"><span class="blank">　</span>の<ruby>中<rt>なか</rt></ruby>の<ruby>言葉<rt>ことば</rt></ruby>を<ruby>正<rt>ただ</rt></ruby>しい<ruby>形<rt>かたち</rt></ruby>にして、<ruby>書<rt>か</rt></ruby>いてください。</p><p class="instr-en">Change the word in the brackets ( ) into the correct form and write it in the blank.</p></div>
+<article class="q" id="s2-q1" data-correct="">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">【レストランで】<ruby>山田<rt>やまだ</rt></ruby>「<ruby>何<rt>なん</rt></ruby>を<ruby>食<rt>た</rt></ruby>べましょうか。」<br>トム「ええと、ぼくはAランチに<span class="blank">　</span>と<ruby>思<rt>おも</rt></ruby>います。」（する）</p>
+<p class="q-en">[At a restaurant] Yamada: "What shall we eat?"<br>Tom: "Um, I think I'll have the A lunch set."</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">しよう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Volitional form + と<ruby>思<rt>おも</rt></ruby>います (deciding now)</span></p>
+<p class="ans-expl">する → しよう. Tom decides on the spot, so と<ruby>思<rt>おも</rt></ruby>います (not と<ruby>思<rt>おも</rt></ruby>っています).</p>
+<p class="ans-romaji"><em>Tomu: "Eeto, boku wa ee-ranchi ni shiyou to omoimasu."</em></p>
+</div></details></article>
+<article class="q" id="s2-q2" data-correct="">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">あしたはこの<ruby>映画<rt>えいが</rt></ruby>を<span class="blank">　</span>と<ruby>思<rt>おも</rt></ruby>っています。（<ruby>見<rt>み</rt></ruby>る）</p>
+<p class="q-en">I'm planning to watch this movie tomorrow.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>見<rt>み</rt></ruby>よう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Group II volitional: ～よう</span></p>
+<p class="ans-expl"><ruby>見<rt>み</rt></ruby>る → <ruby>見<rt>み</rt></ruby>よう.</p>
+<p class="ans-romaji"><em>Ashita wa kono eiga o miyou to omotte imasu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q3" data-correct="">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>電気<rt>でんき</rt></ruby><ruby>店<rt>てん</rt></ruby>へ<ruby>行<rt>い</rt></ruby>って、いいカメラを<span class="blank">　</span>と<ruby>思<rt>おも</rt></ruby>っています。（さがす）</p>
+<p class="q-en">I'm planning to go to an electronics shop and look for a good camera.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">さがそう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Group I volitional: う-sound → お-sound + う</span></p>
+<p class="ans-expl">さがす → さがそう.</p>
+<p class="ans-romaji"><em>Denkiten e itte, ii kamera o sagasou to omotte imasu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>日本<rt>にほん</rt></ruby>でたくさん<ruby>写真<rt>しゃしん</rt></ruby>を<span class="blank">　</span>と<ruby>思<rt>おも</rt></ruby>っています。（とる）</p>
+<p class="q-en">I'm planning to take lots of photos in Japan.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">とろう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>Group I volitional</span></p>
+<p class="ans-expl">とる → とろう.</p>
+<p class="ans-romaji"><em>Nihon de takusan shashin o torou to omotte imasu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q5" data-correct="">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>今週<rt>こんしゅう</rt></ruby>はつかれたので、<ruby>日曜日<rt>にちようび</rt></ruby>はゆっくり<span class="blank">　</span>つもりです。（<ruby>休<rt>やす</rt></ruby>む）</p>
+<p class="q-en">I'm tired this week, so I intend to rest well on Sunday.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>休<rt>やす</rt></ruby>む</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Dictionary form + つもり</span></p>
+<p class="ans-expl">つもり takes the dictionary form.</p>
+<p class="ans-romaji"><em>Konshuu wa tsukareta node, nichiyoubi wa yukkuri yasumu tsumori desu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q6" data-correct="">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">これからもすいえいを<span class="blank">　</span>つもりです。（つづける）</p>
+<p class="q-en">I intend to keep swimming from now on as well.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">つづける</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Dictionary form + つもり</span></p>
+<p class="ans-expl">Dictionary form: つづける.</p>
+<p class="ans-romaji"><em>Kore kara mo suiei o tsuzukeru tsumori desu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q7" data-correct="">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">お<ruby>金<rt>かね</rt></ruby>がないので、<ruby>今週<rt>こんしゅう</rt></ruby>はもうおさけを<ruby>飲<rt>の</rt></ruby>みに<span class="blank">　</span>つもりです。（<ruby>行<rt>い</rt></ruby>く）</p>
+<p class="q-en">I have no money, so I don't intend to go out drinking any more this week.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>行<rt>い</rt></ruby>かない</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ない form + つもり</span></p>
+<p class="ans-expl">No money → won't go: <ruby>行<rt>い</rt></ruby>かないつもり.</p>
+<p class="ans-romaji"><em>Okane ga nai node, konshuu wa mou osake o nomi ni ikanai tsumori desu.</em></p>
+</div></details></article></section><section class="sec" id="s3"><div class="sec-head"><h2 lang="ja">れんしゅう2</h2><span class=sec-en>Practice 2</span><span class="sec-count">9 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">aかbか いいほうをえらんでください。</p><p class="instr-en">Choose the better option, a or b.</p></div>
+<article class="q" id="s3-q1" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">トム「あしたの<ruby>試合<rt>しあい</rt></ruby>にたかし<ruby>君<rt>くん</rt></ruby>も<ruby>出<rt>で</rt></ruby>る？」<br>けん「たかし？（a <ruby>出<rt>で</rt></ruby>る　b <ruby>出<rt>で</rt></ruby>よう）と<ruby>思<rt>おも</rt></ruby>うよ。」</p>
+<p class="q-en">Tom: "Is Takashi playing in tomorrow's match too?"<br>Ken: "Takashi? I think he'll play."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>出<rt>で</rt></ruby>る</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>出<rt>で</rt></ruby>よう</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. <ruby>出<rt>で</rt></ruby>る</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Volitional + と<ruby>思<rt>おも</rt></ruby>う is only for your own intention</span></p>
+<p class="ans-expl">Ken is guessing about <em>Takashi</em>, not stating his own plan, so plain form <ruby>出<rt>で</rt></ruby>ると<ruby>思<rt>おも</rt></ruby>う ("I think he'll play"). <strong>b</strong> <ruby>出<rt>で</rt></ruby>ようと<ruby>思<rt>おも</rt></ruby>う would mean "I intend to play."</p>
+<p class="ans-romaji"><em>Ken: "Takashi? Deru to omou yo."</em></p>
+</div></details></article>
+<article class="q" id="s3-q2" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">ああ、おいしかった。このレストランにはまた<ruby>来<rt>こ</rt></ruby>ようと（a <ruby>思<rt>おも</rt></ruby>います　b <ruby>思<rt>おも</rt></ruby>っています）。</p>
+<p class="q-en">Ah, that was delicious. I think I'll come to this restaurant again.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>思<rt>おも</rt></ruby>います</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>思<rt>おも</rt></ruby>っています</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. <ruby>思<rt>おも</rt></ruby>います</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">と<ruby>思<rt>おも</rt></ruby>います = decision made now</span></p>
+<p class="ans-expl">The speaker decides right now, after eating, so と<ruby>思<rt>おも</rt></ruby>います. <strong>b</strong> <ruby>思<rt>おも</rt></ruby>っています is for an intention held for a while.</p>
+<p class="ans-romaji"><em>Aa, oishikatta. Kono resutoran ni wa mata koyou to omoimasu.</em></p>
+</div></details></article>
+<article class="q" id="s3-q3" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">たばこをやめようとずっと（a <ruby>思<rt>おも</rt></ruby>います　b <ruby>思<rt>おも</rt></ruby>っています）が、なかなかやめられません。</p>
+<p class="q-en">I've been meaning to quit smoking for a long time, but I just can't.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>思<rt>おも</rt></ruby>います</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>思<rt>おも</rt></ruby>っています</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>思<rt>おも</rt></ruby>っています</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">と<ruby>思<rt>おも</rt></ruby>っています = ongoing intention</span></p>
+<p class="ans-expl">ずっと ("all along") shows a long-held intention, so <ruby>思<rt>おも</rt></ruby>っています.</p>
+<p class="ans-romaji"><em>Tabako o yameyou to zutto omotte imasu ga, nakanaka yameraremasen.</em></p>
+</div></details></article>
+<article class="q" id="s3-q4" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">わたしは<ruby>夜<rt>よる</rt></ruby>おそいアルバイトを（a しようとは<ruby>思<rt>おも</rt></ruby>いません　b しないようと<ruby>思<rt>おも</rt></ruby>っています）。</p>
+<p class="q-en">I have no intention of doing a late-night part-time job.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">しようとは<ruby>思<rt>おも</rt></ruby>いません</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">しないようと<ruby>思<rt>おも</rt></ruby>っています</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. しようとは<ruby>思<rt>おも</rt></ruby>いません</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～ようとは<ruby>思<rt>おも</rt></ruby>いません (strong refusal)</span></p>
+<p class="ans-expl">The correct negative is ～ようとは<ruby>思<rt>おも</rt></ruby>いません. <strong>b</strong> There's no volitional form of a ない form (しないよう is not a form).</p>
+<p class="ans-romaji"><em>Watashi wa yoru osoi arubaito o shiyou to wa omoimasen.</em></p>
+</div></details></article>
+<article class="q" id="s3-q5" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">ピアノの<ruby>先生<rt>せんせい</rt></ruby>に（a なろう　b なるよう）と<ruby>思<rt>おも</rt></ruby>って、ピアノをれんしゅうしています。</p>
+<p class="q-en">I'm practising the piano because I want to become a piano teacher.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">なろう</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">なるよう</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. なろう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>Volitional form of Group I verb</span></p>
+<p class="ans-expl">なる → なろう. <strong>b</strong> なるよう is not the volitional form.</p>
+<p class="ans-romaji"><em>Piano no sensei ni narou to omotte, piano o renshuu shite imasu.</em></p>
+</div></details></article>
+<article class="q" id="s3-q6" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>早<rt>はや</rt></ruby>く<ruby>元気<rt>げんき</rt></ruby>になって、（a たいいんできるつもりです　b たいいんしたいです）。</p>
+<p class="q-en">I want to get well soon and leave the hospital.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">たいいんできるつもりです</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">たいいんしたいです</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. たいいんしたいです</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">つもり can't be used with potential verbs</span></p>
+<p class="ans-expl">つもり is for things you can decide to do. "Be able to leave hospital" (できる) isn't something you decide, so つもり doesn't fit. Use a wish: したいです.</p>
+<p class="ans-romaji"><em>Hayaku genki ni natte, taiin shitai desu.</em></p>
+</div></details></article>
+<article class="q" id="s3-q7" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">あ、<ruby>新<rt>あたら</rt></ruby>しい<ruby>店<rt>みせ</rt></ruby>ができましたね。わたしはちょっとこの<ruby>店<rt>みせ</rt></ruby>を（a <ruby>見<rt>み</rt></ruby>ようと<ruby>思<rt>おも</rt></ruby>います　b <ruby>見<rt>み</rt></ruby>るつもりです）。どうぞお<ruby>先<rt>さき</rt></ruby>に。</p>
+<p class="q-en">Oh, a new shop has opened. I think I'll have a quick look in this shop. Please go on ahead.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>見<rt>み</rt></ruby>ようと<ruby>思<rt>おも</rt></ruby>います</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>見<rt>み</rt></ruby>るつもりです</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. <ruby>見<rt>み</rt></ruby>ようと<ruby>思<rt>おも</rt></ruby>います</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">つもり is for decisions made earlier</span></p>
+<p class="ans-expl">The speaker just noticed the shop and decides on the spot, so ようと<ruby>思<rt>おも</rt></ruby>います. <strong>b</strong> つもり is for plans already decided before.</p>
+<p class="ans-romaji"><em>A, atarashii mise ga dekimashita ne. Watashi wa chotto kono mise o miyou to omoimasu. Douzo osaki ni.</em></p>
+</div></details></article>
+<article class="q" id="s3-q8" data-correct="a">
+<div class="q-head">
+<span class="q-num">Q8</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>今日<rt>きょう</rt></ruby>はわたしがご<ruby>飯<rt>はん</rt></ruby>を（a <ruby>作<rt>つく</rt></ruby>ろうと<ruby>思<rt>おも</rt></ruby>っています　b <ruby>作<rt>つく</rt></ruby>るつもりだと<ruby>思<rt>おも</rt></ruby>います）。</p>
+<p class="q-en">I'm planning to make dinner today.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>作<rt>つく</rt></ruby>ろうと<ruby>思<rt>おも</rt></ruby>っています</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>作<rt>つく</rt></ruby>るつもりだと<ruby>思<rt>おも</rt></ruby>います</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">a. <ruby>作<rt>つく</rt></ruby>ろうと<ruby>思<rt>おも</rt></ruby>っています</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span>Stating your own intention</span></p>
+<p class="ans-expl">For your own plan, say <ruby>作<rt>つく</rt></ruby>ろうと<ruby>思<rt>おも</rt></ruby>っています. <strong>b</strong> つもりだと<ruby>思<rt>おも</rt></ruby>います ("I think I intend to") is unnatural, since you know your own intention.</p>
+<p class="ans-romaji"><em>Kyou wa watashi ga gohan o tsukurou to omotte imasu.</em></p>
+</div></details></article>
+<article class="q" id="s3-q9" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q9</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">わたしはあなたとは（a けっこんしないつもりがあります　b けっこんするつもりはありません）。</p>
+<p class="q-en">I have no intention of marrying you.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">けっこんしないつもりがあります</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">けっこんするつもりはありません</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. けっこんするつもりはありません</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">dictionary form + つもりはありません (strong denial)</span></p>
+<p class="ans-expl">The strong negative is "dictionary form + つもりはありません." <strong>a</strong> つもりがあります is not used like this.</p>
+<p class="ans-romaji"><em>Watashi wa anata to wa kekkon suru tsumori wa arimasen.</em></p>
+</div></details></article></section>
+<div class="pager"><a class="pager-btn" href="part1-lesson17.html"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Part 1 · Lesson 17</span></a><a class="pager-btn next" href="part1-lesson19.html"><span>Part 1 · Lesson 19</span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#s1" aria-label="Grammar"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>Grammar</span></a>
+<a href="#s2" aria-label="Practice"><svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4zM13 7l4 4"/></svg><span>Practice</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

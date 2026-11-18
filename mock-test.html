@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>Mock test · 模擬試験 (Mock test)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row">
+    <a class="icon-btn" href="index.html" aria-label="All lessons"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <span class="crumb">Mock test</span>
+    <button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button>
+  </div>
+  <p class="kicker" lang="ja"></p>
+  <h1 lang="ja"><ruby>模擬試験<rt>もぎしけん</rt></ruby> (Mock test)</h1>
+  <p class="meta">Shin Kanzen Master N4 Grammar, book pages 132–135 (PDF pages 154–157). Answers checked against the book's answer key.</p>
+</header>
+<div class="chips"><a class="chip chip-dark" href="#s1">Problem 1</a><a class="chip" href="#s2">Problem 2</a><a class="chip" href="#s3">Problem 3</a></div>
+<div class="stats"><div><b>25</b><span>questions</span></div><div><b id="score">0</b><span>correct taps</span></div></div>
+<section class="sec" id="s1"><div class="sec-head"><h2 lang="ja">もんだい1</h2><span class=sec-en>Problem 1</span><span class="sec-count">15 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja"><span class="blank">　</span>に<ruby>何<rt>なん</rt></ruby>を<ruby>入<rt>い</rt></ruby>れますか。1・2・3・4からいちばんいいものを<ruby>一<rt>ひと</rt></ruby>つえらんでください。</p><p class="instr-en">What goes in the ( )? Choose the best option from 1, 2, 3 and 4.</p></div>
+<article class="q" id="s1-q1" data-correct="2">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">この<ruby>花<rt>はな</rt></ruby>はあのまるいテーブルの<ruby>上<rt>うえ</rt></ruby><span class="blank">　</span>かざりましょう。</p>
+<p class="q-en">Let's put these flowers on top of that round table.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">で</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">に</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">を</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">が</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">2. に</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">に (the place where something ends up)</span></p>
+<p class="ans-expl">かざる ("decorate / put on display") takes に for where the thing is placed. <strong>1</strong> で is where an action happens, not where something is put. <strong>3</strong> を is already used for <ruby>花<rt>はな</rt></ruby> (here shown with は). <strong>4</strong> が marks the subject.</p>
+<p class="ans-romaji"><em>Kono hana wa ano marui teeburu no ue ni kazarimashou.</em></p>
+</div></details></article>
+<article class="q" id="s1-q2" data-correct="1">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>旅行会社<rt>りょこうかいしゃ</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>「あしたは10<ruby>時<rt>じ</rt></ruby>にこのホテル<span class="blank">　</span><ruby>出発<rt>しゅっぱつ</rt></ruby>して、<ruby>一日中<rt>いちにちじゅう</rt></ruby><ruby>町<rt>まち</rt></ruby>を<ruby>見物<rt>けんぶつ</rt></ruby>します。」</p>
+<p class="q-en">Travel agent: "Tomorrow we'll leave this hotel at 10 and spend the whole day sightseeing around town."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">を</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">で</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">へ</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">に</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">1. を</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">を (the place you leave)</span></p>
+<p class="ans-expl">With "leave" verbs (<ruby>出発<rt>しゅっぱつ</rt></ruby>する, <ruby>出<rt>で</rt></ruby>る), を marks the place you leave. <strong>2</strong> で is where an action happens. <strong>3</strong> へ and <strong>4</strong> に mark a destination, not a starting point.</p>
+<p class="ans-romaji"><em>Ashita wa juuji ni kono hoteru o shuppatsu shite, ichinichijuu machi o kenbutsu shimasu.</em></p>
+</div></details></article>
+<article class="q" id="s1-q3" data-correct="3">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">これは<span class="blank">　</span>あげられません。<ruby>大切<rt>たいせつ</rt></ruby>な<ruby>人<rt>ひと</rt></ruby>からもらった<ruby>物<rt>もの</rt></ruby>なんです。</p>
+<p class="q-en">I can't give this to anyone. It's something I got from someone important to me.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja"><ruby>一人<rt>ひとり</rt></ruby>も</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja"><ruby>一人<rt>ひとり</rt></ruby>でも</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">だれにも</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">だれでも</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">3. だれにも</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">だれ + に + も + negative (not to anyone)</span></p>
+<p class="ans-expl">あげる needs に for the person you give to, and も + negative means "not to anyone": だれにも…ません. <strong>1</strong> <ruby>一人<rt>ひとり</rt></ruby>も is missing に. <strong>2</strong> <ruby>一人<rt>ひとり</rt></ruby>でも = "even one person." <strong>4</strong> だれでも = "anyone at all" (goes with positive verbs).</p>
+<p class="ans-romaji"><em>Kore wa dare ni mo ageraremasen. Taisetsu na hito kara moratta mono na n desu.</em></p>
+</div></details></article>
+<article class="q" id="s1-q4" data-correct="2">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">わあ、<span class="blank">　</span>セーターですね。<ruby>色<rt>いろ</rt></ruby>もいいし……。</p>
+<p class="q-en">Wow, that sweater looks warm. And the colour's nice too…</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">あたたかいらしい</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">あたたかそうな</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">あたたかいみたいな</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">あたたかいはずの</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">2. あたたかそうな</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～そう (looks ～, based on what you see)</span></p>
+<p class="ans-expl">The speaker is looking at the sweater and judging by its appearance: あたたかそうな. <strong>1</strong> らしい = "I hear." <strong>3</strong> みたいな is a guess, but sounds odd for what you can see right in front of you. <strong>4</strong> はず = "should be (by logic)."</p>
+<p class="ans-romaji"><em>Waa, atatakasou na seetaa desu ne. Iro mo ii shi…</em></p>
+</div></details></article>
+<article class="q" id="s1-q5" data-correct="4">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「この<ruby>写真<rt>しゃしん</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>を<ruby>知<rt>し</rt></ruby>っていますか。」<br>B「うーん、どこかで1、2<ruby>度<rt>ど</rt></ruby><span class="blank">　</span>あるんですが、<ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>だ</rt></ruby>せません。」</p>
+<p class="q-en">A: "Do you know the person in this photo?"<br>B: "Hmm, I've met them once or twice somewhere, but I can't remember."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja"><ruby>会<rt>あ</rt></ruby>うのが</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja"><ruby>会<rt>あ</rt></ruby>うことが</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja"><ruby>会<rt>あ</rt></ruby>ったのが</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja"><ruby>会<rt>あ</rt></ruby>ったことが</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">4. <ruby>会<rt>あ</rt></ruby>ったことが</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～たことがある (have done before)</span></p>
+<p class="ans-expl">Past experience: <ruby>会<rt>あ</rt></ruby>ったことがある. <strong>2</strong> <ruby>会<rt>あ</rt></ruby>うことがある = "sometimes meet." <strong>1</strong> and <strong>3</strong> の can't be used in this pattern.</p>
+<p class="ans-romaji"><em>B: "Uun, dokoka de ichi, nido atta koto ga aru n desu ga, omoidasemasen."</em></p>
+</div></details></article>
+<article class="q" id="s1-q6" data-correct="2">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">おいしそうなケーキがありますね……。じゃ、ダイエットはあしたからに<span class="blank">　</span>と<ruby>思<rt>おも</rt></ruby>います。</p>
+<p class="q-en">That cake looks delicious… OK, I think I'll start my diet tomorrow instead.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">する</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">しよう</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">している</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">して</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">2. しよう</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Volitional + と<ruby>思<rt>おも</rt></ruby>う (I think I'll ～)</span></p>
+<p class="ans-expl">A decision the speaker is making: volitional しよう + と<ruby>思<rt>おも</rt></ruby>います. <strong>1</strong> するとおもいます is a guess or prediction. <strong>3</strong> is ongoing. <strong>4</strong> isn't a complete form before と.</p>
+<p class="ans-romaji"><em>Oishisou na keeki ga arimasu ne… Ja, daietto wa ashita kara ni shiyou to omoimasu.</em></p>
+</div></details></article>
+<article class="q" id="s1-q7" data-correct="1">
+<div class="q-head">
+<span class="q-num">Q7</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「あれ、めがねはどこにおいたんだろう。」<br>B「めがねなら、ここにおいて<span class="blank">　</span>。」</p>
+<p class="q-en">A: "Huh, where did I put my glasses?"<br>B: "If it's your glasses, they've been put here."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">ありますよ</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">きますよ</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">おきますよ</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">いきますよ</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">1. ありますよ</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～てある (result of someone's action)</span></p>
+<p class="ans-expl">Someone put the glasses there, and they're still there: おいてあります. <strong>2</strong> ～てくる and <strong>4</strong> ～ていく are about movement. <strong>3</strong> ～ておく = "do in advance," which is a future action.</p>
+<p class="ans-romaji"><em>B: "Megane nara, koko ni oite arimasu yo."</em></p>
+</div></details></article>
+<article class="q" id="s1-q8" data-correct="1">
+<div class="q-head">
+<span class="q-num">Q8</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「600<ruby>字<rt>じ</rt></ruby>いないで<ruby>作文<rt>さくぶん</rt></ruby>を<ruby>書<rt>か</rt></ruby>いてください。」<br>B「ああ、よかった。<span class="blank">　</span>んですね。」</p>
+<p class="q-en">A: "Please write the essay in 600 characters or fewer."<br>B: "Oh, good. So it doesn't need to be 800 characters."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">800<ruby>字<rt>じ</rt></ruby>でなくてもいい</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">800<ruby>字<rt>じ</rt></ruby>でなければいけない</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">800<ruby>字<rt>じ</rt></ruby>でもいい</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">800<ruby>字<rt>じ</rt></ruby>ではいけない</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">1. 800<ruby>字<rt>じ</rt></ruby>でなくてもいい</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～なくてもいい (don't have to)</span></p>
+<p class="ans-expl">B is relieved (よかった), so it's shorter than expected: "it doesn't have to be 800." <strong>2</strong> "must be 800" isn't a relief. <strong>3</strong> "800 is OK" contradicts the 600 limit. <strong>4</strong> "800 isn't allowed" isn't what makes them glad.</p>
+<p class="ans-romaji"><em>B: "Aa, yokatta. Happyaku-ji de nakute mo ii n desu ne."</em></p>
+</div></details></article>
+<article class="q" id="s1-q9" data-correct="3">
+<div class="q-head">
+<span class="q-num">Q9</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「<ruby>来週<rt>らいしゅう</rt></ruby>、<ruby>田中<rt>たなか</rt></ruby>さんのけっこんしきに<ruby>行<rt>い</rt></ruby>くんです。」<br>B「けっこんしきに<span class="blank">　</span>、<ruby>白<rt>しろ</rt></ruby>い<ruby>服<rt>ふく</rt></ruby>を<ruby>着<rt>き</rt></ruby>ていかないほうがいいですよ。」</p>
+<p class="q-en">A: "I'm going to Tanaka's wedding next week."<br>B: "If you're going to a wedding, you'd better not wear white."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja"><ruby>行<rt>い</rt></ruby>くと</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja"><ruby>行<rt>い</rt></ruby>ったら</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja"><ruby>行<rt>い</rt></ruby>くなら</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja"><ruby>行<rt>い</rt></ruby>けば</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">3. <ruby>行<rt>い</rt></ruby>くなら</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～なら (if that's the case, here's advice)</span></p>
+<p class="ans-expl">B picks up what A said and gives advice: <ruby>行<rt>い</rt></ruby>くなら. The advice (what to wear) comes <em>before</em> going. <strong>2</strong> <ruby>行<rt>い</rt></ruby>ったら = "after you've gone," too late to choose clothes. <strong>1</strong> と can't be followed by advice. <strong>4</strong> ば doesn't fit this "picking up the topic" use.</p>
+<p class="ans-romaji"><em>B: "Kekkonshiki ni iku nara, shiroi fuku o kite ikanai hou ga ii desu yo."</em></p>
+</div></details></article>
+<article class="q" id="s1-q10" data-correct="4">
+<div class="q-head">
+<span class="q-num">Q10</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「<ruby>今度<rt>こんど</rt></ruby>のパーティーにはぜんぶで<ruby>何人<rt>なんにん</rt></ruby><ruby>来<rt>き</rt></ruby>ますか。」<br>B「<ruby>何人<rt>なんにん</rt></ruby>に<span class="blank">　</span>まだわからないんですが、20<ruby>人<rt>にん</rt></ruby>ぐらいだと<ruby>思<rt>おも</rt></ruby>います。」</p>
+<p class="q-en">A: "How many people are coming to the next party in total?"<br>B: "I don't know yet how many it'll be, but I think about 20."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">なって</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">なるのが</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">なったら</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">なるか</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">4. なるか</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Question word + ～か (embedded question)</span></p>
+<p class="ans-expl">A question with <ruby>何人<rt>なんにん</rt></ruby> inside a sentence ends in か: <ruby>何人<rt>なんにん</rt></ruby>になるかわからない. <strong>1</strong>, <strong>2</strong> and <strong>3</strong> don't form an embedded question.</p>
+<p class="ans-romaji"><em>B: "Nannin ni naru ka mada wakaranai n desu ga, nijuunin gurai da to omoimasu."</em></p>
+</div></details></article>
+<article class="q" id="s1-q11" data-correct="2">
+<div class="q-head">
+<span class="q-num">Q11</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">さいきん、となりの<ruby>家<rt>いえ</rt></ruby>からピアノの<ruby>音<rt>おと</rt></ruby>が<span class="blank">　</span>なりました。</p>
+<p class="q-en">Recently, I've started to hear piano music from next door.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja"><ruby>聞<rt>き</rt></ruby>くように</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja"><ruby>聞<rt>き</rt></ruby>こえるように</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja"><ruby>聞<rt>き</rt></ruby>くことに</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja"><ruby>聞<rt>き</rt></ruby>こえることに</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">2. <ruby>聞<rt>き</rt></ruby>こえるように</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～ようになる (a change: came to ～)</span></p>
+<p class="ans-expl"><ruby>音<rt>おと</rt></ruby>が (subject) + <ruby>聞<rt>き</rt></ruby>こえる ("can be heard"), and a change over time: ようになりました. <strong>1</strong> <ruby>聞<rt>き</rt></ruby>く needs を. <strong>3</strong> and <strong>4</strong> ことになる is for decisions made by others.</p>
+<p class="ans-romaji"><em>Saikin, tonari no ie kara piano no oto ga kikoeru you ni narimashita.</em></p>
+</div></details></article>
+<article class="q" id="s1-q12" data-correct="4">
+<div class="q-head">
+<span class="q-num">Q12</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「たくさんにもつがありますね。<ruby>一<rt>ひと</rt></ruby>つ<span class="blank">　</span>。」<br>B「すみません。おねがいします。」</p>
+<p class="q-en">A: "You've got a lot of bags. Shall I carry one?"<br>B: "Thank you. Yes, please."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja"><ruby>持<rt>も</rt></ruby>ってください</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja"><ruby>持<rt>も</rt></ruby>ちますか</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja"><ruby>持<rt>も</rt></ruby>ちませんか</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja"><ruby>持<rt>も</rt></ruby>ちましょうか</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">4. <ruby>持<rt>も</rt></ruby>ちましょうか</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～ましょうか (offering help)</span></p>
+<p class="ans-expl">A offers to help: <ruby>持<rt>も</rt></ruby>ちましょうか ("Shall I carry it?"). <strong>1</strong> asks B to carry. <strong>2</strong> asks if B will carry. <strong>3</strong> ～ませんか is an invitation to do something together.</p>
+<p class="ans-romaji"><em>A: "Takusan nimotsu ga arimasu ne. Hitotsu mochimashou ka."</em></p>
+</div></details></article>
+<article class="q" id="s1-q13" data-correct="1">
+<div class="q-head">
+<span class="q-num">Q13</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>今日<rt>きょう</rt></ruby>は<span class="blank">　</span><ruby>電車<rt>でんしゃ</rt></ruby>がこんでいますね。<ruby>何<rt>なん</rt></ruby>かあったんでしょうか。</p>
+<p class="q-en">The train is more crowded than usual today. I wonder if something happened.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">いつもより</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">いつもほど</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">いつもなら</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">いつもだけ</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">1. いつもより</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～より (more than)</span></p>
+<p class="ans-expl">Comparing today with usual: いつもより ("than usual"). <strong>2</strong> ほど needs a negative after it. <strong>3</strong> いつもなら = "normally, (but)…" <strong>4</strong> isn't natural.</p>
+<p class="ans-romaji"><em>Kyou wa itsumo yori densha ga konde imasu ne. Nanika atta n deshou ka.</em></p>
+</div></details></article>
+<article class="q" id="s1-q14" data-correct="4">
+<div class="q-head">
+<span class="q-num">Q14</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「あ、めずらしい<ruby>魚<rt>さかな</rt></ruby>ね。<ruby>自分<rt>じぶん</rt></ruby>で<ruby>料理<rt>りょうり</rt></ruby>するの？だいじょうぶ？」<br>B「だいじょうぶ。<ruby>店員<rt>てんいん</rt></ruby>さんに<ruby>料理<rt>りょうり</rt></ruby>のし<ruby>方<rt>かた</rt></ruby>をよく<span class="blank">　</span><ruby>買<rt>か</rt></ruby>ったから。」</p>
+<p class="q-en">A: "Oh, that's an unusual fish. Are you going to cook it yourself? Will you be OK?"<br>B: "I'll be fine. I asked the shop assistant carefully how to cook it before I bought it."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja"><ruby>聞<rt>き</rt></ruby>いてあげて</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja"><ruby>聞<rt>き</rt></ruby>いてくれて</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja"><ruby>聞<rt>き</rt></ruby>かれてから</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja"><ruby>聞<rt>き</rt></ruby>いてから</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">4. <ruby>聞<rt>き</rt></ruby>いてから</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～てから (after doing)</span></p>
+<p class="ans-expl">First asked, then bought: <ruby>聞<rt>き</rt></ruby>いてから. <strong>1</strong> あげる = doing it for someone else. <strong>2</strong> くれる = someone did it for B. <strong>3</strong> passive = "after being asked."</p>
+<p class="ans-romaji"><em>B: "Daijoubu. Ten'in-san ni ryouri no shikata o yoku kiite kara katta kara."</em></p>
+</div></details></article>
+<article class="q" id="s1-q15" data-correct="3">
+<div class="q-head">
+<span class="q-num">Q15</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">そんなに<span class="blank">　</span><ruby>考<rt>かんが</rt></ruby>えないで、まずやってみてください。</p>
+<p class="q-en">Don't think about it so seriously; just try it first.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">むずかしいに</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">むずかしさ</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">むずかしく</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">むずかしくて</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">3. むずかしく</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">い-adjective → adverb with く</span></p>
+<p class="ans-expl">Before the verb <ruby>考<rt>かんが</rt></ruby>える you need an adverb: むずかしく ("in a difficult way"). <strong>1</strong> isn't a real form. <strong>2</strong> is a noun. <strong>4</strong> links clauses.</p>
+<p class="ans-romaji"><em>Sonna ni muzukashiku kangaenaide, mazu yatte mite kudasai.</em></p>
+</div></details></article></section><section class="sec" id="s2"><div class="sec-head"><h2 lang="ja">もんだい2</h2><span class=sec-en>Problem 2</span><span class="sec-count">5 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">★に<ruby>入<rt>はい</rt></ruby>るものはどれですか。1・2・3・4からいちばんいいものを<ruby>一<rt>ひと</rt></ruby>つえらんでください。</p><p class="instr-en">Which piece goes in the ★ slot? Put the four pieces in the correct order and choose the best option from 1, 2, 3 and 4.</p></div>
+<article class="q" id="s2-q16" data-correct="4">
+<div class="q-head">
+<span class="q-num">Q16</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「おいしかったね、あの<ruby>店<rt>みせ</rt></ruby>。また<ruby>行<rt>い</rt></ruby>こうね。」<br>B「あ！<ruby>店<rt>みせ</rt></ruby>にけいたい<ruby>電話<rt>でんわ</rt></ruby>をおいて <span class="blank">　</span> <span class="blank">　</span> ★ <span class="blank">　</span> と。」</p>
+<p class="q-en">A: "That restaurant was good. Let's go again."<br>B: "Oh! I left my phone at the restaurant, so I need to go back for it."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">しまったから</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">もどらない</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">きて</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">とりに</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">4. とりに (order: 3 → 1 → 4 → 2)</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～てくる / ～てしまう / stem + に (purpose) / ～ないと (must)</span></p>
+<p class="ans-expl">Full sentence: <ruby>店<rt>みせ</rt></ruby>にけいたい<ruby>電話<rt>でんわ</rt></ruby>をおいて<strong>きて</strong> <strong>しまったから</strong> <strong>とりに</strong> <strong>もどらない</strong>と。 ★ is the third slot: とりに.</p>
+<p class="ans-romaji"><em>B: "A! Mise ni keitai denwa o oite kite shimatta kara tori ni modoranai to."</em></p>
+</div></details></article>
+<article class="q" id="s2-q17" data-correct="3">
+<div class="q-head">
+<span class="q-num">Q17</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">A「あれ？この<ruby>本<rt>ほん</rt></ruby>は<ruby>何<rt>なん</rt></ruby>ですか。かたづけてもいいですか。」<br>B「いえ、<span class="blank">　</span> <span class="blank">　</span> ★ <span class="blank">　</span> あるんです。」</p>
+<p class="q-en">A: "Huh? What's this book? Can I put it away?"<br>B: "No, I've put it out so I don't forget it tomorrow."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">わすれない</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja"><ruby>出<rt>だ</rt></ruby>して</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">ように</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">あした</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">3. ように (order: 4 → 1 → 3 → 2)</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～ないように (so as not to) / ～てある</span></p>
+<p class="ans-expl">Full sentence: いえ、<strong>あした</strong> <strong>わすれない</strong> <strong>ように</strong> <strong><ruby>出<rt>だ</rt></ruby>して</strong>あるんです。 ★ is the third slot: ように.</p>
+<p class="ans-romaji"><em>B: "Ie, ashita wasurenai you ni dashite aru n desu."</em></p>
+</div></details></article>
+<article class="q" id="s2-q18" data-correct="1">
+<div class="q-head">
+<span class="q-num">Q18</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">これはこのしまで <span class="blank">　</span> <span class="blank">　</span> ★ <span class="blank">　</span> そうですよ。</p>
+<p class="q-en">I hear this is a rare bird that can only be seen on this island.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">めずらしい</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja"><ruby>見<rt>み</rt></ruby>られない</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja"><ruby>鳥<rt>とり</rt></ruby>だ</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">しか</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">1. めずらしい (order: 4 → 2 → 1 → 3)</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～しか～ない (only) / plain form + そうだ (I hear)</span></p>
+<p class="ans-expl">Full sentence: これはこのしまで<strong>しか</strong> <strong><ruby>見<rt>み</rt></ruby>られない</strong> <strong>めずらしい</strong> <strong><ruby>鳥<rt>とり</rt></ruby>だ</strong>そうですよ。 ★ is the third slot: めずらしい.</p>
+<p class="ans-romaji"><em>Kore wa kono shima de shika mirarenai mezurashii tori da sou desu yo.</em></p>
+</div></details></article>
+<article class="q" id="s2-q19" data-correct="2">
+<div class="q-head">
+<span class="q-num">Q19</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">なかなか<ruby>出<rt>で</rt></ruby>かける <span class="blank">　</span> <span class="blank">　</span> ★ <span class="blank">　</span> しまいました。</p>
+<p class="q-en">I just couldn't get ready to go out, and I ended up being late.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">できなくて</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">おそく</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">なって</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">じゅんびが</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">2. おそく (order: 4 → 1 → 2 → 3)</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">なかなか～ない / ～くなる / ～てしまう</span></p>
+<p class="ans-expl">Full sentence: なかなか<ruby>出<rt>で</rt></ruby>かける<strong>じゅんびが</strong> <strong>できなくて</strong> <strong>おそく</strong> <strong>なって</strong>しまいました。 ★ is the third slot: おそく.</p>
+<p class="ans-romaji"><em>Nakanaka dekakeru junbi ga dekinakute osoku natte shimaimashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q20" data-correct="1">
+<div class="q-head">
+<span class="q-num">Q20</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">わたしたちが<ruby>会<rt>あ</rt></ruby>った <span class="blank">　</span> <span class="blank">　</span> ★ <span class="blank">　</span> すぐに<ruby>友<rt>とも</rt></ruby>だちになりました。</p>
+<p class="q-en">That was the first time we'd ever met, but we became friends straight away.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">はじめてだった</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">そのときが</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">のに</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">のは</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">1. はじめてだった (order: 4 → 2 → 1 → 3)</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～のは…が / ～のに (even though)</span></p>
+<p class="ans-expl">Full sentence: わたしたちが<ruby>会<rt>あ</rt></ruby>った<strong>のは</strong> <strong>そのときが</strong> <strong>はじめてだった</strong> <strong>のに</strong>すぐに<ruby>友<rt>とも</rt></ruby>だちになりました。 ★ is the third slot: はじめてだった.</p>
+<p class="ans-romaji"><em>Watashi-tachi ga atta no wa sono toki ga hajimete datta noni sugu ni tomodachi ni narimashita.</em></p>
+</div></details></article></section><section class="sec" id="s3"><div class="sec-head"><h2 lang="ja">もんだい3</h2><span class=sec-en>Problem 3</span><span class="sec-count">5 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">21 から 25 に<ruby>何<rt>なん</rt></ruby>を<ruby>入<rt>い</rt></ruby>れますか。<ruby>文章<rt>ぶんしょう</rt></ruby>の<ruby>意味<rt>いみ</rt></ruby>を<ruby>考<rt>かんが</rt></ruby>えて、1・2・3・4からいちばんいいものを<ruby>一<rt>ひと</rt></ruby>つえらんでください。</p><p class="instr-en">What goes in blanks 21 to 25? Think about the meaning of the passage and choose the best option from 1, 2, 3 and 4.</p></div>
+<div class="prose"><p lang="ja"><strong>The passage: こけし (Kokeshi dolls), by Sarah Smith</strong></p>
+<blockquote class="passage" lang="ja"><p><ruby>先月<rt>せんげつ</rt></ruby>ある<ruby>町<rt>まち</rt></ruby>に<ruby>旅行<rt>りょこう</rt></ruby>に<ruby>行<rt>い</rt></ruby>ったとき、「こけし」<strong>[21]</strong> おみやげを<ruby>買<rt>か</rt></ruby>いました。こけしは<ruby>木<rt>き</rt></ruby>の<ruby>人形<rt>にんぎょう</rt></ruby>で、<ruby>大<rt>おお</rt></ruby>きさはいろいろありましたが、わたしが <strong>[22]</strong>、せの<ruby>高<rt>たか</rt></ruby>さが25センチぐらいの<ruby>物<rt>もの</rt></ruby>です。<ruby>手<rt>て</rt></ruby>も<ruby>足<rt>あし</rt></ruby>も<ruby>首<rt>くび</rt></ruby>もないまっすぐな<ruby>体<rt>からだ</rt></ruby>の<ruby>上<rt>うえ</rt></ruby>に<ruby>小<rt>ちい</rt></ruby>さいボールのような<ruby>頭<rt>あたま</rt></ruby>が <strong>[23]</strong>。それだけの<ruby>形<rt>かたち</rt></ruby>の<ruby>人形<rt>にんぎょう</rt></ruby>ですが、とてもやさしい<ruby>顔<rt>かお</rt></ruby>をしています。<ruby>細<rt>ほそ</rt></ruby>い<ruby>目<rt>め</rt></ruby>と<ruby>小<rt>ちい</rt></ruby>さい<ruby>口<rt>くち</rt></ruby>が<ruby>特<rt>とく</rt></ruby>にいいです。<ruby>体<rt>からだ</rt></ruby>には<ruby>赤<rt>あか</rt></ruby>い<ruby>花<rt>はな</rt></ruby>がかいてあります。どのこけしもみんな<ruby>赤<rt>あか</rt></ruby>い<ruby>色<rt>いろ</rt></ruby>が<ruby>使<rt>つか</rt></ruby>われていました。わたしは<ruby>店<rt>みせ</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>に「<strong>[24]</strong> ですか。」と<ruby>聞<rt>き</rt></ruby>いてみました。<ruby>店<rt>みせ</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>の<ruby>話<rt>はなし</rt></ruby>では、<ruby>赤<rt>あか</rt></ruby>は<ruby>病気<rt>びょうき</rt></ruby>を<ruby>体<rt>からだ</rt></ruby>に<ruby>入<rt>い</rt></ruby>れない<ruby>色<rt>いろ</rt></ruby>なのだそうです。</p><p>この<ruby>町<rt>まち</rt></ruby>は<ruby>特<rt>とく</rt></ruby>にこけしのおみやげが<ruby>有名<rt>ゆうめい</rt></ruby>で、むかしからよく<ruby>売<rt>う</rt></ruby>られていたようです。でも、<strong>[25]</strong>、こけしはここだけではなく、<ruby>日本<rt>にほん</rt></ruby><ruby>中<rt>なか</rt></ruby>のいろいろな<ruby>所<rt>ところ</rt></ruby>で<ruby>買<rt>か</rt></ruby>うことができます。</p></blockquote>
+<p><strong>Translation:</strong> <em>Last month, when I went on a trip to a certain town, I bought a souvenir <strong>[21] called</strong> a "kokeshi." Kokeshi are wooden dolls. They came in all sizes, but <strong>[22] the one I bought</strong> is about 25 cm tall. On a straight body with no arms, legs or neck, there <strong>[23] is</strong> a small, ball-like head. It's a doll with just that shape, but it has a very gentle face. The thin eyes and small mouth are especially nice. Red flowers are painted on the body. Every kokeshi used red. I asked the shop assistant, "<strong>[24] Why</strong> is that?" According to them, red is a colour that keeps illness out of the body.</em> <em>This town is especially famous for kokeshi souvenirs, and it seems they've been sold here for a long time. But <strong>[25] nowadays</strong>, you can buy kokeshi not only here but in many places all over Japan.</em></p></div>
+<article class="q" id="s3-q21" data-correct="1">
+<div class="q-head">
+<span class="q-num">Q21</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">「こけし」<strong>[21]</strong> おみやげを<ruby>買<rt>か</rt></ruby>いました。</p>
+<p class="q-en">I bought a souvenir called a "kokeshi."</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">という</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">といった</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">といっていた</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">といわれた</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">1. という</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">AというB (a B called A)</span></p>
+<p class="ans-expl">Naming something: こけしというおみやげ. <strong>2</strong>, <strong>3</strong> and <strong>4</strong> are past or passive forms of "say," which don't work for simply giving a name.</p>
+<p class="ans-romaji"><em>"Kokeshi" to iu omiyage o kaimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q22" data-correct="4">
+<div class="q-head">
+<span class="q-num">Q22</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">わたしが <strong>[22]</strong>、せの<ruby>高<rt>たか</rt></ruby>さが25センチぐらいの<ruby>物<rt>もの</rt></ruby>です。</p>
+<p class="q-en">The one I bought is about 25 cm tall.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja"><ruby>買<rt>か</rt></ruby>うのは</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja"><ruby>買<rt>か</rt></ruby>っていたのは</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja"><ruby>買<rt>か</rt></ruby>っているのは</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja"><ruby>買<rt>か</rt></ruby>ったのは</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">4. <ruby>買<rt>か</rt></ruby>ったのは</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">～のは…です / past tense</span></p>
+<p class="ans-expl">She bought it last month, a single finished action: <ruby>買<rt>か</rt></ruby>ったのは. <strong>1</strong> is future/habit. <strong>2</strong> and <strong>3</strong> are ongoing forms, which don't fit a one-off purchase.</p>
+<p class="ans-romaji"><em>Watashi ga katta no wa, se no takasa ga nijuugo-senchi gurai no mono desu.</em></p>
+</div></details></article>
+<article class="q" id="s3-q23" data-correct="2">
+<div class="q-head">
+<span class="q-num">Q23</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">…<ruby>小<rt>ちい</rt></ruby>さいボールのような<ruby>頭<rt>あたま</rt></ruby>が <strong>[23]</strong>。</p>
+<p class="q-en">…there's a small ball-like head (attached).</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">つきました</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">ついています</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">ついてきました</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">ついていきます</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">2. ついています</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">Intransitive + ている (a state)</span></p>
+<p class="ans-expl">She's describing what the doll looks like now: the head is attached → ついています. <strong>1</strong> "got attached" is a one-time event. <strong>3</strong> and <strong>4</strong> are about movement or change over time.</p>
+<p class="ans-romaji"><em>…chiisai booru no you na atama ga tsuite imasu.</em></p>
+</div></details></article>
+<article class="q" id="s3-q24" data-correct="2">
+<div class="q-head">
+<span class="q-num">Q24</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">わたしは<ruby>店<rt>みせ</rt></ruby>の<ruby>人<rt>ひと</rt></ruby>に「<strong>[24]</strong> ですか。」と<ruby>聞<rt>き</rt></ruby>いてみました。</p>
+<p class="q-en">I asked the shop assistant, "Why is that?"</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja">どう</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja">どうして</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja">どんなこと</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja">どうやって</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">2. どうして</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">どうして (why)</span></p>
+<p class="ans-expl">She wants to know the reason all kokeshi are red, and the answer is a reason ("red keeps illness out"). <strong>1</strong> どう = "how is it?" <strong>3</strong> どんなこと = "what kind of thing?" <strong>4</strong> どうやって = "by what method?"</p>
+<p class="ans-romaji"><em>Watashi wa mise no hito ni "Doushite desu ka." to kiite mimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q25" data-correct="3">
+<div class="q-head">
+<span class="q-num">Q25</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">むかしからよく<ruby>売<rt>う</rt></ruby>られていたようです。でも、<strong>[25]</strong>、こけしはここだけではなく…<ruby>買<rt>か</rt></ruby>うことができます。</p>
+<p class="q-en">It seems they've been sold here since long ago. But nowadays, you can buy them all over Japan, not just here.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="1"><span class="opt-k">1</span><span class="opt-t" lang="ja"><ruby>今<rt>いま</rt></ruby>も</span></button>
+<button class="opt" type="button" data-key="2"><span class="opt-k">2</span><span class="opt-t" lang="ja"><ruby>今<rt>いま</rt></ruby>でも</span></button>
+<button class="opt" type="button" data-key="3"><span class="opt-k">3</span><span class="opt-t" lang="ja"><ruby>今<rt>いま</rt></ruby>では</span></button>
+<button class="opt" type="button" data-key="4"><span class="opt-k">4</span><span class="opt-t" lang="ja"><ruby>今<rt>いま</rt></ruby>から</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">3. <ruby>今<rt>いま</rt></ruby>では</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja"><ruby>今<rt>いま</rt></ruby>では (nowadays, unlike before)</span></p>
+<p class="ans-expl">It contrasts the past (only this town) with the present (everywhere): <ruby>今<rt>いま</rt></ruby>では. <strong>1</strong> <ruby>今<rt>いま</rt></ruby>も and <strong>2</strong> <ruby>今<rt>いま</rt></ruby>でも mean "still, as before," but the situation has changed. <strong>4</strong> <ruby>今<rt>いま</rt></ruby>から = "from now on."</p>
+<p class="ans-romaji"><em>Demo, ima de wa, kokeshi wa koko dake de wa naku, Nihonjuu no iroiro na tokoro de kau koto ga dekimasu.</em></p>
+</div></details></article></section>
+<div class="pager"><a class="pager-btn" href="part2-review-lessons01-15.html"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Part 2 · Review 1–15</span></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#s1" aria-label="Grammar"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>Grammar</span></a>
+<a href="#s1" aria-label="Practice"><svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4zM13 7l4 4"/></svg><span>Practice</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

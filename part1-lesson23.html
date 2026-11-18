@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbe3ec">
+<meta name="google" content="notranslate">
+<title>Part 1 · Lesson 23 · あげます・～てあげます / くれます・～てくれます / もらいます・～てもらいます</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f8;
+  --page-a: #fde2ea;
+  --page-b: #fbe8de;
+  --ink: #17151a;
+  --ink-2: #5d5964;
+  --ink-3: #8f8a96;
+  --card: #ffffff;
+  --line: #ece9ef;
+  --lav: #b8b8f6;
+  --lav-soft: #e4e3fd;
+  --pink: #f6a8c8;
+  --pink-soft: #fde4ee;
+  --peach: #f8e6d4;
+  --peach-line: #f0c896;
+  --rust: #b4561c;
+  --dark: #26232a;
+  --nav: #2b2326;
+  --good: #2f9e6b;
+  --good-soft: #dff3e8;
+  --bad: #d4536a;
+  --bad-soft: #fbe1e6;
+  --radius: 26px;
+  --font: "Jost", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+  --font-jp: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: linear-gradient(160deg, var(--page-a), var(--page-b)) fixed;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+[lang="ja"] {
+  font-family: var(--font); /* Jost for English letters, Noto Sans JP for Japanese */
+  line-break: strict;
+  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+}
+a { color: inherit; }
+
+/* the phone-like column */
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 20px 16px 120px;
+}
+@media (min-width: 560px) {
+  .phone { margin: 28px auto; min-height: 0; border-radius: 44px;
+           box-shadow: 0 30px 80px rgba(120, 60, 90, .16); padding: 28px 20px 130px; }
+}
+
+/* header */
+.top-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.icon-btn {
+  width: 46px; height: 46px; border-radius: 16px; background: var(--card);
+  display: grid; place-items: center; border: 1px solid var(--line); text-decoration: none;
+}
+.icon-btn svg, .bottom-nav svg, .pager-btn svg {
+  width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.crumb { font-weight: 600; color: var(--ink-2); font-size: 15px; }
+.kicker { margin: 0; font-weight: 600; color: var(--ink-3); font-size: 15px; }
+h1 { font-size: 30px; line-height: 1.3; font-weight: 600; margin: 4px 0 8px; letter-spacing: -.01em; }
+.meta { margin: 0 0 16px; color: var(--ink-3); font-size: 13px; }
+
+/* chips */
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; margin: 0 -16px 16px; padding: 4px 16px;
+  scrollbar-width: none; position: sticky; top: 0; z-index: 5; background: var(--bg);
+}
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; padding: 11px 18px; border-radius: 16px; background: var(--lav-soft);
+  font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.chip:nth-child(3n+2) { background: var(--pink-soft); }
+.chip:nth-child(3n+3) { background: var(--peach); }
+.chip.chip-dark { background: var(--dark); color: #fff; }
+
+/* stats card (peach like the progress card) */
+.stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px;
+  background: var(--peach); border: 1px solid var(--peach-line); border-radius: var(--radius);
+  padding: 16px; margin-bottom: 24px;
+}
+.stats div { text-align: center; }
+.stats b { display: block; font-size: 26px; font-weight: 700; color: var(--rust); }
+.stats span { font-size: 12px; color: var(--ink-2); font-weight: 500; }
+
+/* sections */
+.sec { margin-bottom: 28px; scroll-margin-top: 64px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px; margin: 8px 4px 14px; }
+.sec-head h2 { font-size: 22px; margin: 0; font-weight: 700; }
+.sec-en { color: var(--ink-3); font-weight: 600; }
+.sec-count {
+  margin-left: auto; font-size: 12px; font-weight: 700; background: var(--card);
+  border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px;
+}
+
+/* grammar point cards */
+.gp { border-radius: var(--radius); padding: 20px; margin-bottom: 14px; position: relative; overflow: hidden; }
+.gp::after {
+  content: ""; position: absolute; right: -50px; top: -50px; width: 170px; height: 170px;
+  border-radius: 50%; border: 22px solid currentColor; opacity: .07; pointer-events: none;
+}
+.gp-head { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 8px; }
+.gp-num {
+  flex: none; width: 40px; height: 40px; border-radius: 14px; background: #fff; color: var(--ink);
+  display: grid; place-items: center; font-weight: 700;
+}
+.gp h3 { margin: 2px 0 0; font-size: 20px; line-height: 1.35; }
+.gp-en { margin: 2px 0 0; font-size: 14px; opacity: .75; font-weight: 600; }
+.gp-body { font-size: 15px; }
+.gp-body ul, .gp-body ol { padding-left: 20px; margin: 6px 0; }
+.gp-body li { margin: 5px 0; }
+.gp-body ol li em { display: block; opacity: .75; font-size: 14px; }
+.tone-lav { background: var(--lav); }
+.tone-dark { background: var(--dark); color: #f4f2f6; }
+.tone-peach { background: var(--peach); border: 1px solid var(--peach-line); }
+.tone-pink { background: var(--pink); }
+.tone-dark .gp-num { background: #3b3740; color: #fff; }
+
+/* instructions */
+.instr { background: var(--card); border-radius: 20px; border: 1px dashed #cfcadc; padding: 14px 16px; margin-bottom: 14px; }
+.instr p { margin: 4px 0 0; }
+.instr-jp { font-weight: 500; font-size: 15px; }
+.instr-en { color: var(--ink-2); font-size: 14px; }
+.lbl {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* question cards */
+.q {
+  background: var(--card); border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+  border: 1px solid var(--line); box-shadow: 0 6px 20px rgba(60, 40, 70, .05);
+  scroll-margin-top: 64px;
+}
+.q-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.q-num {
+  background: var(--dark); color: #fff; border-radius: 12px; padding: 4px 11px; font-weight: 700; font-size: 14px;
+}
+.q-tag {
+  font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--lav-soft); color: #4b47a8;
+}
+.q-jp { font-size: 19px; line-height: 1.75; margin: 0 0 6px; font-weight: 500; }
+.q-en { margin: 0 0 14px; color: var(--ink-2); font-size: 14.5px; }
+.blank {
+  display: inline-block; min-width: 3.2em; border-bottom: 2.5px solid var(--pink);
+  background: var(--pink-soft); border-radius: 6px 6px 2px 2px; margin: 0 2px; line-height: 1.2;
+}
+
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+  font: inherit; color: inherit; background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 18px; padding: 10px 14px; transition: background .15s, border-color .15s, transform .1s;
+}
+.opt:active { transform: scale(.985); }
+.opt:hover:not(:disabled) { border-color: var(--lav); }
+.opt-k {
+  flex: none; width: 30px; height: 30px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; font-weight: 700; font-size: 14px;
+}
+.opt-t { font-size: 16px; }
+.opt.right { background: var(--good-soft); border-color: var(--good); }
+.opt.right .opt-k { background: var(--good); color: #fff; border-color: var(--good); }
+.opt.wrong { background: var(--bad-soft); border-color: var(--bad); opacity: .8; }
+.opt.wrong .opt-k { background: var(--bad); color: #fff; border-color: var(--bad); }
+.opt:disabled { cursor: default; }
+
+/* answer reveal */
+.ans summary { list-style: none; cursor: pointer; }
+.ans summary::-webkit-details-marker { display: none; }
+.pill {
+  display: block; text-align: center; background: #000; color: #fff; border-radius: 16px;
+  padding: 13px 18px; font-weight: 600; font-size: 15px;
+}
+.ans[open] .pill { background: var(--lav-soft); color: var(--ink); }
+.pill-hide, .ans[open] .pill-show { display: none; }
+.ans[open] .pill-hide { display: inline; }
+.ans-body { padding-top: 14px; font-size: 15px; }
+.ans-body p { margin: 0 0 10px; }
+.ans-correct {
+  background: var(--good-soft); border-radius: 16px; padding: 10px 14px; margin-bottom: 10px;
+  font-size: 17px; font-weight: 600;
+}
+.ans-correct .lbl, .ans-point .lbl { display: block; margin-bottom: 2px; }
+.ans-correct .lbl { color: var(--good); }
+.ans-point { background: var(--lav-soft); border-radius: 16px; padding: 10px 14px; font-weight: 600; }
+.ans-expl { color: var(--ink); }
+.ans-romaji { color: var(--ink-2); font-size: 14px; border-left: 3px solid var(--pink); padding-left: 10px; }
+
+.prose { font-size: 15px; margin: 0 4px 14px; }
+
+/* pager */
+.pager { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.pager-btn {
+  display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-weight: 600; font-size: 14px;
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px;
+}
+.pager-btn.next { background: #000; color: #fff; border-color: #000; margin-left: auto; }
+
+/* lesson list (index) */
+.lessons { display: grid; gap: 12px; margin-top: 18px; }
+.lesson {
+  display: grid; gap: 6px; padding: 20px; border-radius: var(--radius); text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.lesson::after {
+  content: ""; position: absolute; right: -40px; bottom: -60px; width: 160px; height: 160px;
+  border-radius: 50%; border: 20px solid currentColor; opacity: .07;
+}
+.lesson-tag {
+  justify-self: start; background: #fff; color: var(--ink); font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 999px;
+}
+.lesson-jp { font-size: 19px; font-weight: 500; line-height: 1.45; }
+.lesson-meta { font-size: 13px; opacity: .7; font-weight: 600; }
+
+/* dark bottom nav */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  width: min(448px, calc(100% - 24px)); background: var(--nav); border-radius: 30px;
+  display: flex; justify-content: space-around; padding: 10px; z-index: 10;
+  box-shadow: 0 14px 40px rgba(30, 15, 25, .3);
+}
+.bottom-nav a {
+  display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; color: #e9e4ea;
+  text-decoration: none; transition: background .2s;
+}
+.bottom-nav a span {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);
+}
+.bottom-nav a.active, .bottom-nav a:hover { background: #fff; color: var(--ink); }
+
+@media (max-width: 360px) {
+  h1 { font-size: 26px; }
+  .q-jp { font-size: 18px; }
+}
+
+/* reading passages and tips */
+.passage {
+  margin: 0 0 14px; background: var(--card); border-radius: 22px; padding: 16px 18px;
+  border-left: 5px solid var(--lav); font-size: 16.5px; line-height: 1.9; word-break: normal;
+}
+.passage p { margin: 0 0 8px; }
+.passage p:last-child { margin: 0; }
+.tip { background: var(--pink-soft); border-radius: 18px; padding: 12px 14px; }
+.prose p { margin: 0 0 10px; }
+
+/* furigana */
+ruby { ruby-position: over; ruby-align: center; }
+rt {
+  font-family: var(--font-jp); font-size: .5em; font-weight: 500; letter-spacing: 0;
+  color: var(--ink-2); line-height: 1; user-select: none;
+}
+.tone-dark rt, .q-num rt, .chip-dark rt, .pager-btn.next rt { color: inherit; opacity: .75; }
+.no-furi rt { display: none; }
+.q-jp, .passage, .opt-t, .instr-jp, .gp-body li[lang="ja"] { line-height: 1.95; }
+.ans-body, .gp-body { line-height: 1.75; }
+h1, .gp h3, .lesson-jp { line-height: 1.5; }
+.furi-toggle {
+  margin-left: auto; font: inherit; font-family: var(--font-jp); font-size: 13px; font-weight: 700;
+  border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer;
+  background: #000; color: #fff;
+}
+.furi-toggle[aria-pressed="false"] { background: var(--card); color: var(--ink-3); border: 1px solid var(--line); text-decoration: line-through; }
+.top-row .kicker { margin: 0; }
+
+</style>
+</head>
+<body>
+<div class="phone" id="top">
+
+<header class="top">
+  <div class="top-row">
+    <a class="icon-btn" href="index.html" aria-label="All lessons"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+    <span class="crumb">Part 1 · Lesson 23</span>
+    <button class="furi-toggle" type="button" aria-pressed="true" lang="ja">ふりがな</button>
+  </div>
+  <p class="kicker" lang="ja"><ruby>第<rt>だい</rt></ruby>1<ruby>部<rt>ぶ</rt></ruby> 23<ruby>課<rt>か</rt></ruby></p>
+  <h1 lang="ja">あげます・～てあげます / くれます・～てくれます / もらいます・～てもらいます</h1>
+  <p class="meta">Shin Kanzen Master N4 Grammar, book pages 84–85 (PDF pages 106–107). Answers checked against the book's answer key.</p>
+</header>
+<div class="chips"><a class="chip chip-dark" href="#s1">Grammar</a><a class="chip" href="#s2">Practice 1</a><a class="chip" href="#s3">Practice 2</a></div>
+<div class="stats"><div><b>3</b><span>grammar points</span></div><div><b>11</b><span>questions</span></div><div><b id="score">0</b><span>correct taps</span></div></div>
+<section class="sec" id="s1"><div class="sec-head"><h2>Grammar points on page 84</h2></div><article class="gp tone-lav"><div class="gp-head"><span class="gp-num">1</span><div><h3 lang="ja">あげます / ～てあげます</h3><p class=gp-en>give / do ~ for someone</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: noun + を + あげます・さしあげます; verb て form + あげます・さしあげます
+</li>
+<li lang="ja">The <strong>giver is the speaker</strong> (or someone close to the speaker). The receiver is <strong>someone else</strong>. When giving to someone of higher status outside the family (teacher, boss, customer), use <strong>さしあげます</strong>.
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja"><ruby>妹<rt>いもうと</rt></ruby>はサラさんに<ruby>花<rt>はな</rt></ruby>をあげました。 <em>My younger sister gave Sarah some flowers.</em>
+</li>
+<li lang="ja"><ruby>先生<rt>せんせい</rt></ruby>にカップをさしあげました。 <em>I gave my teacher a cup.</em>
+</li>
+<li lang="ja">サッカー<ruby>場<rt>じょう</rt></ruby>に<ruby>行<rt>い</rt></ruby>くの？<ruby>地図<rt>ちず</rt></ruby>をかいてあげるよ。 <em>You're going to the football ground? I'll draw you a map.</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-dark"><div class="gp-head"><span class="gp-num">2</span><div><h3 lang="ja">くれます / ～てくれます</h3><p class=gp-en>someone gives me / does ~ for me</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: noun + を + くれます・くださいます; verb て form + くれます・くださいます
+</li>
+<li lang="ja">The <strong>giver is someone else</strong>. The receiver is <strong>the speaker</strong> (or someone close to the speaker, like family). From someone of higher status outside the family, use <strong>くださいます</strong>.
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja"><ruby>山田<rt>やまだ</rt></ruby>さんはわたしに<ruby>時計<rt>とけい</rt></ruby>をくれました。 <em>Yamada gave me a watch.</em>
+</li>
+<li lang="ja"><ruby>先生<rt>せんせい</rt></ruby>が<ruby>妹<rt>いもうと</rt></ruby>に<ruby>本<rt>ほん</rt></ruby>をくださいました。 <em>The teacher gave my younger sister a book.</em>
+</li>
+<li lang="ja"><ruby>友<rt>とも</rt></ruby>だちが<ruby>店<rt>みせ</rt></ruby>の<ruby>場所<rt>ばしょ</rt></ruby>を<ruby>教<rt>おし</rt></ruby>えてくれました。 <em>My friend told me where the shop is.</em>
+</li>
+<li lang="ja">サラさんはいっしょに<ruby>病院<rt>びょういん</rt></ruby>へ<ruby>行<rt>い</rt></ruby>ってくれた。 <em>Sarah came to the hospital with me.</em>
+</li></ol>
+</li></ul></div></article>
+<article class="gp tone-peach"><div class="gp-head"><span class="gp-num">3</span><div><h3 lang="ja">もらいます / ～てもらいます</h3><p class=gp-en>receive / have someone do ~ for me</p></div></div><div class="gp-body"><ul>
+<li lang="ja">Form: noun + を + もらいます・いただきます; verb て form + もらいます・いただきます. The giver is marked with に or から.
+</li>
+<li lang="ja">The <strong>subject is the receiver</strong>: the speaker or someone close. From someone of higher status outside the family, use <strong>いただきます</strong>.
+</li>
+<li>Examples from the book:
+<ol>
+<li lang="ja"><ruby>山田<rt>やまだ</rt></ruby>さんに／から<ruby>時計<rt>とけい</rt></ruby>をもらいました。 <em>I received a watch from Yamada.</em>
+</li>
+<li lang="ja"><ruby>妹<rt>いもうと</rt></ruby>は<ruby>先生<rt>せんせい</rt></ruby>に／から<ruby>本<rt>ほん</rt></ruby>をいただきました。 <em>My younger sister received a book from the teacher.</em>
+</li>
+<li lang="ja">サラさんにいっしょに<ruby>病院<rt>びょういん</rt></ruby>へ<ruby>行<rt>い</rt></ruby>ってもらった。 <em>I had Sarah come to the hospital with me.</em>
+</li></ol>
+</li></ul>
+<p class="tip" lang="ja"><strong>Quick tip:</strong> Ask "<strong>who's the giver?</strong>" Me/my side → あげる. Someone → me/my side → くれる. Then <strong>もらう</strong> looks at the same thing from the receiver's side.</p></div></article></section><section class="sec" id="s2"><div class="sec-head"><h2 lang="ja">れんしゅう1</h2><span class=sec-en>Practice 1</span><span class="sec-count">5 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja"><span class="blank">　</span>の<ruby>中<rt>なか</rt></ruby>の<ruby>言葉<rt>ことば</rt></ruby>を<ruby>正<rt>ただ</rt></ruby>しい<ruby>形<rt>かたち</rt></ruby>にして、<ruby>書<rt>か</rt></ruby>いてください。</p><p class="instr-en">Change the word in the brackets ( ) into the correct form and write it in the blank.</p></div>
+<article class="q" id="s2-q1" data-correct="">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>両親<rt>りょうしん</rt></ruby>に<ruby>東京<rt>とうきょう</rt></ruby>スカイツリーを<span class="blank">　</span>あげたいです。（<ruby>見<rt>み</rt></ruby>せる）</p>
+<p class="q-en">I want to show my parents Tokyo Skytree.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>見<rt>み</rt></ruby>せて</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">て form + あげる</span></p>
+<p class="ans-expl"><ruby>見<rt>み</rt></ruby>せる → <ruby>見<rt>み</rt></ruby>せて + あげたい.</p>
+<p class="ans-romaji"><em>Ryoushin ni Toukyou Sukaitsurii o misete agetai desu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q2" data-correct="">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>先週<rt>せんしゅう</rt></ruby>、<ruby>山田<rt>やまだ</rt></ruby>さんがパーティーに<span class="blank">　</span>くれました。（しょうたいする）</p>
+<p class="q-en">Last week, Yamada invited me to a party.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">しょうたいして</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">て form + くれる</span></p>
+<p class="ans-expl">しょうたいする → しょうたいして + くれました.</p>
+<p class="ans-romaji"><em>Senshuu, Yamada-san ga paatii ni shoutai shite kuremashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q3" data-correct="">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>先生<rt>せんせい</rt></ruby>はいつもていねいに<span class="blank">　</span>くださいます。（<ruby>教<rt>おし</rt></ruby>える）</p>
+<p class="q-en">The teacher always teaches us carefully.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja"><ruby>教<rt>おし</rt></ruby>えて</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">て form + くださる (honorific くれる)</span></p>
+<p class="ans-expl"><ruby>教<rt>おし</rt></ruby>える → <ruby>教<rt>おし</rt></ruby>えて + くださいます.</p>
+<p class="ans-romaji"><em>Sensei wa itsumo teinei ni oshiete kudasaimasu.</em></p>
+</div></details></article>
+<article class="q" id="s2-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>友<rt>とも</rt></ruby>だちに<span class="blank">　</span>もらった<ruby>写真<rt>しゃしん</rt></ruby>を<ruby>母<rt>はは</rt></ruby>に<ruby>送<rt>おく</rt></ruby>りました。（とる）</p>
+<p class="q-en">I sent my mother the photo my friend took for me.</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">とって</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">て form + もらう</span></p>
+<p class="ans-expl">とる → とって + もらった.</p>
+<p class="ans-romaji"><em>Tomodachi ni totte moratta shashin o haha ni okurimashita.</em></p>
+</div></details></article>
+<article class="q" id="s2-q5" data-correct="">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Write</span>
+</div>
+<p class="q-jp" lang="ja">すみませんが、<ruby>作文<rt>さくぶん</rt></ruby>を<span class="blank">　</span>いただけませんか。（なおす）</p>
+<p class="q-en">Excuse me, but could you correct my essay?</p>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">なおして</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">て form + いただけませんか (polite request)</span></p>
+<p class="ans-expl">なおす → なおして + いただけませんか.</p>
+<p class="ans-romaji"><em>Sumimasen ga, sakubun o naoshite itadakemasen ka.</em></p>
+</div></details></article></section><section class="sec" id="s3"><div class="sec-head"><h2 lang="ja">れんしゅう2</h2><span class=sec-en>Practice 2</span><span class="sec-count">6 questions</span></div><div class="instr"><span class="lbl">Instructions</span><p class="instr-jp" lang="ja">いちばんいいものをえらんでください。</p><p class="instr-en">Choose the best option.</p></div>
+<article class="q" id="s3-q1" data-correct="b">
+<div class="q-head">
+<span class="q-num">Q1</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">わたしがかぜでねているとき、<ruby>山田<rt>やまだ</rt></ruby>さんが<span class="blank">　</span>。</p>
+<p class="q-en">When I was in bed with a cold, Yamada came (to see me).</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>来<rt>き</rt></ruby>てあげました</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>来<rt>き</rt></ruby>てくれました</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>来<rt>き</rt></ruby>てもらいました</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">b. <ruby>来<rt>き</rt></ruby>てくれました</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">てくれる (someone does something for me)</span></p>
+<p class="ans-expl">Yamada (subject, が) did something for the speaker: <ruby>来<rt>き</rt></ruby>てくれました. <strong>a</strong> あげる would be the speaker's side doing it for someone else. <strong>c</strong> もらう needs the receiver as subject and the giver marked with に.</p>
+<p class="ans-romaji"><em>Watashi ga kaze de nete iru toki, Yamada-san ga kite kuremashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q2" data-correct="c">
+<div class="q-head">
+<span class="q-num">Q2</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>今日<rt>きょう</rt></ruby>は<span class="blank">　</span>、ほんとうにありがとう。</p>
+<p class="q-en">Thank you so much for helping me today.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja"><ruby>手伝<rt>てつだ</rt></ruby>って</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja"><ruby>手伝<rt>てつだ</rt></ruby>ってあげて</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja"><ruby>手伝<rt>てつだ</rt></ruby>ってくれて</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">c. <ruby>手伝<rt>てつだ</rt></ruby>ってくれて</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">てくれて、ありがとう</span></p>
+<p class="ans-expl">You're thanking someone for helping <em>you</em>: <ruby>手伝<rt>てつだ</rt></ruby>ってくれて. <strong>a</strong> plain <ruby>手伝<rt>てつだ</rt></ruby>って works but loses the "for me" nuance the book wants. <strong>b</strong> あげて would mean you helped them.</p>
+<p class="ans-romaji"><em>Kyou wa tetsudatte kurete, hontou ni arigatou.</em></p>
+</div></details></article>
+<article class="q" id="s3-q3" data-correct="c">
+<div class="q-head">
+<span class="q-num">Q3</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">きのうかいたえを<ruby>先生<rt>せんせい</rt></ruby>に<ruby>見<rt>み</rt></ruby>て<span class="blank">　</span>。</p>
+<p class="q-en">I had my teacher look at the picture I drew yesterday.</p>
+<div class="opts">
+<button class="opt" type="button" data-key="a"><span class="opt-k">a</span><span class="opt-t" lang="ja">さしあげました</span></button>
+<button class="opt" type="button" data-key="b"><span class="opt-k">b</span><span class="opt-t" lang="ja">くださいました</span></button>
+<button class="opt" type="button" data-key="c"><span class="opt-k">c</span><span class="opt-t" lang="ja">いただきました</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">c. いただきました</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">ていただく (humble もらう)</span></p>
+<p class="ans-expl"><ruby>先生<rt>せんせい</rt></ruby>に marks the giver, so the receiver (speaker) is the subject: <ruby>見<rt>み</rt></ruby>ていただきました. <strong>a</strong> さしあげる = the speaker does something for the teacher. <strong>b</strong> くださる needs <ruby>先生<rt>せんせい</rt></ruby>が as subject.</p>
+<p class="ans-romaji"><em>Kinou kaita e o sensei ni mite itadakimashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q4" data-correct="">
+<div class="q-head">
+<span class="q-num">Q4</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">レストランで<ruby>店員<rt>てんいん</rt></ruby>から（①　）カレンダーを、ジョンさんに（②　）。</p>
+<p class="q-en">I gave John the calendar I got from the staff at the restaurant.</p>
+<div class="opts">
+<button class="opt" type="button" data-key=""><span class="opt-k"></span><span class="opt-t" lang="ja">① a. あげた　b. くれた　c. もらった</span></button>
+<button class="opt" type="button" data-key=""><span class="opt-k"></span><span class="opt-t" lang="ja">② a. あげました　b. くれました　c. もらいました</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">① c. もらった　② a. あげました</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">もらう (receive from) / あげる (give to someone else)</span></p>
+<p class="ans-expl">① <ruby>店員<rt>てんいん</rt></ruby>から ("from the staff") goes with もらった. ② The speaker gives to John (someone else): あげました. <strong>くれました</strong> would mean John gave it to the speaker.</p>
+<p class="ans-romaji"><em>Resutoran de ten'in kara moratta karendaa o, Jon-san ni agemashita.</em></p>
+</div></details></article>
+<article class="q" id="s3-q5" data-correct="">
+<div class="q-head">
+<span class="q-num">Q5</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja">トム「このセーター、サラさんに（①　）んです。」<br><ruby>山田<rt>やまだ</rt></ruby>「へえ、サラさんが<ruby>作<rt>つく</rt></ruby>ったんでしょうか。」<br>トム「ええ、サラさんが（②　）んです。」</p>
+<p class="q-en">Tom: "I got this sweater from Sarah."<br>Yamada: "Oh, did Sarah make it?"<br>Tom: "Yes, Sarah made it for me."</p>
+<div class="opts">
+<button class="opt" type="button" data-key=""><span class="opt-k"></span><span class="opt-t" lang="ja">① a. あげた　b. くれた　c. もらった</span></button>
+<button class="opt" type="button" data-key=""><span class="opt-k"></span><span class="opt-t" lang="ja">② a. <ruby>作<rt>つく</rt></ruby>ってあげた　b. <ruby>作<rt>つく</rt></ruby>ってくれた　c. <ruby>作<rt>つく</rt></ruby>ってもらった</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">① c. もらった　② b. <ruby>作<rt>つく</rt></ruby>ってくれた</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">に + もらう / が + てくれる</span></p>
+<p class="ans-expl">① サラさんに + もらった = received from Sarah. ② サラさんが (subject) did it for Tom: <ruby>作<rt>つく</rt></ruby>ってくれた.</p>
+<p class="ans-romaji"><em>Tomu: "Kono seetaa, Sara-san ni moratta n desu." … Tomu: "Ee, Sara-san ga tsukutte kureta n desu."</em></p>
+</div></details></article>
+<article class="q" id="s3-q6" data-correct="">
+<div class="q-head">
+<span class="q-num">Q6</span>
+<span class="q-tag">Choose</span>
+</div>
+<p class="q-jp" lang="ja"><ruby>森<rt>もり</rt></ruby>さんが<ruby>妹<rt>いもうと</rt></ruby>に<ruby>本<rt>ほん</rt></ruby>を（①　）ので、おれいにおかしを（②　）。</p>
+<p class="q-en">Mori bought a book for my younger sister, so (we) gave Mori some sweets as thanks.</p>
+<div class="opts">
+<button class="opt" type="button" data-key=""><span class="opt-k"></span><span class="opt-t" lang="ja">① a. <ruby>買<rt>か</rt></ruby>ってあげた　b. <ruby>買<rt>か</rt></ruby>ってくれた　c. <ruby>買<rt>か</rt></ruby>ってもらった</span></button>
+<button class="opt" type="button" data-key=""><span class="opt-k"></span><span class="opt-t" lang="ja">② a. あげました　b. くれました　c. もらいました</span></button>
+</div>
+<details class="ans"><summary><span class="pill"><span class="pill-show">Show answer</span><span class="pill-hide">Hide answer</span></span></summary><div class="ans-body">
+<div class="ans-correct"><span class="lbl">Answer</span><span lang="ja">① b. <ruby>買<rt>か</rt></ruby>ってくれた　② a. あげました</span></div>
+<p class="ans-point"><span class="lbl">Grammar</span><span lang="ja">てくれる (to my family) / あげる (to someone else)</span></p>
+<p class="ans-expl">① Mori (giver, が) did something for the speaker's sister (family = speaker's side): <ruby>買<rt>か</rt></ruby>ってくれた. ② The speaker's side gives sweets to Mori: あげました.</p>
+<p class="ans-romaji"><em>Mori-san ga imouto ni hon o katte kureta node, orei ni okashi o agemashita.</em></p>
+</div></details></article></section>
+<div class="pager"><a class="pager-btn" href="part1-lesson22.html"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span>Part 1 · Lesson 22</span></a><a class="pager-btn next" href="part1-lesson24.html"><span>Part 1 · Lesson 24</span><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></a></div>
+
+</div>
+<nav class="bottom-nav" aria-label="Page navigation">
+<a href="index.html" aria-label="Lessons"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4v-5H9v5H5a1 1 0 0 1-1-1z"/></svg><span>Lessons</span></a>
+<a href="#s1" aria-label="Grammar"><svg viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>Grammar</span></a>
+<a href="#s2" aria-label="Practice"><svg viewBox="0 0 24 24"><path d="M15 5l4 4L8 20H4v-4zM13 7l4 4"/></svg><span>Practice</span></a>
+<a href="#top" aria-label="Top"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span>Top</span></a>
+</nav>
+<script>
+// Tap an option to check it. Correct taps add to the score.
+(function () {
+  var score = 0, scoreEl = document.getElementById('score');
+  document.querySelectorAll('.q').forEach(function (q) {
+    var correct = q.dataset.correct, done = false;
+    q.querySelectorAll('.opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (done) return;
+        if (btn.dataset.key === correct) {
+          btn.classList.add('right');
+          done = true;
+          q.querySelectorAll('.opt').forEach(function (b) { b.disabled = true; });
+          if (!q.dataset.missed) { score++; if (scoreEl) scoreEl.textContent = score; }
+          var d = q.querySelector('details'); if (d) d.open = true;
+        } else {
+          btn.classList.add('wrong');
+          btn.disabled = true;
+          q.dataset.missed = '1';
+        }
+      });
+    });
+  });
+  // furigana on/off (remembered on this device)
+  var root = document.documentElement, KEY = 'n4-furigana';
+  function setFuri(on) {
+    root.classList.toggle('no-furi', !on);
+    document.querySelectorAll('.furi-toggle').forEach(function (b) { b.setAttribute('aria-pressed', on); });
+  }
+  try { setFuri(localStorage.getItem(KEY) !== 'off'); } catch (e) {}
+  document.querySelectorAll('.furi-toggle').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = root.classList.contains('no-furi');
+      setFuri(on);
+      try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+    });
+  });
+  // highlight the chip of the section on screen
+  var chips = document.querySelectorAll('.chip');
+  if ('IntersectionObserver' in window && chips.length) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        chips.forEach(function (c) {
+          c.classList.toggle('chip-dark', c.getAttribute('href') === '#' + e.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.sec').forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
